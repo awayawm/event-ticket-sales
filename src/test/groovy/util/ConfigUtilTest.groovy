@@ -17,8 +17,8 @@ class ConfigUtilTest {
 
     @Test
     void testSlurpsDBSettings(){
-        assertTrue ConfigUtil.getConfig().db.containsKey('driverName')
-        assertTrue ConfigUtil.getConfig().db.containsKey('username')
+        assertTrue ConfigUtil.getConfig().db.containsKey('driver')
+        assertTrue ConfigUtil.getConfig().db.containsKey('user')
         assertTrue ConfigUtil.getConfig().db.containsKey('password')
         assertTrue ConfigUtil.getConfig().db.containsKey('url')
         assertTrue ConfigUtil.getConfig().containsKey('secretKey')

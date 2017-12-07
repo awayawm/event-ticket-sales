@@ -1,8 +1,11 @@
 package dao
 
-import org.junit.After;
+import org.junit.After
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
+
+import static org.junit.Assert.*
 
 class AccountDAOImplTest {
     @Before
@@ -15,8 +18,17 @@ class AccountDAOImplTest {
     }
 
     @Test
+    void isTestDataCreated(){
+        new DAOFactory().createTestData()
+        assertFalse(true)
+    }
+
+    @Ignore
+    @Test
     void testDoesFindByIdReturnAccount(){
 
     }
+
+
 
 }
