@@ -1,6 +1,7 @@
 package com.event.ticket.sales.entity
 
 class Account {
+
     int id
     String username
     String password
