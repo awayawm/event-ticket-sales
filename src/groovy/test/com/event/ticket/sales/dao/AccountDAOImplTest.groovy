@@ -1,10 +1,12 @@
-package com.event.ticket.sales.dao;
+package com.event.ticket.sales.dao
 
 import org.junit.After;
 import org.junit.Before
-import org.junit.Test;
+import org.junit.Test
+import com.event.ticket.sales.dao.AccountDAO
+import com.event.ticket.sales.dao.DAOFactory;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.*
 
 class AccountDAOImplTest {
     @Before

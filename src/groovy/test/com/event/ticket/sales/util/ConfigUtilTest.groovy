@@ -3,6 +3,7 @@ package com.event.ticket.sales.util
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import com.event.ticket.sales.util.ConfigUtil
 
 import static org.junit.Assert.*
 
