@@ -1,6 +1,6 @@
-package com.event.ticket.sales.dao
+package dao
 
-import com.event.ticket.sales.entity.Account
+import entity.Account
 
 interface AccountDAO {
     Account findById(int id)

@@ -8,13 +8,13 @@ repositories {
 sourceSets {
     main {
         groovy {
-            srcDirs = ['src/groovy/main']
+            srcDirs = ['src/main/groovy']
         }
 
     }
     test {
         groovy {
-            srcDirs = ['src/groovy/test']
+            srcDirs = ['src/test/groovy']
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.event.ticket.sales.util
+package util
 
 import org.junit.Test
 

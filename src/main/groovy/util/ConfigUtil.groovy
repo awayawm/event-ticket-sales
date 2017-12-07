@@ -1,4 +1,4 @@
-package com.event.ticket.sales.util
+package util
 
 class ConfigUtil {
     // TODO slurp from root directory if config is not present in project

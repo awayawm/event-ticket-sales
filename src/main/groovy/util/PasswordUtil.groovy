@@ -1,9 +1,6 @@
-package com.event.ticket.sales.util
+package util
 
-import com.event.ticket.sales.util.ConfigUtil
 import org.apache.commons.codec.binary.Hex
-import org.apache.log4j.BasicConfigurator
-import org.apache.log4j.Logger
 
 import javax.crypto.Cipher
 import javax.crypto.spec.SecretKeySpec

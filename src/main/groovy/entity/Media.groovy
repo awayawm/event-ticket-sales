@@ -1,4 +1,4 @@
-package com.event.ticket.sales.entity
+package entity
 
 class Media {
     int id

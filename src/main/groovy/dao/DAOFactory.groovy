@@ -1,4 +1,4 @@
-package com.event.ticket.sales.dao
+package dao
 
 class DAOFactory {
     static void createConnection() {}
