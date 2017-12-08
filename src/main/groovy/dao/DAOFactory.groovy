@@ -15,9 +15,19 @@ class DAOFactory {
         return conn
     }
 
+    static def closeConnection(){
+        conn.close()
+        conn = null
+    }
+
     void createTestData(){
-//        getRoleDAO().addRole("Admin", "Administrators can configure the application.")
-//        getRoleDAO().addRole("Member", "Members are eligible for discounts and promotional outreach.")
+        getRoleDAO().addRole("TestAccountNumber100", "Administrators can configure the application.")
+        getRoleDAO().addRole("TestAccountNumber101", "Members are eligible for discounts and promotional outreach.")
+    }
+
+    void deleteTestData(){
+        getRoleDAO().removeRoleByName("TestAccountNumber100")
+        getRoleDAO().removeRoleByName("TestAccountNumber101")
     }
 
     AccountDAO getAccountDAO(){

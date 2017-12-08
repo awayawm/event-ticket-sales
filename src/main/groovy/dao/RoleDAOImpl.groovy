@@ -12,9 +12,17 @@ class RoleDAOImpl implements RoleDAO {
         null
     }
 
-    boolean removeRoleById(int id) { null }
+    boolean removeRoleById(int id) {
+        def stmt = "delete from Role where id = ?"
+        def result = DAOFactory.getConnection().executeInsert stmt, [id]
+        return result.isEmpty()
+    }
 
-    boolean removeRoleByName(String username) { null }
+    boolean removeRoleByName(String username) {
+        def stmt = "delete from Role where name = ?"
+        def result = DAOFactory.getConnection().executeInsert stmt, [username]
+        return result.isEmpty()
+    }
 
     Role getRoleById(int id) {
         def statement = "select * from Role where id=${id}"
