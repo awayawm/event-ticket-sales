@@ -59,4 +59,24 @@ class AccountDAOImplTest {
         assertTrue accountDAO.removeAccountByUsername(account.username)
     }
 
+    @Test
+    void canGetAccountByName(){
+        assertEquals "email@address.com", accountDAO.getAccountByUsername("TestUserNumber100").email
+    }
+
+    @Test
+    void canGetAccountById(){
+        assertEquals "email@address.com", accountDAO.getAccountById(accountDAO.getAccountByUsername("TestUserNumber100").id).email
+    }
+
+    @Test
+    void getAccountByNameReturnsNullWhenNotFound(){
+        assertNull accountDAO.getAccountByUsername("ThisAccountDoesntExist")
+    }
+
+    @Test
+    void getAccountByIdReturnsNullWhenNotFound(){
+        assertNull accountDAO.getAccountById(123456678)
+    }
+
 }

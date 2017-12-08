@@ -3,27 +3,54 @@ package dao
 import entity.Account
 
 class AccountDAOImpl implements AccountDAO {
-    Account findAccountById(int id) { new Account() }
-    Account findAccountByUsername(String username) { new Account() }
+
     String stmt
     List result
 
     Account addAccount(String username, String password, String email, int roleId) {
         stmt = "insert into Account (username, password, email, roleId) values (?, ?, ?, ?)"
         result = DAOFactory.getConnection().executeInsert stmt, [username, password, email, roleId]
-        return new Account(username: username, password: password, email: email, roleId: roleId)
+        new Account(username: username, password: password, email: email, roleId: roleId)
     }
 
     boolean removeAccountById(int id) {
         stmt = "delete from Account where id = ?"
         result = DAOFactory.getConnection().executeInsert stmt, [id]
-        return result.isEmpty()
+        result.isEmpty()
     }
 
     boolean removeAccountByUsername(String username) {
         stmt = "delete from Account where username = ?"
         result = DAOFactory.getConnection().executeInsert stmt, [username]
-        return result.isEmpty()
+        result.isEmpty()
+    }
+
+    Account getAccountById(int id) {
+        stmt = "select * from Account where id=?"
+        Account account = null
+        DAOFactory.getConnection().eachRow(stmt, [id]){
+            account =  new Account()
+            account.username = it.username
+            account.password = it.password
+            account.email = it.email
+            account.roleId = it.roleId
+            account.id = it.id
+        }
+        account
+    }
+
+    Account getAccountByUsername(String username) {
+        stmt = "select * from Account where username=?"
+        Account account = null
+        DAOFactory.getConnection().eachRow(stmt, [username]){
+            account =  new Account()
+            account.username = it.username
+            account.password = it.password
+            account.email = it.email
+            account.roleId = it.roleId
+            account.id = it.id
+        }
+        account
     }
 
 }
