@@ -1,12 +1,11 @@
 package dao
-
-import entity.Role
 import org.junit.After
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 
 import static org.junit.Assert.*
+
+import entity.Role
 
 class DAOFactoryTest {
     DAOFactory daoFactory = new DAOFactory()
@@ -28,12 +27,11 @@ class DAOFactoryTest {
 
     @Test
     void isTestDataCreated(){
-        Role role
         daoFactory.createTestData()
-        role = roleDAO.getRoleByName("TestRoleNumber100")
-        assertEquals "TestRoleNumber100", role.name
-        role = roleDAO.getRoleByName("TestRoleNumber101")
-        assertEquals "TestRoleNumber101", role.name
+        assertEquals "TestRoleNumber100", roleDAO.getRoleByName("TestRoleNumber100").name
+        assertEquals "TestRoleNumber101", roleDAO.getRoleByName("TestRoleNumber101").name
+        assertEquals "TestUserNumber100", accountDAO.getAccountByUsername("TestUserNumber100").username
+        assertEquals "TestUserNumber101", accountDAO.getAccountByUsername("TestUserNumber101").username
         daoFactory.deleteTestData()
     }
 
@@ -43,8 +41,8 @@ class DAOFactoryTest {
         daoFactory.deleteTestData()
         assertNull roleDAO.getRoleByName("TestRoleNumber100")
         assertNull roleDAO.getRoleByName("TestRoleNumber101")
-//        assertNull roleDAO.getAccountByName("TestUserNumber100")
-//        assertNull roleDAO.getAccountByName("TestUserNumber101")
+        assertNull accountDAO.getAccountByUsername("TestUserNumber100")
+        assertNull accountDAO.getAccountByUsername("TestUserNumber101")
     }
 
 }

@@ -10,7 +10,7 @@ class AccountDAOImpl implements AccountDAO {
     Account addAccount(String username, String password, String email, int roleId) {
         stmt = "insert into Account (username, password, email, roleId) values (?, ?, ?, ?)"
         result = DAOFactory.getConnection().executeInsert stmt, [username, password, email, roleId]
-        new Account(username: username, password: password, email: email, roleId: roleId)
+        new Account(id: result[0][0], username: username, password: password, email: email, roleId: roleId)
     }
 
     boolean removeAccountById(int id) {

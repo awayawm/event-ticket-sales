@@ -8,4 +8,5 @@ interface RoleDAO {
     boolean removeRoleByName(String name)
     Role getRoleById(int id)
     Role getRoleByName(String name)
+    Role updateRoleNameAndDescription(int id, String name, String description)
 }

@@ -1,10 +1,8 @@
 package dao
 
 import entity.Account
-import entity.Role
 import org.junit.After
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import util.PasswordUtil
 
@@ -77,6 +75,15 @@ class AccountDAOImplTest {
     @Test
     void getAccountByIdReturnsNullWhenNotFound(){
         assertNull accountDAO.getAccountById(123456678)
+    }
+
+    @Test
+    void doesAddAccountReturnAccountWithId(){
+        account = accountDAO.addAccount("event",
+                PasswordUtil.encryptString("sales"),
+                "email@address.com",
+                roleDAO.getRoleByName("TestRoleNumber100").id)
+        assertNotEquals "The id of the added account should not be 0", 0, account.id
     }
 
 }

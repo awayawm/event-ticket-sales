@@ -32,7 +32,7 @@ class DAOFactory {
                 "email@address.com",
                 roleDAO.getRoleByName("TestRoleNumber100").id)
 
-        getAccountDAO().addAccount("sales",
+        getAccountDAO().addAccount("TestUserNumber101",
                 PasswordUtil.encryptString("ticket"),
                 "mail@address.com",
                 roleDAO.getRoleByName("TestRoleNumber101").id)
