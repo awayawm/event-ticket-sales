@@ -2,6 +2,7 @@ package dao
 
 import groovy.sql.Sql
 import util.ConfigUtil
+import util.PasswordUtil
 
 class DAOFactory {
 
@@ -21,13 +22,28 @@ class DAOFactory {
     }
 
     void createTestData(){
-        getRoleDAO().addRole("TestAccountNumber100", "Administrators can configure the application.")
-        getRoleDAO().addRole("TestAccountNumber101", "Members are eligible for discounts and promotional outreach.")
+        getRoleDAO().addRole("TestRoleNumber100",
+                            "Administrators can configure the application.")
+        getRoleDAO().addRole("TestRoleNumber101",
+                            "Members are eligible for discounts and promotional outreach.")
+
+        getAccountDAO().addAccount("TestUserNumber100",
+                PasswordUtil.encryptString("event"),
+                "email@address.com",
+                roleDAO.getRoleByName("TestRoleNumber100").id)
+
+        getAccountDAO().addAccount("sales",
+                PasswordUtil.encryptString("ticket"),
+                "mail@address.com",
+                roleDAO.getRoleByName("TestRoleNumber101").id)
+
     }
 
     void deleteTestData(){
-        getRoleDAO().removeRoleByName("TestAccountNumber100")
-        getRoleDAO().removeRoleByName("TestAccountNumber101")
+        getRoleDAO().removeRoleByName("TestRoleNumber100")
+        getRoleDAO().removeRoleByName("TestRoleNumber101")
+        getAccountDAO().removeAccountByUsername("TestUserNumber100")
+        getAccountDAO().removeAccountByUsername("TestUserNumber101")
     }
 
     AccountDAO getAccountDAO(){

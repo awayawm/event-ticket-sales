@@ -1,10 +1,12 @@
 package dao
 
+import entity.Account
 import entity.Role
 import org.junit.After
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
+import util.PasswordUtil
 
 import static org.junit.Assert.*
 
@@ -12,45 +14,49 @@ class AccountDAOImplTest {
     DAOFactory daoFactory = new DAOFactory()
     AccountDAO accountDAO
     RoleDAO roleDAO
+    Account account
 
     @Before
     void setUp() throws Exception {
         accountDAO = daoFactory.getAccountDAO()
         roleDAO = daoFactory.getRoleDAO()
+        daoFactory.createTestData()
+
     }
 
     @After
     void tearDown() throws Exception {
+        daoFactory.deleteTestData()
         daoFactory.closeConnection()
         accountDAO = null
         roleDAO = null
     }
 
     @Test
-    void isTestDataCreated(){
-        Role role
-        daoFactory.createTestData()
-        role = roleDAO.getRoleByName("TestAccountNumber100")
-        assertEquals "TestAccountNumber100", role.name
-        role = roleDAO.getRoleByName("TestAccountNumber101")
-        assertEquals "TestAccountNumber101", role.name
-        daoFactory.deleteTestData()
+    void canAccountBeAdded(){
+        account = accountDAO.addAccount("event",
+                                        PasswordUtil.encryptString("sales"),
+                                        "email@address.com",
+                                        roleDAO.getRoleByName("TestRoleNumber100").id)
+        assertEquals "event", account.username
     }
 
     @Test
-    void isTestDataRemoved(){
-        daoFactory.createTestData()
-        daoFactory.deleteTestData()
-        assertNull roleDAO.getRoleByName("TestAccountNumber100")
-        assertNull roleDAO.getRoleByName("TestAccountNumber101")
+    void canAccountsBeRemovedById(){
+        account = accountDAO.addAccount("event",
+                PasswordUtil.encryptString("sales"),
+                "email@address.com",
+                roleDAO.getRoleByName("TestRoleNumber100").id)
+        assertTrue accountDAO.removeAccountById(account.id)
     }
 
-    @Ignore
     @Test
-    void testDoesFindByIdReturnAccount(){
-
+    void canAccountBeRemovedByUsername(){
+        account = accountDAO.addAccount("event",
+                PasswordUtil.encryptString("sales"),
+                "email@address.com",
+                roleDAO.getRoleByName("TestRoleNumber100").id)
+        assertTrue accountDAO.removeAccountByUsername(account.username)
     }
-
-
 
 }

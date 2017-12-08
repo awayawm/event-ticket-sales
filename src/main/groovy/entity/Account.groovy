@@ -1,5 +1,8 @@
 package entity
 
+import groovy.transform.Canonical
+
+@Canonical
 class Account {
 
     int id

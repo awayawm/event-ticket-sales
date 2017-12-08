@@ -9,6 +9,7 @@ import entity.Role
 
 class RoleDAOImplTest {
     RoleDAO roleDao
+    Role role
 
     @Before
     void setup(){
@@ -22,15 +23,17 @@ class RoleDAOImplTest {
 
     @Test
     void canRolesBeAdded(){
-        Role role = roleDao.addRole("testing_name", "testing_description")
+        role = roleDao.addRole("testing_name", "testing_description")
         assertEquals new Role().getClass(), role.getClass()
+        roleDao.removeRoleById(role.id)
     }
 
     @Test
     void canRolesBeRetrievedById(){
-        Role role = roleDao.addRole("testing_name", "testing_description")
+        role = roleDao.addRole("testing_name", "testing_description")
         Role retrievedRow = roleDao.getRoleById(role.id)
         assertEquals role, retrievedRow
+        roleDao.removeRoleById(role.id)
     }
 
     @Test
@@ -40,9 +43,10 @@ class RoleDAOImplTest {
 
     @Test
     void doesRolesBeRetrievedByNameRetrieveByName(){
-        Role role = roleDao.addRole("testing_name", "testing_description")
+        role = roleDao.addRole("testing_name", "testing_description")
         Role retrievedRow = roleDao.getRoleByName("testing_name")
         assertEquals role.id, retrievedRow.id
+        roleDao.removeRoleById(role.id)
     }
 
     @Test
@@ -52,7 +56,6 @@ class RoleDAOImplTest {
 
     @Test
     void canRolesBeRemovedById(){
-        Role role
 
         role = roleDao.addRole("testing_name", "testing_description")
         roleDao.removeRoleById(role.id)
@@ -64,7 +67,6 @@ class RoleDAOImplTest {
 
     @Test
     void canRolesBeRemovedByName(){
-        Role role
 
         role = roleDao.addRole("testing_name", "testing_description")
         roleDao.removeRoleByName(role.name)
