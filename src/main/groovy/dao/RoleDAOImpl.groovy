@@ -53,4 +53,5 @@ class RoleDAOImpl implements RoleDAO {
         result = DAOFactory.getConnection().executeInsert stmt, [name, description, id]
         new Role(id, name, description)
     }
+
 }

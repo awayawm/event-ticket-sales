@@ -1,6 +1,7 @@
 package dao
 
 import entity.Account
+import entity.Role
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -37,6 +38,7 @@ class AccountDAOImplTest {
                                         "email@address.com",
                                         roleDAO.getRoleByName("TestRoleNumber100").id)
         assertEquals "event", account.username
+        assertNotNull account
     }
 
     @Test
@@ -84,6 +86,45 @@ class AccountDAOImplTest {
                 "email@address.com",
                 roleDAO.getRoleByName("TestRoleNumber100").id)
         assertNotEquals "The id of the added account should not be 0", 0, account.id
+    }
+
+    @Test
+    void gracefullyHandlesUsernameUniqueConstraintViolationForMultipleAccounts(){
+        accountDAO.addAccount("event",
+                PasswordUtil.encryptString("sales"),
+                "email@address.com",
+                roleDAO.getRoleByName("TestRoleNumber100").id)
+
+        assertNull accountDAO.addAccount("event",
+                PasswordUtil.encryptString("sales"),
+                "email@address.com",
+                roleDAO.getRoleByName("TestRoleNumber100").id)
+
+        assertTrue accountDAO.removeAccountByUsername("event")
+    }
+
+    @Test
+    void canGetRoleByAccountId(){
+        account = accountDAO.addAccount("event",
+                PasswordUtil.encryptString("sales"),
+                "email@address.com",
+                roleDAO.getRoleByName("TestRoleNumber100").id)
+
+        assertEquals new Role().getClass(), accountDAO.getRoleForAccountId(account.id).getClass()
+        assertEquals "TestRoleNumber100", accountDAO.getRoleForAccountId(account.id).name
+        assertNotNull accountDAO.getAccountByUsername("event")
+    }
+
+    @Test
+    void canPasswordBeUpdated(){
+        String result = ""
+        account = accountDAO.addAccount("event",
+                PasswordUtil.encryptString("sales"),
+                "email@address.com",
+                roleDAO.getRoleByName("TestRoleNumber100").id)
+
+        assertTrue accountDAO.updatePasswordById(account.id, "new password")
+        assertTrue PasswordUtil.verifyPassword(accountDAO.getAccountByUsername("event").password, "new password")
     }
 
 }
