@@ -1,3 +1,5 @@
+//TODO when application starts create Admin role and adminUser specified by config if they don't already exist
+
 package dao
 
 import groovy.sql.Sql

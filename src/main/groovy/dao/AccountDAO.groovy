@@ -10,8 +10,9 @@ interface AccountDAO {
     boolean removeAccountById(int id)
     boolean removeAccountByUsername(String username)
     Role getRoleForAccountId(int id)
-    boolean updatePasswordById(int id, String password)
-    boolean updatePrimaryInformationById(int id, String fullname, String email, String phoneNumber)
-    boolean updateLocationInformationById(int id, String streetAddress, String city, String state, String zip)
+    boolean updateAccountPasswordById(int id, String password)
+    Account updateAccountPrimaryInformationById(int id, String fullname, String email, String phoneNumber)
+    Account updateAccountLocationInformationById(int id, String streetAddress, String city, String state, String zip)
+    boolean updateAccountLastLoggedInById(int id)
 
 }

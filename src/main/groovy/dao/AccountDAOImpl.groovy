@@ -42,6 +42,8 @@ class AccountDAOImpl implements AccountDAO {
             account.email = it.email
             account.roleId = it.roleId
             account.id = it.id
+            account.fullname = it.fullname
+            account.phoneNumber = it.phoneNumber
         }
         account
     }
@@ -56,6 +58,8 @@ class AccountDAOImpl implements AccountDAO {
             account.email = it.email
             account.roleId = it.roleId
             account.id = it.id
+            account.fullname = it.fullname
+            account.phoneNumber = it.phoneNumber
         }
         account
     }
@@ -69,21 +73,27 @@ class AccountDAOImpl implements AccountDAO {
             role.name = it.name
             role.description = it.description
         }
-        return role
+        role
     }
 
-    boolean updatePasswordById(int id, String password) {
+    boolean updateAccountPasswordById(int id, String password) {
         String encodedPassword = PasswordUtil.encryptString(password)
         stmt = "update Account set password=? where id=?"
         result = DAOFactory.getConnection().executeInsert(stmt, [encodedPassword, id])
         result.isEmpty()
     }
 
-    boolean updatePrimaryInformationById(int id, String fullname, String email, String phoneNumber) {
+    Account updateAccountPrimaryInformationById(int id, String fullname, String email, String phoneNumber) {
+        stmt = "update Account set fullname=?, email=?, phoneNumber=? where id=?"
+        DAOFactory.getConnection().executeInsert(stmt, [fullname, email, phoneNumber, id])
+        getAccountById(id)
+    }
+
+    Account updateAccountLocationInformationById(int id, String streetAddress, String city, String state, String zip) {
 
     }
 
-    boolean updateLocationInformationById(int id, String streetAddress, String city, String state, String zip) {
+    boolean updateAccountLastLoggedInById(int id) {
 
     }
 

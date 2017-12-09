@@ -7,9 +7,6 @@ import javax.crypto.spec.SecretKeySpec
 
 class PasswordUtil {
 
-    //TODO verifyPassword(String encryptedPassword, String providedPassword)
-    //TODO encryptString(String password)
-
     static String encryptString(String password) {
 
         String key = ConfigUtil.getConfig().secretKey

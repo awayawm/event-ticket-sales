@@ -117,14 +117,31 @@ class AccountDAOImplTest {
 
     @Test
     void canPasswordBeUpdated(){
-        String result = ""
         account = accountDAO.addAccount("event",
                 PasswordUtil.encryptString("sales"),
                 "email@address.com",
                 roleDAO.getRoleByName("TestRoleNumber100").id)
 
-        assertTrue accountDAO.updatePasswordById(account.id, "new password")
+        assertTrue accountDAO.updateAccountPasswordById(account.id, "new password")
         assertTrue PasswordUtil.verifyPassword(accountDAO.getAccountByUsername("event").password, "new password")
+    }
+
+    @Test
+    void canAccountPrimaryInformationBeUpdatedById(){
+        account = accountDAO.addAccount("event",
+                PasswordUtil.encryptString("sales"),
+                "email@address.com",
+                roleDAO.getRoleByName("TestRoleNumber100").id)
+
+        assertEquals account.getClass(), accountDAO.updateAccountPrimaryInformationById(account.id, "Mr. Test Account", "test-account@email.com", "8675309").getClass()
+
+        account = accountDAO.getAccountById(account.id)
+
+        assertEquals "Mr. Test Account", account.fullname
+        assertEquals "test-account@email.com", account.email
+        assertEquals "8675309", account.phoneNumber
+        assertEquals "Ms. Test Account", accountDAO.updateAccountPrimaryInformationById(account.id, "Ms. Test Account", "email", "phone").fullname
+
     }
 
 }
