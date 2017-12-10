@@ -151,4 +151,22 @@ class AccountDAOImplTest {
         accountDAO.removeAccountById(account.id)
     }
 
+    @Test
+    void canLastLoggedInBeUpdatedById(){
+        account = accountDAO.getAccountByUsername("TestUserNumber100")
+        assertNull account.lastLoggedIn
+        assertEquals new Account().getClass(), accountDAO.updateAccountLastLoggedInById(account.id).getClass()
+        assertNotNull accountDAO.getAccountById(account.id).lastLoggedIn
+    }
+
+    @Test
+    void canLocationInformationBeUpdatedById(){
+        account = accountDAO.getAccountByUsername("TestUserNumber100")
+        accountDAO.updateAccountLocationInformationById(account.id, "625 Cherry St.", "St. Louis", "Missouri", "34411")
+        assertEquals "625 Cherry St.", accountDAO.getAccountByUsername("TestUserNumber100").streetAddress
+        assertEquals "St. Louis", accountDAO.getAccountByUsername("TestUserNumber100").city
+        assertEquals "Missouri", accountDAO.getAccountByUsername("TestUserNumber100").state
+        assertEquals "34411", accountDAO.getAccountByUsername("TestUserNumber100").zip
+
+    }
 }

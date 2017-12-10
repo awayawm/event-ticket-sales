@@ -20,6 +20,21 @@ class AccountDAOImpl implements AccountDAO {
         }
     }
 
+    private void copyProperties(firstObject, secondObject){
+        firstObject.username = secondObject.username
+        firstObject.password = secondObject.password
+        firstObject.email = secondObject.email
+        firstObject.roleId = secondObject.roleId
+        firstObject.id = secondObject.id
+        firstObject.fullname = secondObject.fullname
+        firstObject.phoneNumber = secondObject.phoneNumber
+        firstObject.lastLoggedIn = secondObject.lastLoggedIn
+        firstObject.streetAddress = secondObject.streetAddress
+        firstObject.city = secondObject.city
+        firstObject.state = secondObject.state
+        firstObject.zip = secondObject.zip
+    }
+
     boolean removeAccountById(int id) {
         stmt = "delete from Account where id = ?"
         result = DAOFactory.getConnection().executeInsert stmt, [id]
@@ -37,13 +52,7 @@ class AccountDAOImpl implements AccountDAO {
         Account account = null
         DAOFactory.getConnection().eachRow(stmt, [id]){
             account =  new Account()
-            account.username = it.username
-            account.password = it.password
-            account.email = it.email
-            account.roleId = it.roleId
-            account.id = it.id
-            account.fullname = it.fullname
-            account.phoneNumber = it.phoneNumber
+            copyProperties(account, it)
         }
         account
     }
@@ -53,13 +62,7 @@ class AccountDAOImpl implements AccountDAO {
         Account account = null
         DAOFactory.getConnection().eachRow(stmt, [username]){
             account =  new Account()
-            account.username = it.username
-            account.password = it.password
-            account.email = it.email
-            account.roleId = it.roleId
-            account.id = it.id
-            account.fullname = it.fullname
-            account.phoneNumber = it.phoneNumber
+            copyProperties(account, it)
         }
         account
     }
@@ -90,11 +93,15 @@ class AccountDAOImpl implements AccountDAO {
     }
 
     Account updateAccountLocationInformationById(int id, String streetAddress, String city, String state, String zip) {
-
+        stmt = "update Account set streetAddress=?, city=?, state=?, zip=? where id=?"
+        DAOFactory.getConnection().executeInsert stmt, [streetAddress, city, state, zip, id]
+        getAccountById(id)
     }
 
-    boolean updateAccountLastLoggedInById(int id) {
-
+    Account updateAccountLastLoggedInById(int id) {
+        stmt = "update Account set lastLoggedIn=? where id=?"
+        result = DAOFactory.getConnection().executeInsert stmt, [new Date(), id]
+        getAccountById(id)
     }
 
 }
