@@ -35,17 +35,18 @@ class AccountDAOImplTest {
     void canAccountBeAdded(){
         account = accountDAO.addAccount("event",
                                         PasswordUtil.encryptString("sales"),
-                                        "email@address.com",
+                                        "myemail@address.net",
                                         roleDAO.getRoleByName("TestRoleNumber100").id)
         assertEquals "event", account.username
         assertNotNull account
+        accountDAO.removeAccountById(account.id)
     }
 
     @Test
     void canAccountsBeRemovedById(){
         account = accountDAO.addAccount("event",
                 PasswordUtil.encryptString("sales"),
-                "email@address.com",
+                "myemail@address.net",
                 roleDAO.getRoleByName("TestRoleNumber100").id)
         assertTrue accountDAO.removeAccountById(account.id)
     }
@@ -54,19 +55,20 @@ class AccountDAOImplTest {
     void canAccountBeRemovedByUsername(){
         account = accountDAO.addAccount("event",
                 PasswordUtil.encryptString("sales"),
-                "email@address.com",
+                "myemail@address.net",
                 roleDAO.getRoleByName("TestRoleNumber100").id)
         assertTrue accountDAO.removeAccountByUsername(account.username)
+        accountDAO.removeAccountById(account.id)
     }
 
     @Test
     void canGetAccountByName(){
-        assertEquals "email@address.com", accountDAO.getAccountByUsername("TestUserNumber100").email
+        assertEquals "event-email@address.com", accountDAO.getAccountByUsername("TestUserNumber100").email
     }
 
     @Test
     void canGetAccountById(){
-        assertEquals "email@address.com", accountDAO.getAccountById(accountDAO.getAccountByUsername("TestUserNumber100").id).email
+        assertEquals "event-email@address.com", accountDAO.getAccountById(accountDAO.getAccountByUsername("TestUserNumber100").id).email
     }
 
     @Test
@@ -83,54 +85,58 @@ class AccountDAOImplTest {
     void doesAddAccountReturnAccountWithId(){
         account = accountDAO.addAccount("event",
                 PasswordUtil.encryptString("sales"),
-                "email@address.com",
+                "myemail@address.net",
                 roleDAO.getRoleByName("TestRoleNumber100").id)
         assertNotEquals "The id of the added account should not be 0", 0, account.id
+        accountDAO.removeAccountById(account.id)
     }
 
     @Test
     void gracefullyHandlesUsernameUniqueConstraintViolationForMultipleAccounts(){
-        accountDAO.addAccount("event",
-                PasswordUtil.encryptString("sales"),
-                "email@address.com",
-                roleDAO.getRoleByName("TestRoleNumber100").id)
+        Account account = accountDAO.addAccount("event",
+                            PasswordUtil.encryptString("sales"),
+                            "myemail@address.net",
+                            roleDAO.getRoleByName("TestRoleNumber100").id)
 
         assertNull accountDAO.addAccount("event",
                 PasswordUtil.encryptString("sales"),
-                "email@address.com",
+                "myemail@address.net",
                 roleDAO.getRoleByName("TestRoleNumber100").id)
 
         assertTrue accountDAO.removeAccountByUsername("event")
+        accountDAO.removeAccountById(account.id)
     }
 
     @Test
     void canGetRoleByAccountId(){
         account = accountDAO.addAccount("event",
                 PasswordUtil.encryptString("sales"),
-                "email@address.com",
+                "myemail@address.net",
                 roleDAO.getRoleByName("TestRoleNumber100").id)
 
         assertEquals new Role().getClass(), accountDAO.getRoleForAccountId(account.id).getClass()
         assertEquals "TestRoleNumber100", accountDAO.getRoleForAccountId(account.id).name
         assertNotNull accountDAO.getAccountByUsername("event")
+        accountDAO.removeAccountById(account.id)
     }
 
     @Test
     void canPasswordBeUpdated(){
         account = accountDAO.addAccount("event",
                 PasswordUtil.encryptString("sales"),
-                "email@address.com",
+                "myemail@address.net",
                 roleDAO.getRoleByName("TestRoleNumber100").id)
 
         assertTrue accountDAO.updateAccountPasswordById(account.id, "new password")
         assertTrue PasswordUtil.verifyPassword(accountDAO.getAccountByUsername("event").password, "new password")
+        accountDAO.removeAccountById(account.id)
     }
 
     @Test
     void canAccountPrimaryInformationBeUpdatedById(){
         account = accountDAO.addAccount("event",
                 PasswordUtil.encryptString("sales"),
-                "email@address.com",
+                "myemail@address.com",
                 roleDAO.getRoleByName("TestRoleNumber100").id)
 
         assertEquals account.getClass(), accountDAO.updateAccountPrimaryInformationById(account.id, "Mr. Test Account", "test-account@email.com", "8675309").getClass()
@@ -142,6 +148,7 @@ class AccountDAOImplTest {
         assertEquals "8675309", account.phoneNumber
         assertEquals "Ms. Test Account", accountDAO.updateAccountPrimaryInformationById(account.id, "Ms. Test Account", "email", "phone").fullname
 
+        accountDAO.removeAccountById(account.id)
     }
 
 }

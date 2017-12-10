@@ -31,21 +31,21 @@ class DAOFactory {
 
         getAccountDAO().addAccount("TestUserNumber100",
                 PasswordUtil.encryptString("event"),
-                "email@address.com",
+                "event-email@address.com",
                 roleDAO.getRoleByName("TestRoleNumber100").id)
 
         getAccountDAO().addAccount("TestUserNumber101",
                 PasswordUtil.encryptString("ticket"),
-                "mail@address.com",
+                "ticket-email@address.com",
                 roleDAO.getRoleByName("TestRoleNumber101").id)
 
     }
 
     void deleteTestData(){
-        getRoleDAO().removeRoleByName("TestRoleNumber100")
-        getRoleDAO().removeRoleByName("TestRoleNumber101")
         getAccountDAO().removeAccountByUsername("TestUserNumber100")
         getAccountDAO().removeAccountByUsername("TestUserNumber101")
+        getRoleDAO().removeRoleByName("TestRoleNumber100")
+        getRoleDAO().removeRoleByName("TestRoleNumber101")
     }
 
     AccountDAO getAccountDAO(){
