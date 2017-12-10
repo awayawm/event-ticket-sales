@@ -11,7 +11,7 @@ class DAOFactory {
     static private def conn = null
 
     static def getConnection(){
-        def config = ConfigUtil.getConfig()
+        def config = ConfigUtil.getFileConfig()
         if(!conn) {
             conn = Sql.newInstance(config.db.url, config.db.user, config.db.password, config.db.driver)
         }

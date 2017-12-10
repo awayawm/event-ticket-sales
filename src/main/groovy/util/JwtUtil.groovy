@@ -13,7 +13,7 @@ class JwtUtil {
 
     static String generateToken() {
         try {
-            Algorithm algorithm = Algorithm.HMAC256(ConfigUtil.getConfig().secretKey)
+            Algorithm algorithm = Algorithm.HMAC256(ConfigUtil.getFileConfig().secretKey)
             return JWT.create().sign(algorithm)
         } catch (JWTCreationException ex){
             println ex.getStackTrace()
@@ -23,7 +23,7 @@ class JwtUtil {
 
     static String generateToken(int minutes) {
         try {
-            Algorithm algorithm = Algorithm.HMAC256(ConfigUtil.getConfig().secretKey)
+            Algorithm algorithm = Algorithm.HMAC256(ConfigUtil.getFileConfig().secretKey)
             return JWT.create().withExpiresAt(DateUtils.addMinutes(new Date(), minutes)).sign(algorithm)
         } catch (JWTCreationException ex){
             println ex.getStackTrace()
@@ -33,7 +33,7 @@ class JwtUtil {
 
     static String generateToken(int id, int minutes) {
         try {
-            Algorithm algorithm = Algorithm.HMAC256(ConfigUtil.getConfig().secretKey)
+            Algorithm algorithm = Algorithm.HMAC256(ConfigUtil.getFileConfig().secretKey)
             return JWT.create().withClaim("id", id).withExpiresAt(DateUtils.addMinutes(new Date(), minutes)).sign(algorithm)
         } catch (JWTCreationException ex){
             println ex.getStackTrace()
@@ -51,7 +51,7 @@ class JwtUtil {
     }
 
     static boolean verifyToken(String token){
-        Algorithm algorithm = Algorithm.HMAC256(ConfigUtil.getConfig().secretKey)
+        Algorithm algorithm = Algorithm.HMAC256(ConfigUtil.getFileConfig().secretKey)
         JWTVerifier verifier = JWT.require(algorithm).build()
         try {
             verifier.verify(token).getToken()

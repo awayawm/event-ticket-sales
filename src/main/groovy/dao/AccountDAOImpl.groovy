@@ -1,7 +1,8 @@
 package dao
 
-import entity.Account
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException
+
+import entity.Account
 import entity.Role
 import util.PasswordUtil
 
@@ -114,5 +115,17 @@ class AccountDAOImpl implements AccountDAO {
             Accounts.add(account)
         }
         return Accounts
+    }
+
+    Account updateTokenById(int id, AccountDAO.TokenType tokenType, String token){
+//        stmt = "update account"
+    }
+
+    boolean updateReceivePromotionalEmailsById(int id, boolean enabled){
+
+    }
+
+    boolean updateUserConfirmedById(int id, boolean enabled){
+
     }
 }

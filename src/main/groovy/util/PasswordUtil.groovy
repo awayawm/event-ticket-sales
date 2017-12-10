@@ -9,7 +9,7 @@ class PasswordUtil {
 
     static String encryptString(String password) {
 
-        String key = ConfigUtil.getConfig().secretKey
+        String key = ConfigUtil.getFileConfig().secretKey
 
         SecretKeySpec secretKeySpec = new SecretKeySpec(Arrays.copyOf(key.getBytes(), 16), "AES")
         Cipher cipher = Cipher.getInstance("AES")
