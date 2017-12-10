@@ -169,4 +169,11 @@ class AccountDAOImplTest {
         assertEquals "34411", accountDAO.getAccountByUsername("TestUserNumber100").zip
 
     }
+
+    @Test
+    void doesGetAllAccountsReturnBothTestAccountsAsList(){
+        assertEquals 2, accountDAO.getAllAccounts().size()
+        assertEquals accountDAO.getAccountByUsername("TestUserNumber100"), accountDAO.getAllAccounts()[0]
+        assertEquals accountDAO.getAccountByUsername("TestUserNumber101"), accountDAO.getAllAccounts()[1]
+    }
 }

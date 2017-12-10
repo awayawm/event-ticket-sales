@@ -18,10 +18,12 @@ class RoleDAOImplTest {
     @Before
     void setup(){
         roleDao = new DAOFactory().getRoleDAO()
+        new DAOFactory().createTestData()
     }
 
     @After
     void teardown(){
+        new DAOFactory().deleteTestData()
         DAOFactory.closeConnection()
     }
 
@@ -87,6 +89,13 @@ class RoleDAOImplTest {
 
         roleDao.removeRoleByName(UPDATED_NAME)
         roleDao.removeRoleByName(NAME)
+    }
+
+    @Test
+    void doesGetAllRolesReturnRolesAsList(){
+        assertEquals 2, roleDao.getAllRoles().size()
+        assertEquals roleDao.getRoleByName("TestRoleNumber100"), roleDao.getAllRoles()[0]
+        assertEquals roleDao.getRoleByName("TestRoleNumber101"), roleDao.getAllRoles()[1]
     }
 
 }

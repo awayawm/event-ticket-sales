@@ -1,5 +1,8 @@
 package entity
 
+import groovy.transform.Canonical
+
+@Canonical
 class Config {
     int id
     String fightLeagueName

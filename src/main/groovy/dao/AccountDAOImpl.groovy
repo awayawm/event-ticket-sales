@@ -104,4 +104,15 @@ class AccountDAOImpl implements AccountDAO {
         getAccountById(id)
     }
 
+    List<Account> getAllAccounts(){
+        List<Account> Accounts = []
+        Account account = null
+        stmt = "select * from Account"
+        DAOFactory.getConnection().eachRow(stmt){
+            account = new Account()
+            copyProperties(account, it)
+            Accounts.add(account)
+        }
+        return Accounts
+    }
 }

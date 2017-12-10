@@ -54,4 +54,12 @@ class RoleDAOImpl implements RoleDAO {
         new Role(id, name, description)
     }
 
+    List<Role> getAllRoles(){
+        List<Role> roles = []
+        stmt = "select * from Role"
+        DAOFactory.getConnection().eachRow(stmt){
+            roles.add(new DAOFactory().getRoleDAO().getRoleById(it.id))
+        }
+        return roles
+    }
 }

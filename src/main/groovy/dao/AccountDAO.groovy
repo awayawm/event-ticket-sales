@@ -14,5 +14,5 @@ interface AccountDAO {
     Account updateAccountPrimaryInformationById(int id, String fullname, String email, String phoneNumber)
     Account updateAccountLocationInformationById(int id, String streetAddress, String city, String state, String zip)
     Account updateAccountLastLoggedInById(int id)
-
+    List<Account> getAllAccounts()
 }
