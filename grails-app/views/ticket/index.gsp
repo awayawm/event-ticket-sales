@@ -63,7 +63,7 @@
               <td>${it.price}</td>
               <td><img src="data:${it.ticketImageContentType};base64,${it.ticketImageBytes.encodeBase64()}" style="max-width: 200px; max-height: 200px;"></td>
               <td><img src="data:${it.ticketLogoContentType};base64,${it.ticketLogoBytes.encodeBase64()}" style="max-width: 200px; max-height: 200px;"></td>
-              <td><i class="fas fa-edit"></i> <i class="fas fa-trash" onclick="showTicketDeleteConfirmDialog(${it.id})"></i></td>
+              <td><i class="fas fa-edit" onclick="document.location.href='/ticket/edit/${it.id}'"></i> <i class="fas fa-trash" onclick="showTicketDeleteConfirmDialog(${it.id})"></i></td>
             </tr>
         </g:each>
         </g:if>

@@ -3,6 +3,56 @@
 package event.ticket.sales
 
 class TicketController {
+    def edit(){
+        switch(request.method) {
+            case("GET"):
+                if (params.id) {
+                    def ticket = Ticket.findById (params.id)
+                    render (view: "edit", model: [ id: params.id,
+                    ticket_name: ticket.name,
+                    ticket_description: ticket.description,
+                    ticket_price: ticket.price,
+                    ticketImageName: ticket.ticketImageName,
+                    ticketImageContentType: ticket.ticketImageContentType,
+                    ticketImageBytes: ticket.ticketImageBytes,
+                    ticketLogoName: ticket.ticketLogoName,
+                    ticketLogoContentType: ticket.ticketLogoContentType,
+                    ticketLogoBytes: ticket.ticketLogoBytes ])
+                } else {
+                    flash.message = "must pass a valid id :("
+                    flash.class = "alert-danger"
+                    redirect action: "index"
+                }
+                break
+
+            case("POST"):
+                def ticket = Ticket.findById(params.id)
+
+                ticket.name = params.ticket_name
+                ticket.description = params.ticket_description
+                ticket.price = Double.parseDouble(params.ticket_price)
+
+                if(!params.ticket_ticketImage.isEmpty()){
+                    ticket.ticketImageBytes = params.ticket_ticketImage.getBytes()
+                    ticket.ticketImageContentType = params.ticket_ticketImage.getContentType()
+                    ticket.ticketImageName = params.ticket_ticketImage.getOriginalFilename()
+                }
+                if(!params.ticket_ticketLogo.isEmpty()){
+                    ticket.ticketLogoName = params.ticket_ticketLogo.getOriginalFilename()
+                    ticket.ticketLogoContentType = params.ticket_ticketLogo.getContentType()
+                    ticket.ticketLogoBytes = params.ticket_ticketLogo.getBytes()
+                }
+
+                ticket = ticket.save()
+
+                flash.message = "ticket successfully updated :)"
+                flash.class = "alert-success"
+                redirect action: "index"
+
+                break
+        }
+    }
+
 
     def index() {
         [tickets: Ticket.findAll()]
@@ -14,6 +64,10 @@ class TicketController {
             ticket.delete(flush:true)
             flash.message = "Ticket has been deleted :)"
             flash.class = "alert-success"
+            redirect action:"index"
+        } else {
+            flash.message = "Cannot delete without an id :("
+            flash.class = "alert-danger"
             redirect action:"index"
         }
     }

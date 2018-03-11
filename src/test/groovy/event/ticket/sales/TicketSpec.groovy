@@ -26,4 +26,19 @@ class TicketSpec extends Specification implements DomainUnitTest<Ticket> {
         Ticket.count() == 1
         Ticket.findAll()[0].ticketImageBytes == ticketImage
     }
+
+    void "can saved ticket be updated"(){
+        setup:
+        def ticket = new Ticket(name: "General Admission", description: "Stadium seating", price: "30.00",
+                ticketImageName: "name", ticketImageBytes: ticketImage, ticketImageContentType: "image/png",
+                ticketLogoName: "image", ticketLogoContentType: "image/png", ticketLogoBytes: ticketLogo).save()
+
+        when:
+        ticket.name = "Cage seat"
+        ticket.save()
+
+        then:
+        Ticket.findAll()[0].name == "Cage seat"
+
+    }
 }

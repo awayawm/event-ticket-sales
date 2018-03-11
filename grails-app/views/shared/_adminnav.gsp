@@ -23,6 +23,9 @@
        <li class="nav-item">
          <a class="nav-link" href="/config">Config</a>
        </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/help">Help</a>
+      </li>
     </ul>
   </div>
 </nav>

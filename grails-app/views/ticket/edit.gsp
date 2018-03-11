@@ -2,39 +2,83 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'ticket.label', default: 'Ticket')}" />
-        <title><g:message code="default.edit.label" args="[entityName]" /></title>
+        <title>Edit Ticket</title>
     </head>
     <body>
-        <a href="#edit-ticket" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
+
+    <p>
+    <div class="row">
+        <div class="col">
+            <g:render template="/shared/adminnav" />
         </div>
-        <div id="edit-ticket" class="content scaffold-edit" role="main">
-            <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
+    </div>
+    </p>
+
+    <div class="row">
+        <div class="col">
             <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
+                <p>
+                <div class="alert ${flash.class}">
+                    ${flash.message}
+                </div>
+                </p>
             </g:if>
-            <g:hasErrors bean="${this.ticket}">
-            <ul class="errors" role="alert">
-                <g:eachError bean="${this.ticket}" var="error">
-                <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-                </g:eachError>
-            </ul>
-            </g:hasErrors>
-            <g:form resource="${this.ticket}" method="PUT">
-                <g:hiddenField name="version" value="${this.ticket?.version}" />
-                <fieldset class="form">
-                    <f:all bean="ticket"/>
-                </fieldset>
-                <fieldset class="buttons">
-                    <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-                </fieldset>
-            </g:form>
         </div>
+    </div>
+
+    <p>
+    <button class="btn btn-primary" onclick="document.location.href='/ticket/index'">Back to Ticket Index</button>
+    </p>
+
+        <h2>Edit Ticket</h2>
+
+    <div class="row">
+        <div class="col">
+            <form action="/ticket/edit" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="${id}"/>
+                <div class="form-group">
+                    <label for="ticket_name"><h5>Ticket Name</h5></label>
+                    <input type="text" class="form-control" id="ticket_name" name="ticket_name" value="${ticket_name}" required />
+                    <small class="form-text text-muted">The name of the ticket</small>
+                </div>
+                <div class="form-group">
+                    <label for="ticket_description"><h5>Ticket Description</h5></label>
+                    <input type="text" class="form-control" id="ticket_description" name="ticket_description" value="${ticket_description}" required />
+                    <small class="form-text text-muted">Description of the ticket</small>
+                </div>
+                <div class="form-group">
+                    <label for="ticket_price"><h5>Ticket Price</h5></label>
+                    <input type="text" class="form-control" id="ticket_price" name="ticket_price" value="${ticket_price}" required />
+                    <small class="form-text text-muted">The price of the ticket with two places after the decimal like 15.50</small>
+                </div>
+
+
+                <div class="row">
+                    <div class="col">
+                        <h5>Current Ticket Background Image: <span class="text-muted">${ticketImageName}</span></h5>
+                        <img src="data:${ticketImageContentType};base64,${ticketImageBytes.encodeBase64()}" style="max-width: 200px; max-height: 200px;">
+                    </div>
+                    <div class="col">
+                        <h5>Current Ticket Logo: <span class="text-muted">${ticketLogoName}</span></h5>
+                        <img src="data:${ticketLogoContentType};base64,${ticketLogoBytes.encodeBase64()}" style="max-width: 200px; max-height: 200px;">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="ticket_ticketImage"><h5>Change Ticket Background Image</h5></label>
+                    <input type="file" class="form-control-file" id="ticket_ticketImage" name="ticket_ticketImage" />
+                    <small class="form-text text-muted">background image of the dynamically rendered ticket.  Try to upload something rectangular</small>
+                 </div>
+                <div class="form-group">
+                    <label for="ticket_ticketLogo"><h5>Change Ticket Logo</h5></label>
+                    <input type="file" class="form-control-file" id="ticket_ticketLogo" name="ticket_ticketLogo" />
+                    <small class="form-text text-muted">logo that appears on the left side of the ticket.  Try to use something square shaped. </small>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Create Ticket"/>
+            </div>
+        </form>
+    </div>
+    </div>
     </body>
 </html>

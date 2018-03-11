@@ -1,14 +1,18 @@
+<!DOCTYPE html>
+<html>
     <head>
         <meta name="layout" content="main" />
         <title>Create Ticket</title>
     </head>
     <body>
 
+    <p>
     <div class="row">
         <div class="col">
             <g:render template="/shared/adminnav" />
         </div>
     </div>
+    </p>
 
     <div class="row">
         <div class="col">
@@ -21,6 +25,10 @@
             </g:if>
         </div>
     </div>
+
+        <p>
+        <button class="btn btn-primary" onclick="document.location.href='/ticket/index'">Back to Ticket Index</button>
+        </p>
 
 
     <h2>Create a ticket</h2>
@@ -67,3 +75,5 @@
             </div>
         </form>
     </div>
+    </body>
+</html>
