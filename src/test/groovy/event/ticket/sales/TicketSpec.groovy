@@ -18,10 +18,12 @@ class TicketSpec extends Specification implements DomainUnitTest<Ticket> {
 
     void "can ticket be saved"(){
         setup:
-        new Ticket(name: "General Admission", description: "Stadium seating", price: "30.00", ticketImage: ticketImage, ticketLogo: ticketLogo).save()
+        new Ticket(name: "General Admission", description: "Stadium seating", price: "30.00",
+                ticketImageName: "name", ticketImageBytes: ticketImage, ticketImageContentType: "image/png",
+                ticketLogoName: "image", ticketLogoContentType: "image/png", ticketLogoBytes: ticketLogo).save()
 
         expect:
         Ticket.count() == 1
-        Ticket.findAll()[0].ticketImage == ticketImage
+        Ticket.findAll()[0].ticketImageBytes == ticketImage
     }
 }

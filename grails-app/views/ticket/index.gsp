@@ -2,27 +2,53 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'ticket.label', default: 'Ticket')}" />
-        <title><g:message code="default.list.label" args="[entityName]" /></title>
+        <title>Tickets list</title>
     </head>
     <body>
-        <a href="#list-ticket" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="list-ticket" class="content scaffold-list" role="main">
-            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-                <div class="message" role="status">${flash.message}</div>
-            </g:if>
-            <f:table collection="${ticketList}" />
-
-            <div class="pagination">
-                <g:paginate total="${ticketCount ?: 0}" />
+    <p>
+        <div class="row">
+            <div class="col">
+                <g:render template="/shared/adminnav"/>
             </div>
         </div>
+        </p>
+    <p>
+        <button class="btn btn-primary" onclick="document.location.href='/ticket/create'">Create</button>
+    </p>
+
+        <g:if test="${flash.message}">
+            <p>
+            <div class="alert ${flash.class}">
+                ${flash.message}
+            </div>
+            </p>
+        </g:if>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">name</th>
+          <th scope="col">description</th>
+          <th scope="col">price</th>
+          <th scope="col">Ticket Background Image</th>
+          <th scope="col">Ticket Logo Image</th>
+          <th scope="col">Functions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <g:each in="${tickets}">
+            <tr>
+              <th>${it.id}</th>
+              <td>${it.name}</td>
+              <td>${it.description}</td>
+              <td>${it.price}</td>
+              <td><img src="data:${it.ticketImageContentType};base64,${it.ticketImageBytes.encodeBase64()}" style="max-width: 200px; max-height: 200px;"></td>
+              <td><img src="data:${it.ticketLogoContentType};base64,${it.ticketLogoBytes.encodeBase64()}" style="max-width: 200px; max-height: 200px;"></td>
+              <td>edit, delete</td>
+            </tr>
+        </g:each>
+      </tbody>
+    </table>
     </body>
 </html>

@@ -3,7 +3,9 @@ package event.ticket.sales
 class Sale {
     String itemsPurchased
     Double total
-    String name
+    Double primaryPartyTotal
+    Double secondaryPartyTotal
+    String customerName
     String phoneNumber
     String emailAddress
     Date transactionDate
