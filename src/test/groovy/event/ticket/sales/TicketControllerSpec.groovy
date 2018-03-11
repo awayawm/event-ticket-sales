@@ -75,4 +75,21 @@ class TicketControllerSpec extends Specification implements ControllerUnitTest<T
         model.tickets.size() == 3
     }
 
+    void "when ticket removed is user redirected to index"(){
+        setup:
+        addTicket()
+        Ticket.count() == 1
+        params.id = Long.toString(Ticket.findAll()[0].id)
+
+        when:
+        controller.delete()
+
+        then:
+        Ticket.count() == 0
+        response.redirectUrl == "/ticket/index"
+        controller.flash.message == "Ticket has been deleted :)"
+        controller.flash.class == "alert-success"
+
+    }
+
 }

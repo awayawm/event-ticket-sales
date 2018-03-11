@@ -1,7 +1,7 @@
 package event.ticket.sales
 
 class Sale {
-    String itemsPurchased
+    String rawRecord // ticket_name, price, qty, ticket_name, price, qty, etc.
     Double total
     Double primaryPartyTotal
     Double secondaryPartyTotal

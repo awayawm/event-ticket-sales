@@ -5,6 +5,22 @@
         <title>Tickets list</title>
     </head>
     <body>
+
+    <div class="modal hide" id="deleteTicketConfirmDialog" tabindex="-1">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+        <div class="modal-header">
+
+            <h5 class="modal-title">Confirm Deletion?</h5>
+            </div>
+            <div class="modal-footer">
+          <button class="btn btn-primary" id="deleteTicketConfirmDialogConfirm">Confirm</button>
+          <button class="btn btn-primary" id="deleteTicketConfirmDialogCancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <p>
         <div class="row">
             <div class="col">
@@ -24,6 +40,8 @@
             </p>
         </g:if>
 
+
+    <g:if test="${tickets}">
     <table class="table">
       <thead>
         <tr>
@@ -45,9 +63,13 @@
               <td>${it.price}</td>
               <td><img src="data:${it.ticketImageContentType};base64,${it.ticketImageBytes.encodeBase64()}" style="max-width: 200px; max-height: 200px;"></td>
               <td><img src="data:${it.ticketLogoContentType};base64,${it.ticketLogoBytes.encodeBase64()}" style="max-width: 200px; max-height: 200px;"></td>
-              <td>edit, delete</td>
+              <td><i class="fas fa-edit"></i> <i class="fas fa-trash" onclick="showTicketDeleteConfirmDialog(${it.id})"></i></td>
             </tr>
         </g:each>
+        </g:if>
+        <g:else>
+        <h2>No tickets created yet.</h2>
+        </g:else>
       </tbody>
     </table>
     </body>

@@ -6,7 +6,7 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="/admin">Dashboard</span></a>
+        <a class="nav-link" href="/dashboard">Dashboard</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/event">Events</a>
@@ -17,6 +17,12 @@
          <li class="nav-item">
            <a class="nav-link" href="/sales">Sales</a>
          </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/reports">Reports</a>
+      </li>
+       <li class="nav-item">
+         <a class="nav-link" href="/config">Config</a>
+       </li>
     </ul>
   </div>
 </nav>

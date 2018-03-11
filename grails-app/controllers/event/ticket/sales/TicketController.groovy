@@ -8,8 +8,17 @@ class TicketController {
         [tickets: Ticket.findAll()]
     }
 
+    def delete(){
+        if(params.id){
+            def ticket = Ticket.findById(Integer.parseInt(params.id))
+            ticket.delete(flush:true)
+            flash.message = "Ticket has been deleted :)"
+            flash.class = "alert-success"
+            redirect action:"index"
+        }
+    }
+
     def create(){
-        println params
         switch(request.method){
             case "POST":
                 if (params.ticket_name && params.ticket_price && params.ticket_description &&
