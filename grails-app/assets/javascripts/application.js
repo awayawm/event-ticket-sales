@@ -1,1 +1,3 @@
-//=require bootstrap.js
+//=require jquery
+//=require popper
+//=require bootstrap

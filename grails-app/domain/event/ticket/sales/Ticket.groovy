@@ -1,13 +1,14 @@
 package event.ticket.sales
 
 class Ticket {
-    Double price
     String name
     String description
+    Double price
     byte[] ticketImage
-    static belongsTo = [event: Event]
+    byte[] ticketLogo
 
     static constraints = {
-        poster maxSize: 1024 * 1024
+        ticketImage maxSize: 1024 * 1024
+        ticketLogo maxSize: 1024 * 1024
     }
 }

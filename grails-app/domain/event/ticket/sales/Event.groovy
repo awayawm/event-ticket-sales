@@ -2,6 +2,7 @@ package event.ticket.sales
 
 class Event {
 
+    static hasMany = [tickets: Ticket]
     String name
     String shortURL
     String description
@@ -11,7 +12,7 @@ class Event {
     Date eventStarts
     Date stopTicketSalesAt
     boolean enabled
-    static hasMany = [tickets: Ticket]
+
 
     static constraints = {
         poster maxSize: 1024 * 1024

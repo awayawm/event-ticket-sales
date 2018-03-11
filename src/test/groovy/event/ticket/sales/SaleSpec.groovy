@@ -10,9 +10,4 @@ class SaleSpec extends Specification implements DomainUnitTest<Sale> {
 
     def cleanup() {
     }
-
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

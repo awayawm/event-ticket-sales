@@ -10,9 +10,4 @@ class TicketControllerSpec extends Specification implements ControllerUnitTest<T
 
     def cleanup() {
     }
-
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

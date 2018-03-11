@@ -10,9 +10,4 @@ class EventControllerSpec extends Specification implements ControllerUnitTest<Ev
 
     def cleanup() {
     }
-
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

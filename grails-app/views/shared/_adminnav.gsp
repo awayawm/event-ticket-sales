@@ -6,16 +6,16 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Dashboard</span></a>
+        <a class="nav-link" href="/admin">Dashboard</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Events</a>
+        <a class="nav-link" href="/event">Events</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Tickets</a>
+        <a class="nav-link" href="/ticket">Tickets</a>
       </li>
          <li class="nav-item">
-           <a class="nav-link" href="#">Sales</a>
+           <a class="nav-link" href="/sales">Sales</a>
          </li>
     </ul>
   </div>

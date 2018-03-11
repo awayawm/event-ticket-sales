@@ -10,9 +10,4 @@ class SaleControllerSpec extends Specification implements ControllerUnitTest<Sal
 
     def cleanup() {
     }
-
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }
