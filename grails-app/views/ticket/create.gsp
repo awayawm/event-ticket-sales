@@ -31,14 +31,14 @@
                     <small class="form-text text-muted">The name of the ticket</small>
                 </div>
                 <div class="form-group">
-                    <label for="ticket_price"><h5>Ticket Price</h5></label>
-                    <input type="text" class="form-control" id="ticket_price" placeholder="ex. 50.00" required />
-                    <small class="form-text text-muted">The price of the ticket with two places after the decimal like 15.50</small>
-                </div>
-                <div class="form-group">
                     <label for="ticket_description"><h5>Ticket Description</h5></label>
                     <input type="text" class="form-control" id="ticket_description" placeholder="Enjoy a stadium view of the ring." required />
                     <small class="form-text text-muted">Description of the ticket</small>
+                </div>
+                <div class="form-group">
+                    <label for="ticket_price"><h5>Ticket Price</h5></label>
+                    <input type="text" class="form-control" id="ticket_price" placeholder="ex. 50.00" required />
+                    <small class="form-text text-muted">The price of the ticket with two places after the decimal like 15.50</small>
                 </div>
                 <div class="form-group">
                     <label for="ticket_ticketImage"><h5>Upload Ticket Image</h5></label>

@@ -7,7 +7,7 @@ import spock.lang.Specification
 
 class TicketSpec extends Specification implements DomainUnitTest<Ticket> {
 
-    byte[] tickeImage = IOUtils.toByteArray(this.class.classLoader.getResourceAsStream("ticketBackground.png"))
+    byte[] ticketImage = IOUtils.toByteArray(this.class.classLoader.getResourceAsStream("ticketBackground.png"))
     byte[] ticketLogo = IOUtils.toByteArray(this.class.classLoader.getResourceAsStream("ticketLogo.gif"))
 
     def setup() {
@@ -18,7 +18,7 @@ class TicketSpec extends Specification implements DomainUnitTest<Ticket> {
 
     void "can ticket be saved"(){
         setup:
-        new Ticket(name: "General Admission", description: "Stadium seating", price: "30.00", ticketImage: tickeImage, ticketLogo: ticketLogo).save()
+        new Ticket(name: "General Admission", description: "Stadium seating", price: "30.00", ticketImage: ticketImage, ticketLogo: ticketLogo).save()
 
         expect:
         Ticket.count() == 1
