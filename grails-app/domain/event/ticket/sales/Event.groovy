@@ -11,6 +11,7 @@ class Event {
     Date eventStarts
     Date stopTicketSalesAt
     boolean enabled
+    static hasMany = [tickets: Ticket]
 
     static constraints = {
         poster maxSize: 1024 * 1024
