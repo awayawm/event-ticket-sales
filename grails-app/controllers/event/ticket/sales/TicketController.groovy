@@ -43,7 +43,7 @@ class TicketController {
                     ticket.ticketLogoBytes = params.ticket_ticketLogo.getBytes()
                 }
 
-                ticket = ticket.save()
+                ticket = ticket.save(flush:true)
 
                 flash.message = "ticket successfully updated :)"
                 flash.class = "alert-success"

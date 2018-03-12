@@ -10,4 +10,8 @@ class EventSpec extends Specification implements DomainUnitTest<Event> {
 
     def cleanup() {
     }
+
+    def "can event be saved"(){
+
+    }
 }
