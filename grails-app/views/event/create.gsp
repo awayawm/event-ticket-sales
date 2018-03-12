@@ -39,6 +39,7 @@
     <li>Short URL: short to access ticket sales from ex. /purchase/battle-at-the-bay</li>
     <li>Description: Description of the event</li>
     <li>Address: Address of event.  This will be printed on the ticket</li>
+    <li>Tickets: select the tickets that are associated with these events.  Customers can buy these.</li>
     <li>Poster: Posters gets displayed on customer landing pages</li>
     <li>Doors open at: Date and Time that doors open.  Printed on ticket</li>
     <li>Event starts at: Date and Time that event starts.  Printed on ticket</li>
@@ -66,6 +67,15 @@
                     <small class="form-text text-muted">A short description of the event.  The customer sees this.</small>
                 </div>
                 <div class="form-group">
+                    <label for="tickets"><h5>Associated Tickets</h5></label>
+                    <select class="form-control" name="tickets" multiple />
+                    <g:each in="${tickets}" var="ticket">
+                    <option value="${ticket.id}"/>${ticket.name}</option>
+                    </g:each>
+                    </select>
+                    <small class="form-text text-muted">These tickets will be available for purchase for this event.</small>
+                </div>
+                <div class="form-group">
                     <label for="ticket_ticketImage"><h5>Address</h5></label>
                     <input type="text" class="form-control" name="address" placeholder="13 W. Broadway, Kirksville, MO 63501" required/>
                     <small class="form-text text-muted">Address of the event.  This is displayed on the ticket</small>
@@ -91,7 +101,7 @@
                     <small class="form-text text-muted">Date and time that ticket sales for this event will end.  The event will be automatically disabled at the selected date and time</small>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="enabled" required />
+                    <input class="form-check-input" type="checkbox" name="enabled" />
                     <label for="enabled" class="form-check-label">Event Enabled</label>
                     <small class="form-text text-muted">Tickets can only be sold for enabled events</small>
                 </div>

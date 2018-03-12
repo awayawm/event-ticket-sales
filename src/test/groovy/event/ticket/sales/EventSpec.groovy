@@ -27,7 +27,7 @@ class EventSpec extends Specification implements DataTest {
         new Event(name: "Battle on the Boat", shortURL: "battle-on-the-boat", description: "12 fights and 2 championship fights for a full night of entertainment!",
                 address: "313 E. Scott, Kirksville MO, 63501", posterContentType: "image/jpg", posterBytes: poster, posterName: "poster.jpg",
                 doorsOpen: new Date(2017, 12, 1, 19, 0), eventStarts: new Date(2017, 12, 1, 19, 0),
-                stopTicketSalesAt: new Date(2017, 12, 1, 19, 0), enabled: true, tickets: ticket).save()
+                stopTicketSalesAt: new Date(2017, 12, 1, 19, 0), enabled: true, tickets: [ticket]).save()
     }
 
     def cleanup() {
@@ -57,10 +57,10 @@ class EventSpec extends Specification implements DataTest {
                 ticketImageName: "ticketBackground2.jpg", ticketImageBytes: ticketImage2, ticketImageContentType: "image/jpg",
                 ticketLogoName: "ticketLogo2.jpg", ticketLogoContentType: "image/jpg", ticketLogoBytes: ticketLogo2).save()
         createEvent()
-        Event.findAll()[0].tickets.add(ticket)
+        Event.findAll()[0].addToTickets(ticket)
 
         then:
         Event.findAll()[0].tickets.size() == 2
-        Event.findAll()[0].tickets[1].name == "cage seat"
+        Event.findAll()[0].tickets.findAll() { it.name == "cage seat" || it.name == "General Admission" }
     }
 }

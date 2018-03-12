@@ -40,7 +40,6 @@
             </p>
         </g:if>
 
-
     <g:if test="${events}">
     <table class="table">
       <thead>
@@ -60,7 +59,7 @@
         </tr>
       </thead>
       <tbody>
-        <g:each in="${tickets}">
+        <g:each in="${events}">
             <tr>
               <th>${it.id}</th>
               <td>${it.name}</td>
@@ -72,6 +71,7 @@
               <td>${it.eventStarts}</td>
               <td>${it.stopTicketSalesAt}</td>
               <td>${it.enabled}</td>
+              <td><ul><g:each in="${it.tickets}" var="ticket"><li>${ticket.name}</li></g:each></ul></td>
               <td><i class="fas fa-edit" onclick="document.location.href='/event/edit/${it.id}'"></i> <i class="fas fa-trash" onclick="showEventDeleteConfirmDialog(${it.id})"></i></td>
             </tr>
         </g:each>
