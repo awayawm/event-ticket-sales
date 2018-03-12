@@ -2,4 +2,5 @@
 //=require popper
 //=require bootstrap
 //=require fontawesome-all
+//=require jquery.datetimepicker.full
 //=require main

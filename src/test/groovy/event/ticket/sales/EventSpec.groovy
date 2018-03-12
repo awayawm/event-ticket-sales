@@ -1,7 +1,6 @@
 package event.ticket.sales
 
 import grails.testing.gorm.DataTest
-import grails.testing.gorm.DomainUnitTest
 import org.apache.commons.io.IOUtils
 import spock.lang.Specification
 
@@ -39,8 +38,8 @@ class EventSpec extends Specification implements DataTest {
         createEvent()
 
         then:
-            Event.count() == 1
-            Event.findAll()[0].tickets[0].name == "General Admission"
+        Event.count() == 1
+        Event.findAll()[0].tickets[0].name == "General Admission"
     }
 
     def "can event be deleted"(){

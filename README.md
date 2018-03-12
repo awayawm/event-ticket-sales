@@ -54,6 +54,7 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 * admin_username: admin username
 * admin_password: admin password
 * split_payment_enabled: true if payments are split otherwise false
+* split_amount: 0 <= amount <= 1, percentage that goes to primary persion
 * split_payment_address: bank address to send split payments to
 * split_payment_account_name: name of split address user
 * ticket_surcharge: general ticket surcharge
