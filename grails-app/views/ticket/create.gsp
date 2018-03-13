@@ -27,7 +27,7 @@
     </div>
 
         <p>
-        <button class="btn btn-primary" onclick="document.location.href='/ticket/index'">Back to Ticket Index</button>
+        <button class="btn btn-primary" onclick="document.location.href='/admin/ticket/index'">Back to Ticket Index</button>
         </p>
 
 
@@ -45,7 +45,7 @@
 
     <div class="row">
         <div class="col">
-            <form action="/ticket/create" method="post" enctype="multipart/form-data">
+            <form action="/admin/ticket/create" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="ticket_name"><h5>Ticket Name</h5></label>
                     <input type="text" class="form-control" id="ticket_name" name="ticket_name" placeholder="ex. General Admission" required />

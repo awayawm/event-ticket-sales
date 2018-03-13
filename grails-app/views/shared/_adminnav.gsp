@@ -6,25 +6,25 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="/dashboard">Dashboard</span></a>
+        <a class="nav-link" href="/admin/dashboard">Dashboard</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/event">Events</a>
+        <a class="nav-link" href="/admin/event">Events</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/ticket">Tickets</a>
+        <a class="nav-link" href="/admin/ticket">Tickets</a>
       </li>
          <li class="nav-item">
-           <a class="nav-link" href="/sales">Sales</a>
+           <a class="nav-link" href="/admin/sales">Sales</a>
          </li>
       <li class="nav-item">
-        <a class="nav-link" href="/reports">Reports</a>
+        <a class="nav-link" href="/admin/reports">Reports</a>
       </li>
        <li class="nav-item">
-         <a class="nav-link" href="/config">Config</a>
+         <a class="nav-link" href="/admin/config">Config</a>
        </li>
       <li class="nav-item">
-        <a class="nav-link" href="/help">Help</a>
+        <a class="nav-link" href="/admin/help">Help</a>
       </li>
     </ul>
   </div>

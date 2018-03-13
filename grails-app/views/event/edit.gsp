@@ -27,14 +27,14 @@
     </div>
 
     <p>
-    <button class="btn btn-primary" onclick="document.location.href='/event/index'">Back to Event Index</button>
+    <button class="btn btn-primary" onclick="document.location.href='/admin/event/index'">Back to Event Index</button>
     </p>
 
         <h2>Edit Event</h2>
 
     <div class="row">
         <div class="col">
-            <form action="/event/edit" method="post" enctype="multipart/form-data">
+            <form action="/admin/event/edit" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="${event.id}"/>
                 <div class="form-group">
                     <label for="name"><h5>Event Name</h5></label>

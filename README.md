@@ -65,6 +65,7 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 
 #### Challenges
 * splitting payment complicates ticket surchage.  possible split
+* ticket images are logo and advertisment.  create a ticket similar to fandango
 
 #### Current Sprint
 * ~~icons on functions~~

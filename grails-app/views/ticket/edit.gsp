@@ -27,14 +27,14 @@
     </div>
 
     <p>
-    <button class="btn btn-primary" onclick="document.location.href='/ticket/index'">Back to Ticket Index</button>
+    <button class="btn btn-primary" onclick="document.location.href='/admin/ticket/index'">Back to Ticket Index</button>
     </p>
 
         <h2>Edit Ticket</h2>
 
     <div class="row">
         <div class="col">
-            <form action="/ticket/edit" method="post" enctype="multipart/form-data">
+            <form action="/admin/ticket/edit" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="${id}"/>
                 <div class="form-group">
                     <label for="ticket_name"><h5>Ticket Name</h5></label>

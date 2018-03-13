@@ -29,7 +29,7 @@
         </div>
         </p>
     <p>
-        <button class="btn btn-primary" onclick="document.location.href='/event/create'">Create</button>
+        <button class="btn btn-primary" onclick="document.location.href='/admin/event/create'">Create</button>
     </p>
 
         <g:if test="${flash.message}">
@@ -72,7 +72,7 @@
               <td>${it.stopTicketSalesAt}</td>
               <td>${it.enabled}</td>
               <td><ul><g:each in="${it.tickets}" var="ticket"><li>${ticket.name}</li></g:each></ul></td>
-              <td><i class="fas fa-edit" onclick="document.location.href='/event/edit/${it.id}'"></i> <i class="fas fa-trash" onclick="showEventDeleteConfirmDialog(${it.id})"></i></td>
+              <td><i class="fas fa-edit" onclick="document.location.href='/admin/event/edit/${it.id}'"></i> <i class="fas fa-trash" onclick="showEventDeleteConfirmDialog(${it.id})"></i></td>
             </tr>
         </g:each>
         </g:if>

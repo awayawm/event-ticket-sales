@@ -27,7 +27,7 @@
     </div>
 
         <p>
-        <button class="btn btn-primary" onclick="document.location.href='/event/index'">Back to Event Index</button>
+        <button class="btn btn-primary" onclick="document.location.href='/admin/event/index'">Back to Event Index</button>
         </p>
 
 
@@ -50,7 +50,7 @@
 
     <div class="row">
         <div class="col">
-            <form action="/event/create" method="post" enctype="multipart/form-data">
+            <form action="/admin/event/create" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name"><h5>Event Name</h5></label>
                     <input type="text" class="form-control" name="name" placeholder="ex. Battle at the Bay" required />
