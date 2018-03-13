@@ -1,11 +1,12 @@
 package event.ticket.sales
 
 class Sale {
-    static hasMany = [tickets: Ticket]
     Event event
+    String rawRecord
     Double total
     Double primaryPartyTotal
     Double secondaryPartyTotal
+    Double splitPercentage
     String customerName
     String phoneNumber
     String emailAddress

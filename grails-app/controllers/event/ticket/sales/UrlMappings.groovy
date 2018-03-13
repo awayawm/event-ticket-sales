@@ -15,17 +15,21 @@ class UrlMappings {
                 "/"(controller:"ticket", action: "index")
                 "/create"(controller:"ticket", action: "create")
                 "/edit/$id"(controller:"ticket", action: "edit")
+                "/edit"(controller:"ticket", action: "edit")
             }
             group "/event", {
                 "/index"(controller:"event", action: "index")
                 "/"(controller:"event", action: "index")
                 "/create"(controller:"event", action: "create")
                 "/edit/$id"(controller:"event", action: "edit")
+                "/edit"(controller:"event", action: "edit")
             }
             "/dashboard"(controller:"dashboard", action: "index")
         }
 
-        "/"(view:"/index")
+        "/"(controller:"purchase", action:"selectEvent")
+        "/purchase/$id"(controller:"purchase", action: "shortURL")
+
         "500"(view:'/error')
         "404"(view:'/notFound')
     }

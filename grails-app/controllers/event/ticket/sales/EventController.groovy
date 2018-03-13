@@ -20,8 +20,6 @@ class EventController {
                 event.description = params.description
                 event.address = params.address
 
-                println params
-
                 if(params.eventStarts != "") {
                     event.eventStarts = new Date(params.eventStarts)
                 }
@@ -44,7 +42,6 @@ class EventController {
 
                 event.tickets = []
                 params.tickets.each {
-                    println it
                     event.addToTickets(Ticket.findById(Integer.parseInt(it)))
                 }
                 event.save(flush:true)
@@ -86,7 +83,6 @@ class EventController {
                 render view: "create", model: [tickets: Ticket.findAll()]
                 break
             case("POST"):
-                println params
                 def event = new Event(name:params.name, shortURL: params.shortURL, description: params.description,
                             address: params.address, eventStarts: new Date(params.eventStarts), stopTicketSalesAt: new Date(params.stopTicketSalesAt),
                             doorsOpen: new Date(params.doorsOpen), enabled: params.enabled == "on", posterName: params.poster.getOriginalFilename(),

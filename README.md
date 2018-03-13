@@ -11,9 +11,9 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 ### Roadmap
 
 1. administration section
-    1. admin inputs, edits, deletes event and ticket information
+    ~~1. admin inputs, edits, deletes event and ticket information~~
     2. admin logs on with credentials
-    3. configuration is read from file, config admin section
+    3. configuration is read from file, config admin section, admin requires session
     4. help admin section
 	
 * Requirements
@@ -62,20 +62,21 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 * google_analytic_keys
 * google_captcha_v2_key
 * braintree_api
+* title (name of application ex. Ranger's Fight League)
 
 #### Challenges
 * splitting payment complicates ticket surchage.  possible split
 * ticket images are logo and advertisment.  create a ticket similar to fandango
 
 #### Current Sprint
-* ~~icons on functions~~
-* ~~confirmation on delete~~
-* ~~edit tickets~~
-* ~~insert sample data automatically when running in development~~
-* create event
-* index events
-* edit events
-* create sample config in project
-* update admin urls to /admin/ticket/create etc.
+~~* icons on functions~~
+~~* confirmation on delete~~
+~~* edit tickets~~
+~~* insert sample data automatically when running in development~~
+~~* create event~~
+~~* index events~~
+~~* edit events~~
+~~* create sample config in project~~
+~~* update admin urls to /admin/ticket/create etc.~~
 * load config from file if env var is present otherwise load sample data in project
 * interceptor requires session.loggedIn to be true for certain pages

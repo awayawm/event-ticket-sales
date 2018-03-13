@@ -79,7 +79,7 @@ class EventControllerSpec extends Specification implements ControllerUnitTest<Ev
         then:
         Event.count() == 1
         Event.findAll()[0].tickets[0].name == "General Admission"
-        response.redirectUrl == '/event/index'
+        response.redirectUrl == '/admin/event'
         controller.flash.message == "Event saved successfully :)"
         controller.flash.class == "alert-success"
     }
@@ -120,7 +120,7 @@ class EventControllerSpec extends Specification implements ControllerUnitTest<Ev
         then:
         controller.flash.message == "Nothing to see here :("
         controller.flash.class == "alert-danger"
-        response.redirectUrl == "/event/index"
+        response.redirectUrl == "/admin/event"
     }
 
     void "can event be changed"(){
@@ -153,7 +153,7 @@ class EventControllerSpec extends Specification implements ControllerUnitTest<Ev
         Event.findAll()[0].posterBytes == poster
         controller.flash.message == "Event successfully edited :)"
         controller.flash.class == "alert-success"
-        response.redirectUrl == "/event/index"
+        response.redirectUrl == "/admin/event"
         Event.findAll()[0].tickets[0].name == ticket.name
     }
 

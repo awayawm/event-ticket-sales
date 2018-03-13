@@ -40,7 +40,7 @@ class TicketControllerSpec extends Specification implements ControllerUnitTest<T
         then:
         controller.flash.message == "Not all parameters provided :("
         controller.flash.class == "alert-danger"
-        response.redirectUrl == "/ticket/create"
+        response.redirectUrl == "/admin/ticket/create"
     }
 
     void "success flash and redirect to /ticket/index when ticket saved by create()"(){
@@ -59,7 +59,7 @@ class TicketControllerSpec extends Specification implements ControllerUnitTest<T
         then:
         controller.flash.message == "Ticket successfully created :)"
         controller.flash.class == "alert-success"
-        response.redirectUrl == "/ticket/index"
+        response.redirectUrl == "/admin/ticket"
         Ticket.count() == 1
     }
 
@@ -87,7 +87,7 @@ class TicketControllerSpec extends Specification implements ControllerUnitTest<T
 
         then:
         Ticket.count() == 0
-        response.redirectUrl == "/ticket/index"
+        response.redirectUrl == "/admin/ticket"
         controller.flash.message == "Ticket has been deleted :)"
         controller.flash.class == "alert-success"
     }
@@ -99,7 +99,7 @@ class TicketControllerSpec extends Specification implements ControllerUnitTest<T
         then:
         controller.flash.message == "Cannot delete without an id :("
         controller.flash.class == "alert-danger"
-        response.redirectUrl == "/ticket/index"
+        response.redirectUrl == "/admin/ticket"
 
     }
 
@@ -124,7 +124,7 @@ class TicketControllerSpec extends Specification implements ControllerUnitTest<T
         Ticket.findAll()[0].ticketLogoBytes == ticketLogo2
         controller.flash.message == "ticket successfully updated :)"
         controller.flash.class == "alert-success"
-        response.redirectUrl == '/ticket/index'
+        response.redirectUrl == '/admin/ticket'
 
     }
 
