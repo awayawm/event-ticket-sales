@@ -11,7 +11,7 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 ### Roadmap
 
 1. administration section
-    ~~1. admin inputs, edits, deletes event and ticket information~~
+    1. ~~admin inputs, edits, deletes event and ticket information~~
     2. admin logs on with credentials
     3. configuration is read from file, config admin section, admin requires session
     4. help admin section
@@ -22,8 +22,8 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 	* login uses google captcha v2
 	
 2. customer can use landing page to purchase a ticket
-	1. customer selects event
-	2. customer selects tickets
+	1. ~~customer selects event~~
+	2. ~~customer selects tickets~~
 	3. customer confirms purchase
 	
 3. purchase is processed
@@ -69,14 +69,14 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 * ticket images are logo and advertisment.  create a ticket similar to fandango
 
 #### Current Sprint
-~~* icons on functions~~
-~~* confirmation on delete~~
-~~* edit tickets~~
-~~* insert sample data automatically when running in development~~
-~~* create event~~
-~~* index events~~
-~~* edit events~~
-~~* create sample config in project~~
-~~* update admin urls to /admin/ticket/create etc.~~
+* ~~icons on functions~~
+* ~~confirmation on delete~~
+* ~~edit tickets~~
+* ~~insert sample data automatically when running in development~~
+* ~~create event~~
+* ~~index events~~
+* ~~edit events~~
+* ~~create sample config in project~~
+* ~~update admin urls to /admin/ticket/create etc.~~
 * load config from file if env var is present otherwise load sample data in project
 * interceptor requires session.loggedIn to be true for certain pages

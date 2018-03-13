@@ -23,7 +23,7 @@
                                 <center>
                                     <h1>${event.name}</h2>
                                     <p>
-                                        <img src="data:${event.posterContentType};base64,${event.posterBytes.encodeBase64()}" style="max-width: 300px; max-height: 300px;">
+                                        <img class="img-fluid" src="data:${event.posterContentType};base64,${event.posterBytes.encodeBase64()}" style="max-width: 300px; max-height: 300px;">
                                     </p>
                                      <h5>Fights Start: <span class="text-muted"><g:formatDate date="${event.eventStarts}" type="datetime" style="MEDIUM"/></span></h5>
                                     <p>

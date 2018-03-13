@@ -27,7 +27,7 @@ class UrlMappings {
             "/dashboard"(controller:"dashboard", action: "index")
         }
 
-        "/"(controller:"purchase", action:"selectEvent")
+        "/"(controller:"purchase", action:"index")
         "/purchase/$id"(controller:"purchase", action: "shortURL")
 
         "500"(view:'/error')

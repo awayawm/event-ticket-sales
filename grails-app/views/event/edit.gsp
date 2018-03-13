@@ -102,9 +102,8 @@
                     <small class="form-text text-muted">Date and time that ticket sales for this event will end.  The event will be automatically disabled at the selected date and time.  Current value is kept if no new value is seleted.</small>
                 </div>
 
-
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="enabled" checked="${event.enabled == true ? "checked" : ""}" />
+                    <input class="form-check-input" type="checkbox" name="enabled" checked="${event.enabled == true ? "true" : "false"}" />
                     <label for="enabled" class="form-check-label">Event Enabled</label>
                     <small class="form-text text-muted">Tickets can only be sold for enabled events</small>
                 </div>
