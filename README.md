@@ -13,13 +13,9 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 1. administration section
     1. ~~admin inputs, edits, deletes event and ticket information~~
     2. admin logs on with credentials
-    3. configuration is read from file, config admin section, admin requires session
-    4. help admin section
-	
-* Requirements
-	* text rendering can be dark or light
-	* event_ticket_sales_config environmental variable points to location of config
-	* login uses google captcha v2
+    3. ~~configuration is read from file~~
+    4. config index/controller
+    6. help index/controller
 	
 2. customer can use landing page to purchase a ticket
 	1. ~~customer selects event~~
@@ -32,9 +28,6 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 	3. payment is split between multiple accounts
 		3.3.1 if payment can't be split by braintree, send a payment to a third party using paypal or something similar
 	4. sales information, including customer information, is recorded in database
-	
-* Requirements
-	* Customer can purchase any number of various tickets for an event (ex. 4 general admission and 2 cage seat)
 
 4. tickets are emailed to user
 	1. apache fop creates dynamic tickets
@@ -48,26 +41,12 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 6. admin dashboard
 	1. dashboard contains simple graphs of profit (line charts)
 	2. link to google analytics
-	
-#### Config
-* admin_report_emails: list of emails that reports are emailed to 
-* admin_username: admin username
-* admin_password: admin password
-* split_payment_enabled: true if payments are split otherwise false
-* split_amount: 0 <= amount <= 1, percentage that goes to primary persion
-* split_payment_address: bank address to send split payments to
-* split_payment_account_name: name of split address user
-* ticket_surcharge: general ticket surcharge
-* maximum image upload size (in bytes)
-* google_analytic_keys
-* google_captcha_v2_key
-* braintree_api
-* title (name of application ex. Ranger's Fight League)
 
 #### Challenges
-* splitting payment complicates ticket surchage.  possible split
+* surcharge goes to primary person
 * ticket images are logo and advertisment.  create a ticket similar to fandango
-
+* recaptcha on login
+	
 #### Current Sprint
 * ~~icons on functions~~
 * ~~confirmation on delete~~
@@ -78,5 +57,5 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 * ~~edit events~~
 * ~~create sample config in project~~
 * ~~update admin urls to /admin/ticket/create etc.~~
-* load config from file if env var is present otherwise load sample data in project
+* ~~load config from file if env var is present otherwise load sample data in project~~
 * interceptor requires session.loggedIn to be true for certain pages
