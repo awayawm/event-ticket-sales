@@ -17,7 +17,8 @@ class TicketController {
                     ticketImageBytes: ticket.ticketImageBytes,
                     ticketLogoName: ticket.ticketLogoName,
                     ticketLogoContentType: ticket.ticketLogoContentType,
-                    ticketLogoBytes: ticket.ticketLogoBytes ])
+                    ticketLogoBytes: ticket.ticketLogoBytes,
+                    ticket_quantity: ticket.quantity ])
                 } else {
                     flash.message = "must pass a valid id :("
                     flash.class = "alert-danger"
@@ -31,6 +32,7 @@ class TicketController {
                 ticket.name = params.ticket_name
                 ticket.description = params.ticket_description
                 ticket.price = Double.parseDouble(params.ticket_price)
+                ticket.quantity = Integer.parseInt(params.ticket_quantity)
 
                 if(!params.ticket_ticketImage.isEmpty()){
                     ticket.ticketImageBytes = params.ticket_ticketImage.getBytes()
@@ -83,7 +85,8 @@ class TicketController {
                                             ticketImageName: params.ticket_ticketImage.getOriginalFilename(),
                                             ticketLogoName: params.ticket_ticketLogo.getOriginalFilename(),
                                             ticketLogoContentType: params.ticket_ticketLogo.getContentType(),
-                                            ticketLogoBytes: params.ticket_ticketLogo.getBytes()).save()
+                                            ticketLogoBytes: params.ticket_ticketLogo.getBytes(),
+                                            quantity: params.ticket_quantity).save()
                     if (!ticket){
                         flash.message = "Error when saving ticket to database :("
                         flash.class = "alert-danger"

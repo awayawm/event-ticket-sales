@@ -1,7 +1,7 @@
 package event.ticket.sales
 
 class PurchaseController {
-    PurchaseService purchaseService = new PurchaseService()
+    EventService purchaseService = new EventService()
     def index(){
         render view:"selectEvent", model:[events:purchaseService.getEvents().events]
     }

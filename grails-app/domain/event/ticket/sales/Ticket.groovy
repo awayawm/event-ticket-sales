@@ -6,6 +6,7 @@ class Ticket {
     String name
     String description
     Double price
+    Integer quantity
     String ticketImageName
     String ticketImageContentType
     byte[] ticketImageBytes
@@ -17,6 +18,7 @@ class Ticket {
         name blank: false
         description blank: false
         price blank: false
+        quantity blank:false
         ticketImageName blank:false
         ticketImageBytes blank: false, maxSize: 1024 * 1024 * 10
         ticketImageContentType blank: false

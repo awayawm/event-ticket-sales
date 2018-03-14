@@ -30,7 +30,9 @@
             <h5 class="card-title">${ticket.name}</h5>
 <h6 class="card-subtitle mb-2 text-muted">${ticket.description}</h6>
 
-           <h3>$${ticket.price}</h3>
+           <h3><g:formatNumber number="${ticket.price}" type="currency" currencyCode="USD" />
+            <g:if test="${ticket.quantity <= 10}"><small class="text-danger">${ticket.quantity} Tickets Remaining!</small></g:if>
+            </h3>
 
            <select class="form-control" name="">
                <g:each name="tickets_${ticket.id}" var="num" in="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" >

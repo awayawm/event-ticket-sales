@@ -49,6 +49,7 @@
           <th scope="col">name</th>
           <th scope="col">description</th>
           <th scope="col">price</th>
+          <th scope="col">quantity</th>
           <th scope="col">Ticket Background Image</th>
           <th scope="col">Ticket Logo Image</th>
           <th scope="col">Functions</th>
@@ -61,6 +62,7 @@
               <td>${it.name}</td>
               <td>${it.description}</td>
               <td>${it.price}</td>
+              <td>${it.quantity}</td>
               <td><img src="data:${it.ticketImageContentType};base64,${it.ticketImageBytes.encodeBase64()}" style="max-width: 200px; max-height: 200px;"></td>
               <td><img src="data:${it.ticketLogoContentType};base64,${it.ticketLogoBytes.encodeBase64()}" style="max-width: 200px; max-height: 200px;"></td>
               <td><i class="fas fa-edit" onclick="document.location.href='/admin/ticket/edit/${it.id}'"></i> <i class="fas fa-trash" onclick="showTicketDeleteConfirmDialog(${it.id})"></i></td>

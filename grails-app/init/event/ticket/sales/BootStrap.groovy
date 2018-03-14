@@ -18,16 +18,16 @@ class BootStrap {
 
         switch(Environment.current){
             case(Environment.DEVELOPMENT):
-                new Ticket(name: "General Admission", description: "Stadium Seating", price: "30.00",
+                new Ticket(quantity: 75, name: "General Admission", description: "Stadium Seating", price: "30.00",
                         ticketImageName: "titleBackground.png", ticketImageBytes: titleBackground, ticketImageContentType: "image/png",
                         ticketLogoName: "ticketLogo.gif", ticketLogoContentType: "image/gif", ticketLogoBytes: ticketLogo).save()
-                new Ticket(name: "Cage Seating", description: "Tables around the cage", price: "60.00",
+                new Ticket(quantity: 60, name: "Cage Seating", description: "Tables around the cage", price: "60.00",
                                     ticketImageName: "titleBackground2.jpg", ticketImageBytes: titleBackground2, ticketImageContentType: "image/jpg",
                                     ticketLogoName: "ticketLogo2.jpg", ticketLogoContentType: "image/jpg", ticketLogoBytes: ticketLogo2).save()
-                new Ticket(name: "Table Seats", description: "Tables outside the ring", price: "45.00",
+                new Ticket(quantity: 9, name: "Table Seats", description: "Tables outside the ring", price: "45.00",
                         ticketImageName: "titleBackground.png", ticketImageBytes: titleBackground, ticketImageContentType: "image/png",
                         ticketLogoName: "ticketLogo2.jpg", ticketLogoContentType: "image/jpg", ticketLogoBytes: ticketLogo2).save()
-                new Ticket(name: "Director Seat", description: "View the fights from 50 feet in the air on the safety of a cherrypicker.  Waiver required.", price: "120.00",
+                new Ticket(quantity: 30, name: "Director Seat", description: "View the fights from 50 feet in the air on the safety of a cherrypicker.  Waiver required.", price: "120.00",
                         ticketImageName: "titleBackground2.jpg", ticketImageBytes: titleBackground2, ticketImageContentType: "image/jpg",
                         ticketLogoName: "ticketLogo.gif", ticketLogoContentType: "image/gif", ticketLogoBytes: ticketLogo).save()
 

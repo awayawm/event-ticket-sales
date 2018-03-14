@@ -17,7 +17,7 @@ class TicketControllerSpec extends Specification implements ControllerUnitTest<T
     byte[] ticketLogo2 = IOUtils.toByteArray(this.class.classLoader.getResourceAsStream("ticketLogo2.jpg"))
 
     def addTicket(){
-        new Ticket(name: "General Admission", description: "Stadium seating", price: "30.00",
+        new Ticket(name: "General Admission", description: "Stadium seating", price: "30.00", quantity: 100,
                 ticketImageName: "name", ticketImageBytes: ticketImage, ticketImageContentType: "image/png",
                 ticketLogoName: "image", ticketLogoContentType: "image/png", ticketLogoBytes: ticketLogo).save()
 
@@ -51,6 +51,7 @@ class TicketControllerSpec extends Specification implements ControllerUnitTest<T
         params.ticket_price = 30.00
         params.ticket_ticketImage = new GrailsMockMultipartFile('ticket_ticketImage', 'IronMan3.jpg', 'image/jpeg', "1234567" as byte[])
         params.ticket_ticketLogo = new GrailsMockMultipartFile('ticket_ticketLogo', 'IronMan3.jpg', 'image/jpeg', "1234567" as byte[])
+        params.ticket_quantity = 100
         Ticket.count() == 0
 
         when:
@@ -114,6 +115,7 @@ class TicketControllerSpec extends Specification implements ControllerUnitTest<T
         params.ticket_ticketImage = new GrailsMockMultipartFile("test", new byte[0])
         params.ticket_ticketLogo = new GrailsMockMultipartFile("updated logo", "ticketLogo2.jpg", "image/jpg", ticketLogo2)
         params.ticket_price = Double.toString(Ticket.findAll()[0].price)
+        params.ticket_quantity = "100"
 
         when:
         controller.edit()

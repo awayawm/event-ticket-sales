@@ -19,7 +19,7 @@ class TicketSpec extends Specification implements DomainUnitTest<Ticket> {
     void "can ticket be saved"(){
         setup:
         new Ticket(name: "General Admission", description: "Stadium seating", price: "30.00",
-                ticketImageName: "name", ticketImageBytes: ticketImage, ticketImageContentType: "image/png",
+                ticketImageName: "name", ticketImageBytes: ticketImage, quantity: 100, ticketImageContentType: "image/png",
                 ticketLogoName: "image", ticketLogoContentType: "image/png", ticketLogoBytes: ticketLogo).save()
 
         expect:
@@ -31,7 +31,7 @@ class TicketSpec extends Specification implements DomainUnitTest<Ticket> {
         setup:
         def ticket = new Ticket(name: "General Admission", description: "Stadium seating", price: "30.00",
                 ticketImageName: "name", ticketImageBytes: ticketImage, ticketImageContentType: "image/png",
-                ticketLogoName: "image", ticketLogoContentType: "image/png", ticketLogoBytes: ticketLogo).save()
+                ticketLogoName: "image", ticketLogoContentType: "image/png", quantity: 100, ticketLogoBytes: ticketLogo).save()
 
         when:
         ticket.name = "Cage seat"

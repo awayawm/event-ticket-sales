@@ -38,6 +38,7 @@
     <li>Ticket name: The name of the ticket as it appears as an available ticket for an event</li>
     <li>Ticket description: Description of the ticket that appears under the name of the associate event ticket list</li>
     <li>Ticket price: The price of the ticket</li>
+    <li>Ticket quantity: Number of tickets available for sale</li>
     <li>Ticket image: The background image used in the dynamically generated ticket emailed to the customer</li>
     <li>Ticket logo: The logo of the organization.  Gets stamped on the ticket.</li>
     </ul>
@@ -60,6 +61,11 @@
                     <label for="ticket_price"><h5>Ticket Price</h5></label>
                     <input type="text" class="form-control" id="ticket_price" name="ticket_price" placeholder="ex. 50.00" required />
                     <small class="form-text text-muted">The price of the ticket with two places after the decimal like 15.50</small>
+                </div>
+                <div class="form-group">
+                    <label for="ticket_price"><h5>Quantity</h5></label>
+                    <input type="text" class="form-control" id="ticket_quantity" name="ticket_quantity" placeholder="ex. 120" required />
+                    <small class="form-text text-muted">The number of tickets available for sale</small>
                 </div>
                 <div class="form-group">
                     <label for="ticket_ticketImage"><h5>Upload Ticket Background Image</h5></label>

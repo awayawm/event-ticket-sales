@@ -51,6 +51,11 @@
                     <input type="text" class="form-control" id="ticket_price" name="ticket_price" value="${ticket_price}" required />
                     <small class="form-text text-muted">The price of the ticket with two places after the decimal like 15.50</small>
                 </div>
+                <div class="form-group">
+                    <label for="ticket_price"><h5>Ticket Quantity</h5></label>
+                    <input type="text" class="form-control" id="ticket_quantity" name="ticket_quantity" value="${ticket_quantity}" required />
+                    <small class="form-text text-muted">Number of tickets available for purchase</small>
+                </div>
 
 
                 <div class="row">

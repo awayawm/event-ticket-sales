@@ -19,7 +19,7 @@ class EventControllerSpec extends Specification implements ControllerUnitTest<Ev
     def createEvent(){
         def ticket = new Ticket(name: "General Admission", description: "Stadium seating", price: "30.00",
                 ticketImageName: "name", ticketImageBytes: ticketImage, ticketImageContentType: "image/png",
-                ticketLogoName: "image", ticketLogoContentType: "image/png", ticketLogoBytes: ticketLogo).save()
+                ticketLogoName: "image", ticketLogoContentType: "image/png", quantity: 250, ticketLogoBytes: ticketLogo).save()
 
         new Event(name: "Battle on the Boat", shortURL: "battle-on-the-boat", description: "12 fights and 2 championship fights for a full night of entertainment!",
                 address: "313 E. Scott, Kirksville MO, 63501", posterContentType: "image/jpg", posterBytes: poster, posterName: "poster.jpg",
@@ -28,10 +28,10 @@ class EventControllerSpec extends Specification implements ControllerUnitTest<Ev
     }
 
     def createTickets(){
-        new Ticket(name: "General Admission", description: "Stadium seating", price: "30.00",
+        new Ticket(quantity: 50, name: "General Admission", description: "Stadium seating", price: "30.00",
                 ticketImageName: "name", ticketImageBytes: ticketImage, ticketImageContentType: "image/png",
                 ticketLogoName: "image", ticketLogoContentType: "image/png", ticketLogoBytes: ticketLogo).save()
-        new Ticket(name: "General Admission", description: "Stadium seating", price: "30.00",
+        new Ticket(quantity: 25, name: "General Admission", description: "Stadium seating", price: "30.00",
                 ticketImageName: "name", ticketImageBytes: ticketImage, ticketImageContentType: "image/png",
                 ticketLogoName: "image", ticketLogoContentType: "image/png", ticketLogoBytes: ticketLogo).save()
     }
@@ -56,7 +56,7 @@ class EventControllerSpec extends Specification implements ControllerUnitTest<Ev
 
     def "can event be created"(){
         setup:
-        def ticket = new Ticket(name: "General Admission", description: "Stadium seating", price: "30.00",
+        def ticket = new Ticket(quantity: 50, name: "General Admission", description: "Stadium seating", price: "30.00",
                 ticketImageName: "name", ticketImageBytes: ticketImage, ticketImageContentType: "image/png",
                 ticketLogoName: "image", ticketLogoContentType: "image/png", ticketLogoBytes: ticketLogo).save()
         Ticket.count() == 1
@@ -86,7 +86,7 @@ class EventControllerSpec extends Specification implements ControllerUnitTest<Ev
 
     void "does event create view return list of all tickets as tickets"(){
         setup:
-        new Ticket(name: "General Admission", description: "Stadium seating", price: "30.00",
+        new Ticket(quantity: 20, name: "General Admission", description: "Stadium seating", price: "30.00",
                 ticketImageName: "name", ticketImageBytes: ticketImage, ticketImageContentType: "image/png",
                 ticketLogoName: "image", ticketLogoContentType: "image/png", ticketLogoBytes: ticketLogo).save()
         Ticket.count() == 1
@@ -126,7 +126,7 @@ class EventControllerSpec extends Specification implements ControllerUnitTest<Ev
     void "can event be changed"(){
         setup:
         createEvent()
-        def ticket = new Ticket(name: "General Admission", description: "Stadium seating", price: "30.00",
+        def ticket = new Ticket(quantity: 75, name: "General Admission", description: "Stadium seating", price: "30.00",
                 ticketImageName: "name", ticketImageBytes: ticketImage, ticketImageContentType: "image/png",
                 ticketLogoName: "image", ticketLogoContentType: "image/png", ticketLogoBytes: ticketLogo).save()
         Ticket.count() == 2
@@ -160,7 +160,7 @@ class EventControllerSpec extends Specification implements ControllerUnitTest<Ev
     void "does image get overridden on edit"(){
         setup:
         createEvent()
-        def ticket = new Ticket(name: "General Admission", description: "Stadium seating", price: "30.00",
+        def ticket = new Ticket(quantity: 30, name: "General Admission", description: "Stadium seating", price: "30.00",
                 ticketImageName: "name", ticketImageBytes: ticketImage, ticketImageContentType: "image/png",
                 ticketLogoName: "image", ticketLogoContentType: "image/png", ticketLogoBytes: ticketLogo).save()
         Ticket.count() == 2

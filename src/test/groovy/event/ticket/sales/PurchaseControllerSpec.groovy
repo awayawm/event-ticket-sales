@@ -56,7 +56,6 @@ class PurchaseControllerSpec extends Specification implements ControllerUnitTest
 
         then:
         println model.event.name
-
-
     }
+
 }

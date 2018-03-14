@@ -71,7 +71,7 @@
               <td>${it.eventStarts}</td>
               <td>${it.stopTicketSalesAt}</td>
               <td>${it.enabled}</td>
-              <td><ul><g:each in="${it.tickets}" var="ticket"><li>${ticket.name}</li></g:each></ul></td>
+              <td><ul><g:each in="${it.tickets}" var="ticket"><li>${ticket.name} <span class="text-muted">(${ticket.quantity} left)</span></li></g:each></ul></td>
               <td><i class="fas fa-edit" onclick="document.location.href='/admin/event/edit/${it.id}'"></i> <i class="fas fa-trash" onclick="showEventDeleteConfirmDialog(${it.id})"></i></td>
             </tr>
         </g:each>
