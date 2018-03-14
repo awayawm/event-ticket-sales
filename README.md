@@ -65,3 +65,4 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 * interceptor requires session.loggedIn to be true for certain pages
 * braintree and ticket, Confirmatiom view
 * comp tickets (you select a ticket and enter an name, email address, phone)
+* ticket policy modal confirmation before charging credit card

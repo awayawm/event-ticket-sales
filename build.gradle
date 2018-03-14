@@ -93,6 +93,9 @@ dependencies {
     testRuntime "org.seleniumhq.selenium:selenium-firefox-driver:3.6.0"
     testRuntime "org.seleniumhq.selenium:selenium-remote-driver:3.6.0"
     testRuntime "org.seleniumhq.selenium:selenium-api:3.6.0"
+    // https://mvnrepository.com/artifact/com.braintreepayments.gateway/braintree-java
+    compile group: 'com.braintreepayments.gateway', name: 'braintree-java', version: '2.77.0'
+
 }
 
 bootRun {

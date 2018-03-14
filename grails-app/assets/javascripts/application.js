@@ -3,4 +3,6 @@
 //=require bootstrap
 //=require fontawesome-all
 //=require jquery.datetimepicker.full
+//=client
+//=hosted-fields
 //=require main

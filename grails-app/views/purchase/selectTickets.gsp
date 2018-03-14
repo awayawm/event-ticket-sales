@@ -35,7 +35,7 @@
             </h3>
 
            <select class="form-control" name="">
-               <g:each name="tickets_${ticket.id}" var="num" in="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" >
+               <g:each name="tickets_${ticket.id}" var="num" in="[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" >
              <option value="${num}">${num} ticket${num == 1 ? "" : "s"}</option>
              </g:each>
            </select>
@@ -46,13 +46,13 @@
 
        </g:each>
 <hr>
-        <button class="btn btn-primary btn-lg" onclick="document.location.href='/purchase/${event.shortURL}'">Purchase Tickets</button>
+        <input type="submit" class="btn btn-primary btn-lg" value="Purchase Tickets"/>
         </form>
             </div>
             <div class="col">
                 <center>
                     <p>
-                        <img class="img-fluid" src="data:${event.posterContentType};base64,${event.posterBytes.encodeBase64()}" style="max-width: 700px; max-height: 700px;">
+                        <img class="rounded img-fluid max-width: 700px; max-height: 700px;" src="data:${event.posterContentType};base64,${event.posterBytes.encodeBase64()}">
                     </p>
                     <button class="btn btn-primary btn-lg" onclick="document.location.href='/'">Back to Select Events</button>
                 </center>

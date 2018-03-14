@@ -27,8 +27,14 @@ class UrlMappings {
             "/dashboard"(controller:"dashboard", action: "index")
         }
 
+        group "/purchase", {
+            "/processPayment"(controller:"purchase", action: "processPayment")
+            "/confirmation"(controller:"purchase", action: "confirmation")
+            "/$id"(controller:"purchase", action: "shortURL")
+        }
+
         "/"(controller:"purchase", action:"index")
-        "/purchase/$id"(controller:"purchase", action: "shortURL")
+
 
         "500"(view:'/error')
         "404"(view:'/notFound')
