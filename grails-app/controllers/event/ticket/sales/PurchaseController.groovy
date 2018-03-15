@@ -1,11 +1,16 @@
 package event.ticket.sales
 
 import com.braintreegateway.BraintreeGateway
+import com.braintreegateway.ClientTokenRequest
 import com.braintreegateway.Environment
+import com.braintreegateway.Result
+import com.braintreegateway.Transaction
+import com.braintreegateway.TransactionRequest
 
 class PurchaseController {
     EventService purchaseService = new EventService()
     ConfigService configService = new ConfigService()
+
     def index(){
         render view:"selectEvent", model:[events:purchaseService.getEvents().events]
     }
@@ -22,11 +27,20 @@ class PurchaseController {
 
     def processPayment(){
         println params
-        BraintreeGateway gateway = new BraintreeGateway(
-                Environment.SANDBOX,
-                configService.getConfig().keys.braintree.merchantId,
-                configService.getConfig().keys.braintree.publicKey,
-                configService.getConfig().keys.braintree.privateKey
-        );
+        String nonceFromTheClient = request.queryParams("params.payment_method_nonce");
+        TransactionRequest request = new TransactionRequest()
+                .amount(new BigDecimal("10.00"))
+                .paymentMethodNonce(nonceFromTheClient)
+                .options()
+                .submitForSettlement(true)
+                .done()
+
+        Result<Transaction> result = gateway.transaction().sale(request);
+
+        println result.toString()
+    }
+
+    def getClientToken(){
+        return BraintreeService.getGateway().clientToken().generate(new ClientTokenRequest().customerId(params.id))
     }
 }

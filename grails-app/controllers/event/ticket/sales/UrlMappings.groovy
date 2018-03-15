@@ -29,6 +29,7 @@ class UrlMappings {
 
         group "/purchase", {
             "/processPayment"(controller:"purchase", action: "processPayment")
+            "/getClientToken"(controller:"purchase", action: "getClientToken")
             "/confirmation"(controller:"purchase", action: "confirmation")
             "/$id"(controller:"purchase", action: "shortURL")
         }

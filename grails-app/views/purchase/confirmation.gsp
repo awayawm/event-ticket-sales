@@ -19,45 +19,26 @@
         </g:if>
         <h1>Purchase Tickets</h1>
 
-          <label class="hosted-fields--label" for="fullName">Full Name</label>
-          <div fullname="fullName" class="hosted-field"></div>
+    <form action="/" id="my-sample-form" method="post">
 
-          <label class="hosted-fields--label" for="emailAddress">Email Address</label>
-          <div id="emailAddress" class="hosted-field"></div>
+      <label for="card-number"><h3>Card Number</h3></label>
+      <div class="form-control" style="height: 40px" id="card-number"></div>
 
-          <label class="hosted-fields--label" for="phoneNumber">Phone Number</label>
-          <div id="phoneNumber" class="hosted-field"></div>
+      <label for="cvv"><h3>CVV</h3></label>
+      <div class="form-control" style="height: 40px" id="cvv"></div>
 
-        <div class="demo-frame">
-          <form action="/purchase/processPayment" method="post" id="cardForm" >
+      <label for="expiration-date"><h3>Expiration Date</h3></label>
+      <div class="form-control" style="height: 40px" id="expiration-date"></div>
 
-            <label class="hosted-fields--label" for="fullName">Full Name</label>
-            <input type="text" name="fullName" class="hosted-field"></div>
+    <p>
+      <input class="btn btn-lg btn-primary" type="submit" value="Pay" disabled />
+    </p>
 
-            <label class="hosted-fields--label" for="card-number">Card Number</label>
-            <div id="card-number" class="hosted-field"></div>
+    </form>
 
-            <label class="hosted-fields--label" for="expiration-date">Expiration Date</label>
-            <div id="expiration-date" class="hosted-field"></div>
-
-            <label class="hosted-fields--label" for="cvv">CVV</label>
-            <div id="cvv" class="hosted-field"></div>
-
-            <label class="hosted-fields--label" for="postal-code">Postal Code</label>
-            <div id="postal-code" class="hosted-field"></div>
-
-            <div class="button-container">
-            <input type="submit" class="button button--small button--green" value="Purchase" id="submit"/>
-            </div>
-          </form>
-        </div>
-
-        <script src="https://js.braintreegateway.com/web/3.31.0/js/client.js"></script>
-        <script src="https://js.braintreegateway.com/web/3.31.0/js/hosted-fields.js"></script>
-
-
-        </div>
-        </div>
         </center>
+        </div>
+        </div>
+
     </body>
 </html>
