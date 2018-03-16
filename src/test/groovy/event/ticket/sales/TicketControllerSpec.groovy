@@ -20,7 +20,6 @@ class TicketControllerSpec extends Specification implements ControllerUnitTest<T
         new Ticket(name: "General Admission", description: "Stadium seating", price: "30.00", quantity: 100,
                 ticketImageName: "name", ticketImageBytes: ticketImage, ticketImageContentType: "image/png",
                 ticketLogoName: "image", ticketLogoContentType: "image/png", ticketLogoBytes: ticketLogo).save()
-
     }
 
     def setup() {

@@ -1,9 +1,10 @@
 package event.ticket.sales
 
+import com.braintreegateway.BraintreeGateway
+import com.braintreegateway.ClientTokenGateway
 import grails.testing.gorm.DataTest
 import grails.testing.web.controllers.ControllerUnitTest
 import org.apache.commons.io.IOUtils
-import spock.lang.Ignore
 import spock.lang.Specification
 
 class PurchaseControllerSpec extends Specification implements ControllerUnitTest<PurchaseController>, DataTest {
@@ -33,6 +34,10 @@ class PurchaseControllerSpec extends Specification implements ControllerUnitTest
     }
 
     def cleanup() {
+        controller.braintreeService.metaClass = null
+        BraintreeGateway.metaClass = null
+        ConfigService.metaClass = null
+        BraintreeService.metaClass = null
     }
 
     def "does poster index get return all events"(){
@@ -40,6 +45,7 @@ class PurchaseControllerSpec extends Specification implements ControllerUnitTest
         createEvent()
         createEvent()
         createEvent()
+        controller.braintreeService.metaClass.getClientToken = {}
         when:
         controller.index()
         then:
@@ -58,4 +64,23 @@ class PurchaseControllerSpec extends Specification implements ControllerUnitTest
         println model.event.name
     }
 
+    def "does purchase index return an event and a client token?"(){
+        setup:
+        createEvent()
+        params.id = Event.findAll()[0].id
+        controller.braintreeService.metaClass.getClientToken = {
+            "client token"
+        }
+
+        ConfigService.metaClass.constructor = {}
+        BraintreeService.metaClass.constructor = {}
+
+        when:
+        controller.index()
+        then:
+        println model
+        model.clientToken != null
+        model.clientToken == "client token"
+
+    }
 }

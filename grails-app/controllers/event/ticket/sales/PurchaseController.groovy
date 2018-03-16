@@ -10,9 +10,10 @@ import com.braintreegateway.TransactionRequest
 class PurchaseController {
     EventService purchaseService = new EventService()
     ConfigService configService = new ConfigService()
+    BraintreeService braintreeService = new BraintreeService()
 
     def index(){
-        render view:"selectEvent", model:[events:purchaseService.getEvents().events]
+        render view:"selectEvent", model:[events:purchaseService.getEvents().events, clientToken: braintreeService.getClientToken()]
     }
     def shortURL(){
         if (params.id) {
