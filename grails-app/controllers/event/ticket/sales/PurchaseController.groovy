@@ -6,14 +6,15 @@ import com.braintreegateway.Environment
 import com.braintreegateway.Result
 import com.braintreegateway.Transaction
 import com.braintreegateway.TransactionRequest
+import grails.converters.JSON
 
 class PurchaseController {
-    EventService purchaseService = new EventService()
+    EventService eventService = new EventService()
     ConfigService configService = new ConfigService()
     BraintreeService braintreeService = new BraintreeService()
 
     def index(){
-        render view:"selectEvent", model:[events:purchaseService.getEvents().events, clientToken: braintreeService.getClientToken()]
+        render view:"selectEvent", model:[events:eventService.getEvents().events]
     }
     def shortURL(){
         if (params.id) {
@@ -23,25 +24,45 @@ class PurchaseController {
     }
 
     def confirmation(){
-        render view:"confirmation"
+        def itemMapList = [] // [[ticket-object:quantity]]
+        def itemMap = [:]
+        def total = 0
+        def quantity = 0
+        params.each(){ k,v ->
+            if(k.startsWith("ticket_")){
+                def ticketKey = k.substring(k.indexOf("_") + 1, k.length())
+                def ticket = Ticket.findById(ticketKey)
+                itemMap.ticketObject = ticket
+                itemMap.quantity = v
+                itemMapList << itemMap
+
+                quantity = itemMap.quantity instanceof Integer ? itemMap.quantity : Double.parseDouble(itemMap.quantity)
+                total += quantity * ticket.price
+                itemMap = [:]
+            }
+        }
+        def model = [total:total, itemMapList: itemMapList, clientToken:braintreeService.getClientToken()]
+        render view:"confirmation", model:model
     }
 
     def processPayment(){
         println params
-        String nonceFromTheClient = request.queryParams("params.payment_method_nonce");
-        TransactionRequest request = new TransactionRequest()
-                .amount(new BigDecimal("10.00"))
-                .paymentMethodNonce(nonceFromTheClient)
-                .options()
-                .submitForSettlement(true)
-                .done()
+        if(params.nonce) {
+            String nonceFromTheClient = params.nonce
+            TransactionRequest request = new TransactionRequest()
+                    .amount(new BigDecimal("10.00"))
+                    .paymentMethodNonce(nonceFromTheClient)
+                    .options()
+                    .submitForSettlement(true)
+                    .done()
 
-        Result<Transaction> result = gateway.transaction().sale(request);
-
-        println result.toString()
+            Result<Transaction> result = braintreeService.getGateway().transaction().sale(request)
+            return [success: true, data: [result: result]] as JSON
+        }
+        [success: false] as JSON
     }
 
     def getClientToken(){
-        return BraintreeService.getGateway().clientToken().generate(new ClientTokenRequest().customerId(params.id))
+        return braintreeService.getGateway().clientToken().generate(new ClientTokenRequest().customerId(params.id))
     }
 }
