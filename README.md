@@ -27,6 +27,7 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 		3.3.1 if payment can't be split by braintree, send a payment to a third party using paypal or something similar
 	4. sales information, including customer information, is recorded in database
     5. ticket quantities decrements by 1
+    6. customer views receipt information and link to download ticket
     
 4. tickets are emailed to user
 	1. apache fop creates dynamic tickets
@@ -37,6 +38,7 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 	1. generates total sales
 	2. primary sales report
 	3. split sales report (periodic or on-demand)
+	4. produces a event ticket list report that contains names, numbers, email, and tickets purchased
 	
 6. admin dashboard
 	1. dashboard contains simple graphs of profit (line charts)
@@ -44,9 +46,10 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 
 #### Challenges
 * surcharge goes to primary person
-* ticket images are logo and advertisment.  create a ticket similar to fandango
+* generated ticket looks similar to fandango
+* change ticket background to advertisement
 * recaptcha on login
-* interceptor requires session.loggedIn to be true for certain pages
+* interceptor requires session.loggedIn to be true for admin pages
 * ~~braintree and ticket, Confirmatiom view~~
 * comp tickets (you select a ticket and enter an name, email address, phone)
 * ~~ticket policy modal confirmation before charging credit card~~
@@ -54,3 +57,5 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 * ~~flash error messages on briantree failures~~
 * receipt landing page on success
 * write sale data to domain
+* autotimestamp all domains
+* itemmap to rawrecord.  raw record to itemmap in ticketservice

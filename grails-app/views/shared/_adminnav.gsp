@@ -20,12 +20,6 @@
       <li class="nav-item">
         <a class="nav-link" href="/admin/reports">Reports</a>
       </li>
-       <li class="nav-item">
-         <a class="nav-link" href="/admin/config">Config</a>
-       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/admin/help">Help</a>
-      </li>
     </ul>
   </div>
 </nav>
