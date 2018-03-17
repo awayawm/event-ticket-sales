@@ -10,6 +10,7 @@ import spock.lang.Specification
 
 class PurchaseControllerSpec extends Specification implements ControllerUnitTest<PurchaseController>, DataTest {
 
+
     byte[] ticketImage = IOUtils.toByteArray(this.class.classLoader.getResourceAsStream("ticketBackground.png"))
     byte[] ticketImage2 = IOUtils.toByteArray(this.class.classLoader.getResourceAsStream("ticketBackground2.jpg"))
     byte[] ticketLogo = IOUtils.toByteArray(this.class.classLoader.getResourceAsStream("ticketLogo.gif"))
@@ -19,14 +20,15 @@ class PurchaseControllerSpec extends Specification implements ControllerUnitTest
     byte[] poster3 = IOUtils.toByteArray(this.class.classLoader.getResourceAsStream("poster3.jpg"))
 
     def createEvent(){
+        DateService dateService = new DateService()
         def ticket = new Ticket(quantity: 100, name: "General Admission", description: "Stadium seating", price: "30.00",
                 ticketImageName: "name", ticketImageBytes: ticketImage, ticketImageContentType: "image/png",
                 ticketLogoName: "image", ticketLogoContentType: "image/png", ticketLogoBytes: ticketLogo).save(flush:true)
 
         new Event(name: "Battle on the Boat", shortURL: "battle-on-the-boat", description: "12 fights and 2 championship fights for a full night of entertainment!",
                 address: "313 E. Scott, Kirksville MO, 63501", posterContentType: "image/jpg", posterBytes: poster, posterName: "poster.jpg",
-                doorsOpen: new Date(2017, 12, 1, 19, 0), eventStarts: new Date(2017, 12, 1, 19, 0),
-                stopTicketSalesAt: new Date(2017, 12, 1, 19, 0), enabled: true, tickets: ticket).save()
+                doorsOpen: dateService.getDate(2017, 12, 1, 19, 0), eventStarts: dateService.getDate(2017, 12, 1, 19, 0),
+                stopTicketSalesAt: dateService.getDate(2017, 12, 1, 19, 0), enabled: true, tickets: ticket).save()
     }
 
     def setup() {
@@ -62,7 +64,9 @@ class PurchaseControllerSpec extends Specification implements ControllerUnitTest
         controller.shortURL()
 
         then:
-        println model.event.name
+        model.event.name == "Battle on the Boat"
+        session.event_name ==  "Battle on the Boat"
+        session.doorsOpen instanceof Date
     }
 
     def "does purchase confirmation return an event and a client token?"(){
@@ -86,6 +90,7 @@ class PurchaseControllerSpec extends Specification implements ControllerUnitTest
 
     def "does confirmation parse tickets from request"(){
         setup:
+
         def ticket1 = new Ticket(quantity: 100, name: "Cage seat", description: "Stadium seating", price: "8.00",
                 ticketImageName: "name", ticketImageBytes: ticketImage, ticketImageContentType: "image/png",
                 ticketLogoName: "image", ticketLogoContentType: "image/png", ticketLogoBytes: ticketLogo).save(flush:true)
@@ -114,17 +119,19 @@ class PurchaseControllerSpec extends Specification implements ControllerUnitTest
 
         then:
         println model.itemMapList
-        model.total == 28.0
         model.itemMapList.size() == 3
+        session.totalBeforeFeesAndTaxes == 28.0
+        session.totalAfterFeesAndTaxes == 35.183
+        session.taxes == 1.183
+        session.totalSurcharge == 6.0
     }
 
-    def "do an authenication error redirect to events index with a flash in confirmation"(){
+    def "confirmation - does an authenication error redirect to events index with a flash"(){
         setup:
         BraintreeGateway.metaClass.constructor = { Environment environment, String merchantId, String publicKey, String privateKey ->
         }
 
         BraintreeService.metaClass.getClientToken = {
-            println "bleck"
             throw new AuthenticationException()
         }
 

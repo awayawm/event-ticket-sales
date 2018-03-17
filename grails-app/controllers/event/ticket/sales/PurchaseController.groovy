@@ -7,6 +7,9 @@ import com.braintreegateway.TransactionRequest
 import com.braintreegateway.exceptions.AuthenticationException
 import grails.converters.JSON
 
+import java.math.RoundingMode
+import java.time.format.DateTimeFormatter
+
 class PurchaseController {
     EventService eventService = new EventService()
     ConfigService configService = new ConfigService()
@@ -18,7 +21,8 @@ class PurchaseController {
     def shortURL(){
         if (params.id) {
             def event = Event.findByShortURL(params.id)
-            println event.doorsOpen
+            session.event_name = event.name
+            session.doorsOpen = event.doorsOpen
             render model:[event:event], view:"selectTickets"
         }
     }
@@ -26,9 +30,12 @@ class PurchaseController {
     def confirmation(){
         def itemMapList = [] // [[ticket-object:quantity]]
         def itemMap = [:]
-        def total = 0
-        def quantity = 0
+        double total = 0
+        int quantity = 0
         def token
+        def numTicketsSold = 0
+        def taxes = 0.0
+
         params.each(){ k,v ->
             if(k.startsWith("ticket_")){
                 def ticketKey = k.substring(k.indexOf("_") + 1, k.length())
@@ -36,9 +43,9 @@ class PurchaseController {
                 itemMap.ticketObject = ticket
                 itemMap.quantity = v
                 itemMapList << itemMap
-
                 quantity = itemMap.quantity instanceof Integer ? itemMap.quantity : Double.parseDouble(itemMap.quantity)
                 total += quantity * ticket.price
+                numTicketsSold += quantity
                 itemMap = [:]
             }
         }
@@ -49,25 +56,28 @@ class PurchaseController {
             flash.class = "alert-danger"
             redirect action:'index'
         }
-        def model = [total:total, itemMapList: itemMapList, clientToken:token]
+
+        session.totalSurcharge = (double)configService.getConfig().admin.ticket_surcharge * numTicketsSold
+        session.taxes = total * (double)configService.getConfig().admin.tax_rate
+        session.totalBeforeFeesAndTaxes = total
+        session.totalAfterFeesAndTaxes = total + session.totalSurcharge + session.taxes
+
+        def model = [itemMapList: itemMapList, clientToken:token]
         render view:"confirmation", model:model
     }
 
     def processPayment(){
-        println params
         if(params.nonce) {
-            String nonceFromTheClient = params.nonce
             TransactionRequest request = new TransactionRequest()
-                    .amount(new BigDecimal("10.00"))
-                    .paymentMethodNonce(nonceFromTheClient)
+                    .amount(new BigDecimal(session.totalAfterFeesAndTaxes).setScale(2, RoundingMode.CEILING))
+                    .paymentMethodNonce(params.nonce)
                     .options()
                     .submitForSettlement(true)
                     .done()
 
             Result<Transaction> result = braintreeService.getGateway().transaction().sale(request)
-            return [success: true, data: [result: result]] as JSON
+            return render (success: result.isSuccess(), data: [message: result.getMessage()]) as JSON
         }
-        [success: false] as JSON
     }
 
     def getClientToken(){

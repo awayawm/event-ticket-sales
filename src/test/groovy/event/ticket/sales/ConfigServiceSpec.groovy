@@ -15,7 +15,7 @@ class ConfigServiceSpec extends Specification implements ServiceUnitTest<ConfigS
 
     def "does isEnvironmentalVariableSet() return false when System.getEnv() returns null"(){
         setup:
-        System.metaClass.static.getenv = {
+        System.metaClass.static.getenv = { String name ->
             null
         }
         when:
@@ -33,7 +33,7 @@ class ConfigServiceSpec extends Specification implements ServiceUnitTest<ConfigS
         def result = service.isEnvironmentalVariableSet()
 
         expect:
-        result == false
+        !result
     }
 
     def "does isEnvironmentalVariable() returns false if System.getenv() is false"(){

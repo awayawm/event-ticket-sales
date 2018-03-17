@@ -16,12 +16,13 @@
 
       <div class="row">
             <div class="col">
-            <form id="event-form" action="/purchase/confirmation" method="post" enctype="multipart/form-data">
-            <h1>${event.name}</h2>
+             <h1>${event.name}</h2>
             <hr>
              <h5>Fights Start: <span class="text-muted"><g:formatDate date="${event.eventStarts}" style="MEDIUM"/></span></h5>
             <h5>Doors open: <span class="text-muted"><g:formatDate date="${event.doorsOpen}" style="MEDIUM"/></span></h5>
             <hr>
+       <form id="event-form" action="/purchase/confirmation" method="post" enctype="multipart/form-data">
+
        <g:each in="${event.tickets}" var="ticket">
 
            <p>

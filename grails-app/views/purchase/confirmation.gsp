@@ -5,78 +5,109 @@
         <title>event-ticket-sales</title>
     </head>
     <body>
-  <div class="row">
-    <div class="col-md-8 order-md-1">
-        <h1>Purchase Tickets</h1>
-        </div>
-        </div>
-  <div class="row">
-    <div class="col-md-8 order-md-1">
-        <g:if test="${flash.message}">
-            <p>
-            <div class="alert ${flash.class}">
-                ${flash.message}
-            </div>
-            </p>
-        </g:if>
 
+    <div class="container-fluid" style="max-width:960px">
+        <div class="py-5 text-center">
+        <h2>Get your tickets for ${session.event_name}</h2>
+        </div>
 
-    <form action="/purchase/processPayment" id="purchase-confirmation-form" method="post">
+        <div class="row">
+        <div class="col-md-8 order-md-1">
+
+                <g:if test="${flash.message}">
+                    <p>
+                    <div class="alert ${flash.class}">
+                        ${flash.message}
+                    </div>
+                    </p>
+                </g:if>
+
+        <form action="/purchase/processPayment" id="purchase-confirmation-form" method="post">
 
         <div class="row">
         <div class="col-md-6 mb-3">
-        <label for="first_name"><h3>First Name</h3></label>
-        <input required class="form-control" type="text" name="first_name" id="first_name" placeholder="First Name"/>
+            <label for="first_name"><h6>First Name</h6></label>
+            <input required class="form-control" type="text" name="first_name" id="first_name" placeholder="First Name"/>
         </div>
+
         <div class="col-md-6 mb-3">
-        <label for="last_name"><h3>Last name</h3></label>
-        <input required class="form-control" type="text" name="last_name" id="last_name" placeholder="Last Name"/>
+            <label for="last_name"><h6>Last name</h6></label>
+            <input required class="form-control" type="text" name="last_name" id="last_name" placeholder="Last Name"/>
         </div>
         </div>
 
-        <label for="email_address"><h3>Email Address</h3></label>
+        <div class="py-2">
+        <label for="email_address"><h6>Email Address</h6></label>
         <input required class="form-control" type="text" name="email_address" id="email_address" placeholder="Your Email Address"/>
+        </div>
 
-        <label for="phone_number"><h3>Phone Number</h3></label>
-        <input required class="form-control" type="text" name="phone_number" id="phone_number" placeholder="###-###-#####"/>
+        <div class="py-2">
+            <label for="phone_number"><h6>Phone Number</h6></label>
+            <input required class="form-control" type="text" name="phone_number" id="phone_number" placeholder="###-###-#####"/>
+        </div>
 
-          <label for="card-number"><h3>Card Number</h3></label>
+        <div class="py-2">
+          <label for="card-number"><h6>Card Number</h6></label>
           <div class="form-control" style="height: 40px" id="card-number"></div>
+        </div>
 
         <div class="row">
         <div class="col-md-6 mb-3">
-            <label for="cvv"><h3>CVV</h3></label>
-            <div class="form-control" style="height: 40px" id="cvv"></div>
+            <div class="py-2">
+                <label for="cvv"><h6>CVV</h6></label>
+                <div class="form-control" style="height: 40px" id="cvv"></div>
+            </div>
         </div>
         <div class="col-md-6 mb-3">
-          <label for="expiration-date"><h3>Expiration Date</h3></label>
-          <div class="form-control" style="height: 40px" id="expiration-date"></div>
+            <div class="py-2">
+              <label for="expiration-date"><h6>Expiration Date</h6></label>
+              <div class="form-control" style="height: 40px" id="expiration-date"></div>
+            </div>
         </div>
         </div>
 
-            </form>
+        </form>
         </div>
 
         <div class="col-md-4 order-md-2 mb-4">
 
-        <h3 class="text-muted">Your Cart</h3>
+        <div class="card">
+            <div class="card-header">
+                <h4 class="text-muted">Your Cart</h4>
+            </div>
 
-        <div class="list-group">
+        <ul class="list-group list-group-flush">
 
         <g:each in="${itemMapList}" var="item">
-          <button type="button" class="list-group-item list-group-item-action">
-          ${item.ticketObject.name} - ${item.quantity} @ ${item.ticketObject.price}
-          </button>
+            <g:if test="${item.quantity != '0'}">
+              <li class="list-group-item d-flex justify-content-between 1h-condensed">
+              <div>
+                  <h6 class="my-0">${item.ticketObject.name}</h6>
+                  <small class="text-muted">${item.ticketObject.description}</small>
+              </div>
+              <span>${item.quantity} @ <g:formatNumber number="${item.ticketObject.price}" type="currency" currencyCode="USD" /></span>
+              </li>
+            </g:if>
         </g:each>
 
-        <button type="button" class="list-group-item list-group-item-action">
-        Taxes and Fees
-        </button>
-        <button type="button" class="list-group-item list-group-item-action">
-        Total - <g:formatNumber number="${total}" type="currency" currencyCode="USD" />
-        </button>
+        <li class="list-group-item d-flex justify-content-between 1h-condensed">
+         <span><h6>Taxes and Fees</h6></span>
+         <g:formatNumber number="${session.totalSurcharge + session.taxes}" type="currency" currencyCode="USD" />
+        </li>
+
+        <li class="list-group-item d-flex justify-content-between 1h-condensed">
+         <div>
+          <span><h6>Total</h6></span>
+          </div>
+          <strong><g:formatNumber number="${session.totalAfterFeesAndTaxes}" type="currency" currencyCode="USD" /></strong>
+        </li>
+
+        </ul>
+        </div>
+
         <hr>
-          <button class="btn btn-lg btn-primary" id="submitPayment" disabled>Purchase Tickets</button>
+          <button class="btn btn-lg btn-primary btn-block" id="submitPayment" disabled>Purchase Tickets</button>
+        </div>
         </div>
         </div>
 
@@ -120,7 +151,7 @@
             return;
           }
 
-            var button = document.getElementById("submitPayment");
+          var button = document.getElementById("submitPayment");
           button.removeAttribute('disabled');
 
           button.addEventListener('click', function (event) {
@@ -140,12 +171,8 @@
                  phone_number: document.getElementById("phone_number").value
                  })
                 .done(function(data) {
-                    console.log("success: " + data)
+                    console.log(data)
                 })
-                .fail(function(data) {
-                    console.log("failure: " + data)
-                })
-
             });
           }, false);
         });

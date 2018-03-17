@@ -2,7 +2,6 @@ package event.ticket.sales
 
 import com.braintreegateway.BraintreeGateway
 import com.braintreegateway.Environment
-import com.braintreegateway.exceptions.AuthenticationException
 
 class BraintreeService {
 
@@ -14,8 +13,7 @@ class BraintreeService {
                 Environment.SANDBOX,
                 configService.getConfig().keys.braintree.merchantId,
                 configService.getConfig().keys.braintree.publicKey,
-                configService.getConfig().keys.braintree.privateKey
-        )
+                configService.getConfig().keys.braintree.privateKey)
     }
 
     def getClientToken() {
