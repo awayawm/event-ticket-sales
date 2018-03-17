@@ -16,11 +16,11 @@
 
       <div class="row">
             <div class="col">
-            <form action="/purchase/confirmation" method="post" enctype="multipart/form-data">
+            <form id="event-form" action="/purchase/confirmation" method="post" enctype="multipart/form-data">
             <h1>${event.name}</h2>
             <hr>
-             <h5>Fights Start: <span class="text-muted"><g:formatDate date="${event.eventStarts}" type="datetime" style="MEDIUM"/></span></h5>
-            <h5>Doors open: <span class="text-muted"><g:formatDate date="${event.doorsOpen}" type="datetime" style="MEDIUM"/></span></h5>
+             <h5>Fights Start: <span class="text-muted"><g:formatDate date="${event.eventStarts}" style="MEDIUM"/></span></h5>
+            <h5>Doors open: <span class="text-muted"><g:formatDate date="${event.doorsOpen}" style="MEDIUM"/></span></h5>
             <hr>
        <g:each in="${event.tickets}" var="ticket">
 
@@ -46,19 +46,59 @@
 
        </g:each>
 <hr>
-        <input type="submit" class="btn btn-primary btn-lg" value="Purchase Tickets"/>
-        </form>
+           </form>
+
+           <button onclick="didCustomerSelectTickets()" class="btn btn-primary btn-lg btn-block" />Purchase Tickets</button>
+
             </div>
             <div class="col">
                 <center>
                     <p>
                         <img class="rounded img-fluid max-width: 700px; max-height: 700px;" src="data:${event.posterContentType};base64,${event.posterBytes.encodeBase64()}">
                     </p>
-                    <button class="btn btn-primary btn-lg" onclick="document.location.href='/'">Back to Select Events</button>
-                </center>
+                  <button class="btn btn-primary btn-lg" onclick="document.location.href='/'">Back to Select Events</button>
+
+                                    </center>
             </div>
     </div>
 
+<script>
+var didCustomerSelectTickets = function(){
+
+    var sum = 0
+    $("option:selected").each(function() {
+        sum += $(this).val()
+    })
+
+    if(sum > 0){
+        $('#event-form').submit()
+    } else {
+        $('#pleaseSelectTicketsModel').modal('toggle')
+    }
+}
+var returnToTickets = function() {
+    $('#pleaseSelectTicketsModel').modal('toggle')
+}
+</script>
+
+<div class="modal fade" id="pleaseSelectTicketsModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Opps!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Please select some tickets before pressing the purchase button
+      </div>
+      <div class="modal-footer">
+        <button onclick="returnToTickets()" type="button" class="btn btn-primary">Okay!</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     </body>
 </html>

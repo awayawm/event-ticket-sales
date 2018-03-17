@@ -1,16 +1,12 @@
 package event.ticket.sales
 
 import grails.gorm.transactions.Transactional
-import org.apache.commons.io.IOUtils
-
-import java.nio.file.Path
-import java.nio.file.Paths
 
 @Transactional
 class ConfigService {
 
     boolean isEnvironmentalVariableSet() {
-        !(System.getenv("EVENT_TICKET_SALES") == false)
+        !(System.getenv("EVENT_TICKET_SALES") == false || System.getenv("EVENT_TICKET_SALES") == null)
     }
 
     def getConfig(){

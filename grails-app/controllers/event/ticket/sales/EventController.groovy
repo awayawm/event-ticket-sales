@@ -2,6 +2,8 @@ package event.ticket.sales
 
 class EventController {
 
+    DateService dateService = new DateService()
+
     def edit(){
         switch(request.method) {
             case ("GET"):

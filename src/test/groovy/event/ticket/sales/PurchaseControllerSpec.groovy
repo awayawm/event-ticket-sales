@@ -1,6 +1,8 @@
 package event.ticket.sales
 
 import com.braintreegateway.BraintreeGateway
+import com.braintreegateway.Environment
+import com.braintreegateway.exceptions.AuthenticationException
 import grails.testing.gorm.DataTest
 import grails.testing.web.controllers.ControllerUnitTest
 import org.apache.commons.io.IOUtils
@@ -114,6 +116,25 @@ class PurchaseControllerSpec extends Specification implements ControllerUnitTest
         println model.itemMapList
         model.total == 28.0
         model.itemMapList.size() == 3
+    }
+
+    def "do an authenication error redirect to events index with a flash in confirmation"(){
+        setup:
+        BraintreeGateway.metaClass.constructor = { Environment environment, String merchantId, String publicKey, String privateKey ->
+        }
+
+        BraintreeService.metaClass.getClientToken = {
+            println "bleck"
+            throw new AuthenticationException()
+        }
+
+        when:
+        controller.confirmation()
+
+        then:
+        controller.flash.message == "Could not get a Braintree clientKey, please check your configuration and/or environmental variable :("
+        controller.flash.class == "alert-danger"
+        response.redirectUrl == '/'
     }
 
 }

@@ -7,7 +7,7 @@
         <g:layoutTitle default="event-ticket-sales"/>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
+    <asset:link href="favicon.ico" type="image/x-icon"/>
     <asset:stylesheet src="application.css"/>
 
     <g:layoutHead/>

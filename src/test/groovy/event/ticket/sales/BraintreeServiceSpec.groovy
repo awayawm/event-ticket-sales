@@ -24,17 +24,18 @@ class BraintreeServiceSpec extends Specification implements ServiceUnitTest<Brai
         ConfigService.metaClass = null
     }
 
-    def "does getClientToken attempt to get a token"(){
+    def "does getClientToken() return null with invalid credentials"(){
         setup:
-        boolean authenticationExceptionCaught = false
-
-        expect:
-        service.gateway instanceof BraintreeGateway
+        boolean authenticationExceptionThrown = false
+        when :
         try {
             service.getClientToken()
-        } catch(AuthenticationException ex){
-            authenticationExceptionCaught = true
+        }catch(AuthenticationException ex){
+            authenticationExceptionThrown = true
         }
-        authenticationExceptionCaught
+
+        then:
+        service.gateway instanceof BraintreeGateway
+        authenticationExceptionThrown
     }
 }

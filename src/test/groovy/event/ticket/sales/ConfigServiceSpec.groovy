@@ -9,8 +9,19 @@ class ConfigServiceSpec extends Specification implements ServiceUnitTest<ConfigS
     }
 
     def cleanup() {
-        System.metaClass.static = null
+        System.metaClass = null
         service.metaClass = null
+    }
+
+    def "does isEnvironmentalVariableSet() return false when System.getEnv() returns null"(){
+        setup:
+        System.metaClass.static.getenv = {
+            null
+        }
+        when:
+        def result = service.isEnvironmentalVariableSet()
+        then:
+        !result
     }
 
     def "does isEnvironmentalVariableSet() return false if EVENT_TICKET_SALES not set"(){
@@ -23,6 +34,10 @@ class ConfigServiceSpec extends Specification implements ServiceUnitTest<ConfigS
 
         expect:
         result == false
+    }
+
+    def "does isEnvironmentalVariable() returns false if System.getenv() is false"(){
+        System
     }
 
     def "does isEnvironmentalVariableSet() return true if EVENT_TICKET_SALES set"(){

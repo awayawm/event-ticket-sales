@@ -1,11 +1,10 @@
 package event.ticket.sales
 
-import com.braintreegateway.BraintreeGateway
 import com.braintreegateway.ClientTokenRequest
-import com.braintreegateway.Environment
 import com.braintreegateway.Result
 import com.braintreegateway.Transaction
 import com.braintreegateway.TransactionRequest
+import com.braintreegateway.exceptions.AuthenticationException
 import grails.converters.JSON
 
 class PurchaseController {
@@ -19,6 +18,7 @@ class PurchaseController {
     def shortURL(){
         if (params.id) {
             def event = Event.findByShortURL(params.id)
+            println event.doorsOpen
             render model:[event:event], view:"selectTickets"
         }
     }
@@ -28,6 +28,7 @@ class PurchaseController {
         def itemMap = [:]
         def total = 0
         def quantity = 0
+        def token
         params.each(){ k,v ->
             if(k.startsWith("ticket_")){
                 def ticketKey = k.substring(k.indexOf("_") + 1, k.length())
@@ -41,7 +42,14 @@ class PurchaseController {
                 itemMap = [:]
             }
         }
-        def model = [total:total, itemMapList: itemMapList, clientToken:braintreeService.getClientToken()]
+        try{
+            token = braintreeService.getClientToken()
+        } catch(AuthenticationException ex){
+            flash.message = "Could not get a Braintree clientKey, please check your configuration and/or environmental variable :("
+            flash.class = "alert-danger"
+            redirect action:'index'
+        }
+        def model = [total:total, itemMapList: itemMapList, clientToken:token]
         render view:"confirmation", model:model
     }
 

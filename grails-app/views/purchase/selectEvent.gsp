@@ -6,13 +6,17 @@
     </head>
     <body>
 
-        <g:if test="${flash.message}">
-            <p>
-            <div class="alert ${flash.class}">
-                ${flash.message}
-            </div>
-            </p>
-        </g:if>
+    <div class="row">
+        <div class="col">
+            <g:if test="${flash.message}">
+                <p>
+                <div class="alert ${flash.class}">
+                    ${flash.message}
+                </div>
+                </p>
+            </g:if>
+        </div>
+    </div>
 
 
       <div class="row">

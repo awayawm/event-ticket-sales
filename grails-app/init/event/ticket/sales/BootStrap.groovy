@@ -3,10 +3,16 @@ package event.ticket.sales
 import grails.util.Environment
 import org.apache.commons.io.IOUtils
 
+import java.time.LocalDateTime
+import java.time.ZoneId
+
 
 class BootStrap {
 
     def init = { servletContext ->
+
+        DateService dateService = new DateService()
+
         def resourcePath = "${System.properties['user.dir']}/src/test/resources"
         byte[] titleBackground = IOUtils.toByteArray(new FileInputStream("${resourcePath}/ticketBackground.png"))
         byte[] titleBackground2 = IOUtils.toByteArray(new FileInputStream("${resourcePath}/ticketBackground2.jpg"))
@@ -33,18 +39,18 @@ class BootStrap {
 
                 new Event(name: "Battle on the Boat", shortURL: "battle-on-the-boat", description: "12 fights and 2 championship fights for a full night of entertainment!",
                         address: "313 E. Scott, Kirksville MO, 63501", posterContentType: "image/jpg", posterBytes: poster, posterName: "poster.jpg",
-                        doorsOpen: new Date(2017, 12, 1, 19, 0), eventStarts: new Date(2017, 12, 1, 19, 0),
-                        stopTicketSalesAt: new Date(2017, 12, 1, 19, 0), enabled: true, tickets: Ticket.findAll()[0]).save()
+                        doorsOpen: dateService.getDate(2018, 6, 21, 19, 0), eventStarts: dateService.getDate(2018, 6, 21, 20, 0),
+                        stopTicketSalesAt: dateService.getDate(2018, 6, 21, 20, 30), enabled: true, tickets: Ticket.findAll()[0]).save()
 
                 new Event(name: "Rumble at the Ridge", shortURL: "rumble-at-the-ridge", description: "16 Fights for over 6 hours of fights.  Featuring the MU Golden Girls.",
                         address: "2345 Winchester Dr., Columbia, MO 65201", posterContentType: "image/jpg", posterBytes: poster2, posterName: "poster2.jpg",
-                        doorsOpen: new Date(2017, 6, 1, 19, 0), eventStarts: new Date(2017, 06, 1, 20, 0),
-                        stopTicketSalesAt: new Date(2017, 6, 1, 20, 0), enabled: true, tickets: [Ticket.findAll()[0], Ticket.findAll()[2], Ticket.findAll()[3]]).save()
+                        doorsOpen: dateService.getDate(2018, 4, 16, 16, 0), eventStarts: dateService.getDate(2018, 4, 16, 17, 0),
+                        stopTicketSalesAt: dateService.getDate(2018, 4, 16, 17, 0), enabled: true, tickets: [Ticket.findAll()[0], Ticket.findAll()[2], Ticket.findAll()[3]]).save()
 
                 new Event(name: "Fight at the Farm", shortURL: "fight-at-the-farm", description: "4 Championship Fights at Noon for the Golden Belt.  A day you will never forget!",
                         address: "433 Skylake Ave., Chicago, Illinios 45678", posterContentType: "image/jpg", posterBytes: poster3, posterName: "poster3.jpg",
-                        doorsOpen: new Date(2017, 11, 3, 19, 30), eventStarts: new Date(2017, 11, 3, 20, 30),
-                        stopTicketSalesAt: new Date(2017, 11, 3, 21, 0), enabled: false, tickets: [Ticket.findAll()[1], Ticket.findAll()[2], Ticket.findAll()[3]]).save()
+                        doorsOpen: dateService.getDate(2018, 5, 30, 20, 00), eventStarts: dateService.getDate(2018, 5, 30, 21, 00),
+                        stopTicketSalesAt: dateService.getDate(2018, 5, 30, 21, 0), enabled: false, tickets: [Ticket.findAll()[1], Ticket.findAll()[2], Ticket.findAll()[3]]).save()
 
 
                 break
