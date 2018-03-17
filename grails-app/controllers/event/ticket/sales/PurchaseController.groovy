@@ -35,6 +35,7 @@ class PurchaseController {
         def token
         def numTicketsSold = 0
         def taxes = 0.0
+        def config
 
         params.each(){ k,v ->
             if(k.startsWith("ticket_")){
@@ -57,26 +58,33 @@ class PurchaseController {
             redirect action:'index'
         }
 
-        session.totalSurcharge = (double)configService.getConfig().admin.ticket_surcharge * numTicketsSold
-        session.taxes = total * (double)configService.getConfig().admin.tax_rate
-        session.totalBeforeFeesAndTaxes = total
-        session.totalAfterFeesAndTaxes = total + session.totalSurcharge + session.taxes
+        session.totalBeforeFeesAndTaxes = new BigDecimal(total).setScale(2, RoundingMode.CEILING)
+        session.totalSurcharge = new BigDecimal((double)configService.getConfig().admin.ticket_surcharge * numTicketsSold).setScale(2, RoundingMode.CEILING)
+        session.taxes = new BigDecimal(session.totalBeforeFeesAndTaxes * (double)configService.getConfig().admin.tax_rate).setScale(2, RoundingMode.CEILING)
+        session.totalAfterFeesAndTaxes = session.totalBeforeFeesAndTaxes + session.totalSurcharge + session.taxes
 
-        def model = [itemMapList: itemMapList, clientToken:token]
+
+        config = ["coordinator_email" : configService.getConfig().admin.coordinator_email,
+                    "coordinator_phone_number": configService.getConfig().admin.coordinator_phone_number]
+
+        def model = [config:config, itemMapList: itemMapList, clientToken:token]
         render view:"confirmation", model:model
     }
 
     def processPayment(){
         if(params.nonce) {
             TransactionRequest request = new TransactionRequest()
-                    .amount(new BigDecimal(session.totalAfterFeesAndTaxes).setScale(2, RoundingMode.CEILING))
+                    .amount(session.totalAfterFeesAndTaxes)
                     .paymentMethodNonce(params.nonce)
                     .options()
                     .submitForSettlement(true)
                     .done()
 
             Result<Transaction> result = braintreeService.getGateway().transaction().sale(request)
-            return render (success: result.isSuccess(), data: [message: result.getMessage()]) as JSON
+            render(contentType:"application/json") {
+                success(result.isSuccess())
+                message(result.getMessage())
+            }
         }
     }
 

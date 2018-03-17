@@ -121,8 +121,8 @@ class PurchaseControllerSpec extends Specification implements ControllerUnitTest
         println model.itemMapList
         model.itemMapList.size() == 3
         session.totalBeforeFeesAndTaxes == 28.0
-        session.totalAfterFeesAndTaxes == 35.183
-        session.taxes == 1.183
+        session.totalAfterFeesAndTaxes == 35.19
+        session.taxes == 1.19
         session.totalSurcharge == 6.0
     }
 

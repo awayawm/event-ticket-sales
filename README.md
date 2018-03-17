@@ -2,7 +2,7 @@
 
 ### Requirements
 
-Anonymous online users can purchase tickets using braintree api.  
+~~Anonymous online users can purchase tickets using braintree api.~~
 
 After purchasing online tickets, tickets are dynamically generated as PDFs and emailed to the purchaser.  
 
@@ -18,15 +18,15 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 2. customer can use landing page to purchase a ticket
 	1. ~~customer selects event~~
 	2. ~~customer selects tickets~~
-	3. customer confirms purchase
+	3. ~~customer confirms purchase~~
 	
 3. purchase is processed
-	1. ~customer enters payment information (name, email, cc, etc.)~
-	2. ~braintree api processes payment~
+	1. ~~customer enters payment information (name, email, cc, etc.)~~
+	2. ~~braintree api processes payment~~
 	3. payment is split between multiple accounts
 		3.3.1 if payment can't be split by braintree, send a payment to a third party using paypal or something similar
 	4. sales information, including customer information, is recorded in database
-    5. ticket quantity decrements by 1
+    5. ticket quantities decrements by 1
     
 4. tickets are emailed to user
 	1. apache fop creates dynamic tickets
@@ -49,4 +49,8 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 * interceptor requires session.loggedIn to be true for certain pages
 * ~~braintree and ticket, Confirmatiom view~~
 * comp tickets (you select a ticket and enter an name, email address, phone)
-* ticket policy modal confirmation before charging credit card
+* ~~ticket policy modal confirmation before charging credit card~~
+* ~~validation on confirmation~~
+* ~~flash error messages on briantree failures~~
+* receipt landing page on success
+* write sale data to domain

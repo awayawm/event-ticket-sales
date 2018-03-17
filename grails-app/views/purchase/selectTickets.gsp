@@ -14,13 +14,13 @@
             </p>
         </g:if>
 
+      <h1>${event.name}</h1>
+      <h5>Fights Start: <span class="text-muted"><g:formatDate date="${event.eventStarts}" style="MEDIUM"/></span></h5>
+      <h5>Doors open: <span class="text-muted"><g:formatDate date="${event.doorsOpen}" style="MEDIUM"/></span></h5>
+
       <div class="row">
             <div class="col">
-             <h1>${event.name}</h2>
-            <hr>
-             <h5>Fights Start: <span class="text-muted"><g:formatDate date="${event.eventStarts}" style="MEDIUM"/></span></h5>
-            <h5>Doors open: <span class="text-muted"><g:formatDate date="${event.doorsOpen}" style="MEDIUM"/></span></h5>
-            <hr>
+
        <form id="event-form" action="/purchase/confirmation" method="post" enctype="multipart/form-data">
 
        <g:each in="${event.tickets}" var="ticket">
@@ -52,14 +52,9 @@
            <button onclick="didCustomerSelectTickets()" class="btn btn-primary btn-lg btn-block" />Purchase Tickets</button>
 
             </div>
-            <div class="col">
-                <center>
-                    <p>
-                        <img class="rounded img-fluid max-width: 700px; max-height: 700px;" src="data:${event.posterContentType};base64,${event.posterBytes.encodeBase64()}">
-                    </p>
-                  <button class="btn btn-primary btn-lg" onclick="document.location.href='/'">Back to Select Events</button>
-
-                                    </center>
+            <div class="col text-center">
+                <img class="rounded img-fluid max-width: 700px; max-height: 700px;" src="data:${event.posterContentType};base64,${event.posterBytes.encodeBase64()}">
+                  <button class="my-3 btn btn-primary btn-lg" onclick="document.location.href='/'">Back to Select Events</button>
             </div>
     </div>
 
