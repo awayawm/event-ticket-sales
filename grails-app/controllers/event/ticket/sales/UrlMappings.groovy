@@ -16,6 +16,7 @@ class UrlMappings {
                 "/create"(controller:"ticket", action: "create")
                 "/edit/$id"(controller:"ticket", action: "edit")
                 "/edit"(controller:"ticket", action: "edit")
+                "/delete/$id"(controller:"ticket", action: "delete")
             }
             group "/event", {
                 "/index"(controller:"event", action: "index")
@@ -23,6 +24,7 @@ class UrlMappings {
                 "/create"(controller:"event", action: "create")
                 "/edit/$id"(controller:"event", action: "edit")
                 "/edit"(controller:"event", action: "edit")
+                "/delete/$id"(controller:"event", action: "delete")
             }
             "/dashboard"(controller:"dashboard", action: "index")
         }

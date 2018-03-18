@@ -14,6 +14,8 @@ class Event {
     Date eventStarts
     Date stopTicketSalesAt
     boolean enabled
+    Date dateCreated
+    Date lastUpdated
 
     static constraints = {
         name blank: false

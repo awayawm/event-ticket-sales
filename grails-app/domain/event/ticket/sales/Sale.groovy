@@ -2,6 +2,8 @@ package event.ticket.sales
 
 class Sale {
     Event event
+    SaleStatus salesStatus
+    String uuid
     String rawRecord
     Double totalBeforeFeesAndTaxes
     Double totalAfterFeesAndTaxes
@@ -19,7 +21,9 @@ class Sale {
     boolean consumed
 
     static constraints = {
+        uuid blank:false
         event blank:false
+        salesStatus blank:false
         rawRecord blank:false
         totalBeforeFeesAndTaxes blank:false
         totalAfterFeesAndTaxes blank:false

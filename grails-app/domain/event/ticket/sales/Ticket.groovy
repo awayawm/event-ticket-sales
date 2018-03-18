@@ -13,6 +13,8 @@ class Ticket {
     String ticketLogoName
     String ticketLogoContentType
     byte[] ticketLogoBytes
+    Date dateCreated
+    Date lastUpdated
 
     static constraints = {
         name blank: false

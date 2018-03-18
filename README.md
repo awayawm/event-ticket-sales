@@ -57,5 +57,6 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 * ~~flash error messages on briantree failures~~
 * receipt landing page on success
 * write sale data to domain
-* autotimestamp all domains
+* ~~autotimestamp all domains~~
 * itemmap to rawrecord.  raw record to itemmap in ticketservice
+* write transaction status to SaleStatus and periodically check status, set associated sale settle to true when verified

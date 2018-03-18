@@ -103,7 +103,7 @@
                 </div>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="enabled" checked="${event.enabled == true ? "true" : "false"}" />
+                    <input class="form-check-input" type="checkbox" name="enabled" ${event.enabled == true ? "checked" : ""} />
                     <label for="enabled" class="form-check-label">Event Enabled</label>
                     <small class="form-text text-muted">Tickets can only be sold for enabled events</small>
                 </div>

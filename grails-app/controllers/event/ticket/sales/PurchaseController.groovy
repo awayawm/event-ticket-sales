@@ -68,6 +68,7 @@ class PurchaseController {
                     "coordinator_phone_number": configService.getConfig().admin.coordinator_phone_number]
 
         def model = [config:config, itemMapList: itemMapList, clientToken:token]
+        println itemMapList
         render view:"confirmation", model:model
     }
 
@@ -76,11 +77,23 @@ class PurchaseController {
             TransactionRequest request = new TransactionRequest()
                     .amount(session.totalAfterFeesAndTaxes)
                     .paymentMethodNonce(params.nonce)
+                    .customer()
+                        .firstName(params.first_name)
+                        .lastName(params.last_name)
+                        .email(params.email_address)
+                        .phone(params.phone_number)
+                        .done()
                     .options()
-                    .submitForSettlement(true)
-                    .done()
+                        .submitForSettlement(true)
+                        .storeInVaultOnSuccess(true)
+                        .done()
 
             Result<Transaction> result = braintreeService.getGateway().transaction().sale(request)
+
+            if(result.isSuccess()){
+                println result.getTarget().getId()
+            }
+
             render(contentType:"application/json") {
                 success(result.isSuccess())
                 message(result.getMessage())
@@ -89,6 +102,6 @@ class PurchaseController {
     }
 
     def getClientToken(){
-        return braintreeService.getGateway().clientToken().generate(new ClientTokenRequest().customerId(params.id))
+        return braintreeService.getGateway().clientToken().generate(new ClientTokenRequest())
     }
 }
