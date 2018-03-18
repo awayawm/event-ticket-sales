@@ -198,6 +198,7 @@
                                     console.log(data)
                                     $("#alert_box").empty()
                                     $("#alert_box").removeClass("alert alert-danger")
+                                    document.location.href = "/sale/status/" + data.id
                             } else {
                                     $("#shake-form").animate({left: '-=10px'}, 20);
                                     $("#shake-form").animate({left: '+=10px'}, 20);

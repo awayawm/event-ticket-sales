@@ -9,7 +9,20 @@ class UrlMappings {
 //            }
 //        }
 
+        group "/report", {
+            "/index"(controller:"report", action: "index")
+        }
+
+        group "/sale", {
+            "/status/$id"(controller:"sale", action: "status")
+        }
+
         group "/admin", {
+            group "/sale", {
+                "/index"(controller:"sale", action: "index")
+                "/"(controller:"sale", action: "index")
+            }
+
             group "/ticket", {
                 "/index"(controller:"ticket", action: "index")
                 "/"(controller:"ticket", action: "index")
@@ -18,6 +31,7 @@ class UrlMappings {
                 "/edit"(controller:"ticket", action: "edit")
                 "/delete/$id"(controller:"ticket", action: "delete")
             }
+
             group "/event", {
                 "/index"(controller:"event", action: "index")
                 "/"(controller:"event", action: "index")
@@ -26,6 +40,7 @@ class UrlMappings {
                 "/edit"(controller:"event", action: "edit")
                 "/delete/$id"(controller:"event", action: "delete")
             }
+
             "/dashboard"(controller:"dashboard", action: "index")
         }
 

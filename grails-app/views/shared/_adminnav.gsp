@@ -15,10 +15,10 @@
         <a class="nav-link" href="/admin/ticket">Tickets</a>
       </li>
          <li class="nav-item">
-           <a class="nav-link" href="/admin/sales">Sales</a>
+           <a class="nav-link" href="/admin/sale">Sales</a>
          </li>
       <li class="nav-item">
-        <a class="nav-link" href="/admin/reports">Reports</a>
+        <a class="nav-link" href="/admin/report">Reports</a>
       </li>
     </ul>
   </div>

@@ -7,7 +7,7 @@ class TicketService {
 
     def subtractItemMap(def itemMap) {
         itemMap.each(){
-            Ticket.findById(it.ticketObject.id).quantity -= it.quantity
+            Ticket.findById(it.ticketObject.id).quantity -= Integer.valueOf(it.quantity)
         }
     }
     def addRawRecordTicketQuantiesBack(def rawRecord){
@@ -30,12 +30,14 @@ class TicketService {
         def rawRecordItemMap = []
         def rawRecordItem = [:]
         for(int i = 0; i < splitRawRecord.size(); i+=itemLength){
-            rawRecordItem.name = splitRawRecord[i]
-            rawRecordItem.description = splitRawRecord[i+1]
-            rawRecordItem.price = splitRawRecord[i+2]
-            rawRecordItem.quantity = splitRawRecord[i+3]
-            rawRecordItemMap << rawRecordItem
-            rawRecordItem = [:]
+            if(splitRawRecord[i+3] != '0') {
+                rawRecordItem.name = splitRawRecord[i]
+                rawRecordItem.description = splitRawRecord[i + 1]
+                rawRecordItem.price = splitRawRecord[i + 2]
+                rawRecordItem.quantity = splitRawRecord[i + 3]
+                rawRecordItemMap << rawRecordItem
+                rawRecordItem = [:]
+            }
         }
         rawRecordItemMap
     }

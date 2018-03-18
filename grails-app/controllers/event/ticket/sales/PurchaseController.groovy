@@ -89,10 +89,8 @@ class PurchaseController {
             Result<Transaction> result = braintreeService.getGateway().transaction().sale(request)
 
             if(result.isSuccess()){
-                println result.getTarget().getId()
-                println result.getTarget().getStatus()
 
-                def uuid = RandomStringUtils.random(64, true, true)
+                def uuid = RandomStringUtils.random(32, true, true)
                 def saleStatus = new SaleStatus(transactionId: result.getTarget().getId(),
                                                 status: "Approved")
                 Event event = Event.findByName(session.event_name)
@@ -114,18 +112,25 @@ class PurchaseController {
                         customerName: "${params.first_name} ${params.last_name}", phoneNumber: "${params.phone_number}", emailAddress: "${params.email_address}",
                         ticketPDF: new byte[0]).save(failOnError:true)
 
+                ticketService.subtractItemMap(session.itemMapList)
+
                 if(!sale){
-                    render(contentType:"application/json") {
+                    // TODO send email on database save failures
+                    return render(contentType:"application/json") {
                         success(false)
                         message("Could not save sale to database :(")
                     }
                 } else {
-                    render(contentType:"application/json") {
-                        success(result.isSuccess())
-                        message(result.getMessage())
+                    session.sale = sale
+                    return render(contentType:"application/json") {
+                        success(true)
+                        id(session.sale.uuid)
                     }
                 }
-
+            }
+            return render(contentType:"application/json") {
+                success(false)
+                message(result.getMessage())
             }
         }
     }
