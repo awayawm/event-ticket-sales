@@ -16,9 +16,10 @@ class Sale {
     String customerName
     String phoneNumber
     String emailAddress
-    Date transactionDate
     byte[] ticketPDF
     boolean consumed
+    Date dateCreated
+    Date lastUpdated
 
     static constraints = {
         uuid blank:false
@@ -36,7 +37,6 @@ class Sale {
         customerName blank:false
         phoneNumber blank:false
         emailAddress blank:false
-        transactionDate blank:false
         ticketPDF blank: false, maxSize: 1024 * 1024 * 10
         consumed default:false
     }

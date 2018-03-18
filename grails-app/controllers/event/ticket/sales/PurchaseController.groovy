@@ -5,10 +5,9 @@ import com.braintreegateway.Result
 import com.braintreegateway.Transaction
 import com.braintreegateway.TransactionRequest
 import com.braintreegateway.exceptions.AuthenticationException
-import grails.converters.JSON
+import org.apache.commons.lang3.RandomStringUtils
 
 import java.math.RoundingMode
-import java.time.format.DateTimeFormatter
 
 class PurchaseController {
     EventService eventService = new EventService()
@@ -62,13 +61,12 @@ class PurchaseController {
         session.totalSurcharge = new BigDecimal((double)configService.getConfig().admin.ticket_surcharge * numTicketsSold).setScale(2, RoundingMode.CEILING)
         session.taxes = new BigDecimal(session.totalBeforeFeesAndTaxes * (double)configService.getConfig().admin.tax_rate).setScale(2, RoundingMode.CEILING)
         session.totalAfterFeesAndTaxes = session.totalBeforeFeesAndTaxes + session.totalSurcharge + session.taxes
-
+        session.itemMapList = itemMapList
 
         config = ["coordinator_email" : configService.getConfig().admin.coordinator_email,
                     "coordinator_phone_number": configService.getConfig().admin.coordinator_phone_number]
 
         def model = [config:config, itemMapList: itemMapList, clientToken:token]
-        println itemMapList
         render view:"confirmation", model:model
     }
 
@@ -92,11 +90,42 @@ class PurchaseController {
 
             if(result.isSuccess()){
                 println result.getTarget().getId()
-            }
+                println result.getTarget().getStatus()
 
-            render(contentType:"application/json") {
-                success(result.isSuccess())
-                message(result.getMessage())
+                def uuid = RandomStringUtils.random(64, true, true)
+                def saleStatus = new SaleStatus(transactionId: result.getTarget().getId(),
+                                                status: "Approved")
+                Event event = Event.findByName(session.event_name)
+                TicketService ticketService = new TicketService()
+                def allocConfig = configService.getConfig().allocation
+
+                Double primaryAllocation = allocConfig.allocationEnabled ?
+                        allocConfig.primaryPercentage * session.totalBeforeFeesAndTaxes + session.totalSurcharge + session.taxes
+                        : session.totalBeforeFeesAndTaxes + session.totalSurcharge + session.taxes
+                Double secondaryAllocation = allocConfig.allocationEnabled ?
+                        (1 - allocConfig.primaryPercentage) * session.totalBeforeFeesAndTaxes
+                        : 0
+
+                def sale = new Sale(event:event, salesStatus: saleStatus, uuid: uuid,
+                        rawRecord: ticketService.createRawRecord(session.itemMapList), totalBeforeFeesAndTaxes: session.totalBeforeFeesAndTaxes,
+                        totalAfterFeesAndTaxes: session.totalAfterFeesAndTaxes, taxes: session.taxes, totalSurcharge: session.totalSurcharge,
+                        primaryAllocation: primaryAllocation, secondaryAllocation: secondaryAllocation,
+                        primaryPercentage: allocConfig.primaryPercentage, allocationEnabled: allocConfig.allocationEnabled,
+                        customerName: "${params.first_name} ${params.last_name}", phoneNumber: "${params.phone_number}", emailAddress: "${params.email_address}",
+                        ticketPDF: new byte[0]).save(failOnError:true)
+
+                if(!sale){
+                    render(contentType:"application/json") {
+                        success(false)
+                        message("Could not save sale to database :(")
+                    }
+                } else {
+                    render(contentType:"application/json") {
+                        success(result.isSuccess())
+                        message(result.getMessage())
+                    }
+                }
+
             }
         }
     }

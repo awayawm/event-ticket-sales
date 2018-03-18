@@ -10,6 +10,9 @@ class TicketService {
             Ticket.findById(it.ticketObject.id).quantity -= it.quantity
         }
     }
+    def addRawRecordTicketQuantiesBack(def rawRecord){
+
+    }
     def createRawRecord(def itemMap){
         StringBuilder sb = new StringBuilder()
         itemMap.each{
