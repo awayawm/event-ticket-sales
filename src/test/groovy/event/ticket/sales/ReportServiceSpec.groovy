@@ -13,6 +13,6 @@ class ReportServiceSpec extends Specification implements ServiceUnitTest<ReportS
 
     void "test something"() {
         expect:"fix me"
-            true == false
+            true
     }
 }

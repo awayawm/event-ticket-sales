@@ -5,19 +5,19 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
-      <li class="nav-item active">
+      <li class="nav-item ${params.controller == 'dashboard' ? 'active' : ''}">
         <a class="nav-link" href="/admin/dashboard">Dashboard</span></a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item ${params.controller == 'event' ? 'active' : ''}">
         <a class="nav-link" href="/admin/event">Events</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item ${params.controller == 'ticket' ? 'active' : ''}">
         <a class="nav-link" href="/admin/ticket">Tickets</a>
       </li>
-         <li class="nav-item">
+         <li class="nav-item ${params.controller == 'sale' ? 'active' : ''}">
            <a class="nav-link" href="/admin/sale">Sales</a>
          </li>
-      <li class="nav-item">
+      <li class="nav-item ${params.controller == 'report' ? 'active' : ''}">
         <a class="nav-link" href="/admin/report">Reports</a>
       </li>
     </ul>

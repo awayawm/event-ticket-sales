@@ -9,10 +9,6 @@ class UrlMappings {
 //            }
 //        }
 
-        group "/report", {
-            "/index"(controller:"report", action: "index")
-        }
-
         group "/sale", {
             "/status/$id"(controller:"sale", action: "status")
         }
@@ -21,6 +17,10 @@ class UrlMappings {
             group "/sale", {
                 "/index"(controller:"sale", action: "index")
                 "/"(controller:"sale", action: "index")
+            }
+            group "/report", {
+                "/index"(controller:"report", action: "index")
+                "/"(controller:"report", action: "index")
             }
 
             group "/ticket", {

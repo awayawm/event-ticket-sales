@@ -55,7 +55,7 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 * ~~ticket policy modal confirmation before charging credit card~~
 * ~~validation on confirmation~~
 * ~~flash error messages on briantree failures~~
-* receipt landing page on success
+* ~~receipt landing page on success~~
 * ~~write sale data to domain~~
 * ~~sales admin index~~
 * ~~autotimestamp all domains~~

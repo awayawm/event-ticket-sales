@@ -96,6 +96,10 @@ dependencies {
     // https://mvnrepository.com/artifact/com.braintreepayments.gateway/braintree-java
     compile group: 'com.braintreepayments.gateway', name: 'braintree-java', version: '2.77.0'
 
+    // https://mvnrepository.com/artifact/org.apache.xmlgraphics/fop
+    compile group: 'org.apache.xmlgraphics', name: 'fop', version: '2.2'
+
+
 }
 
 bootRun {

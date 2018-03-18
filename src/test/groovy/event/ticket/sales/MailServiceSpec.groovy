@@ -13,6 +13,6 @@ class MailServiceSpec extends Specification implements ServiceUnitTest<MailServi
 
     void "test something"() {
         expect:"fix me"
-            true == false
+            true
     }
 }

@@ -23,10 +23,10 @@
 
        <form id="event-form" action="/purchase/confirmation" method="post" enctype="multipart/form-data">
 
-       <g:each in="${event.tickets}" var="ticket">
 
-           <p>
-        <div class="card">
+       <g:each in="${event.tickets}" var="ticket">
+        <g:if test="${ticket.quantity > 0}">
+        <div class="card m-2">
           <div class="card-body">
             <h5 class="card-title">${ticket.name}</h5>
 <h6 class="card-subtitle mb-2 text-muted">${ticket.description}</h6>
@@ -43,8 +43,7 @@
 
            </div>
            </div>
-           </p>
-
+            </g:if>
        </g:each>
 <hr>
            </form>

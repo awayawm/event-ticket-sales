@@ -21,19 +21,19 @@
     <div class="container-fluid" style="max-width:960px;">
 
 
-    <div class="clearfix">
-      <div class="float-left">
-      <h5>Customer Information</h5>
-      <h6>${sale.customerName}</h6>
-      <h6>${sale.emailAddress}</h6>
-      <h6>${sale.phoneNumber}</h6>
+    <div class="row">
+      <div class="col text-left">
+          <h5>Customer Information</h5>
+          <h6>${sale.customerName}</h6>
+          <h6>${sale.emailAddress}</h6>
+          <h6>${sale.phoneNumber}</h6>
       </div>
-      <div class="float-right text-right">
-      <h5>Event Information</h5>
-      <h6>${sale.event.name}</h6>
-      <h6>${sale.event.address}</h6>
-      <h6>Doors Open: <g:formatDate date="${sale.event.doorsOpen}" type="datetime" style="MEDIUM"/></h6>
-      <h6>Fight Starts: <g:formatDate date="${sale.event.eventStarts}" type="datetime" style="MEDIUM"/></h6>
+      <div class="col text-right">
+          <h5>Event Information</h5>
+          <h6>${sale.event.name}</h6>
+          <h6>${sale.event.address}</h6>
+          <h6>Doors Open: <g:formatDate date="${sale.event.doorsOpen}" type="datetime" style="MEDIUM"/></h6>
+          <h6>Fight Starts: <g:formatDate date="${sale.event.eventStarts}" type="datetime" style="MEDIUM"/></h6>
       </div>
     </div>
 
@@ -41,7 +41,7 @@
         <div class="col text-center">
 
         <h1 class="m-5">Thank you for your purchase.</h1>
-        <p class="lead mb-4">Your ticket is now being emailed to you.  You can download it here using this link</p>
+        <p class="lead mb-5">Your ticket is now being emailed to you.  You can download it here using this link</p>
 
 <table class="table">
   <thead>
@@ -78,10 +78,8 @@
 </table>
 
 
-    <div class="clearfix my-5">
-      <div class="float-left">
-      </div>
-      <div class="float-right text-right">
+    <div class="row my-5">
+      <div class="col text-right">
         <h5>Payment Status: <small class="text-muted">${sale.salesStatus.status}</small></h5>
        </div>
     </div>
