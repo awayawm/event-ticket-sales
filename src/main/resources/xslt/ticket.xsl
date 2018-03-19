@@ -72,6 +72,27 @@
                     </fo:block>
                 </fo:block-container>
 
+                <fo:block font-size="10pt">
+                    <fo:table border="solid" border-collapse="collapse" >
+                        <fo:table-header>
+                            <fo:table-row>
+                                    <fo:table-cell border="dotted black 2pt">
+                                        <fo:block font-weight="bold">
+                                            Heck
+                                        </fo:block>
+                                    </fo:table-cell>
+                                <fo:table-cell>
+                                    <fo:block font-weight="bold">
+                                        zoink
+                                    </fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
+                        </fo:table-header>
+                        <fo:table-body>
+                        </fo:table-body>
+                    </fo:table>
+                </fo:block>
+
             </fo:flow>
         </fo:page-sequence>
     </fo:root>
