@@ -46,7 +46,7 @@ class SaleSpec extends Specification implements DomainUnitTest<Sale> {
         def itemMap = [['ticketObject':ticket, 'quantity':4],
                        ['ticketObject':ticket2, 'quantity':3]]
         TicketService ticketService = new TicketService()
-        def uuid = RandomStringUtils.random(64, true, true)
+        def uuid = RandomStringUtils.random(32, true, true)
         def saleStatus = new SaleStatus(transactionId: "68kep29z", status: "Approved")
         new Sale(event:event, salesStatus: saleStatus, uuid: uuid,
                 rawRecord: ticketService.createRawRecord(itemMap), totalBeforeFeesAndTaxes: 10.0,

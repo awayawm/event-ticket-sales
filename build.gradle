@@ -99,6 +99,11 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.xmlgraphics/fop
     compile group: 'org.apache.xmlgraphics', name: 'fop', version: '2.2'
 
+// https://mvnrepository.com/artifact/net.sf.barcode4j/barcode4j-fop-ext
+    compile group: 'net.sf.barcode4j', name: 'barcode4j-fop-ext', version: '2.1'
+
+    // https://mvnrepository.com/artifact/net.sf.barcode4j/barcode4j
+    compile group: 'net.sf.barcode4j', name: 'barcode4j', version: '2.1'
 
 }
 

@@ -118,7 +118,6 @@ class PurchaseControllerSpec extends Specification implements ControllerUnitTest
         controller.confirmation()
 
         then:
-        println model.itemMapList
         model.itemMapList.size() == 3
         session.totalBeforeFeesAndTaxes == 28.0
         session.totalAfterFeesAndTaxes == 35.19

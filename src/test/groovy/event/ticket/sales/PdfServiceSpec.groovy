@@ -2,13 +2,11 @@ package event.ticket.sales
 
 import grails.testing.gorm.DataTest
 import grails.testing.services.ServiceUnitTest
-import groovy.xml.XmlUtil
 import org.apache.commons.io.IOUtils
 import org.apache.commons.lang3.RandomStringUtils
-import org.apache.fop.util.XMLUtil
 import spock.lang.Specification
 
-class SaleServiceSpec extends Specification implements ServiceUnitTest<SaleService>, DataTest{
+class PdfServiceSpec extends Specification implements ServiceUnitTest<PdfService>, DataTest{
     byte[] ticketImage = IOUtils.toByteArray(this.class.classLoader.getResourceAsStream("ticketBackground.png"))
     byte[] ticketImage2 = IOUtils.toByteArray(this.class.classLoader.getResourceAsStream("ticketBackground2.jpg"))
     byte[] ticketLogo = IOUtils.toByteArray(this.class.classLoader.getResourceAsStream("ticketLogo.gif"))
@@ -42,20 +40,19 @@ class SaleServiceSpec extends Specification implements ServiceUnitTest<SaleServi
     }
 
     def cleanup() {
-        TicketService.metaClass = null
     }
 
-    void "does generateTicketXml() create something we can use for a ticket"() {
+    void "can ticket be rendered"() {
         setup:
         createEvent()
         def mockItemMap = [['ticketObject':ticket, 'quantity':4],
-                       ['ticketObject':ticket2, 'quantity':3]]
+                           ['ticketObject':ticket2, 'quantity':3]]
         TicketService.metaClass.createRawRecord = { def itemMap ->
             "General Admission,Stadium seating,30.0,4,Underwater Seat,Includes snorkle,10.0,3"
         }
         TicketService.metaClass.rawRecordToRawRecordItemMap = { def rawRecord ->
             [[name:'General Admission', description: 'Stadium Seating', price: '30.0', quantity: '4'],
-                    [name:'Underwater Seat', description: 'Tables around the cage', price:'60.0', quantity: '3']]
+             [name:'Underwater Seat', description: 'Tables around the cage', price:'60.0', quantity: '3']]
         }
         TicketService ticketService = new TicketService()
         def uuid = RandomStringUtils.random(32, true, true)
@@ -67,13 +64,11 @@ class SaleServiceSpec extends Specification implements ServiceUnitTest<SaleServi
                 customerName: "dude", phoneNumber: "234", emailAddress: "hi@hi.com",
                 ticketPDF: new byte[0]).save(failOnError:true)
         when:
-        def xml = service.generateTicketXml(Sale.findByUuid(uuid))
-        then:
-        def sale = new XmlSlurper().parseText(xml)
-        sale.Tickets.children().size() == 2
-        sale.Event.@Description.text() == "12 fights and 2 championship fights for a full night of entertainment!"
-        sale.Totals.@TotalAfterFeesAndTaxes.text() == "12.0"
-        sale.Customer.@Name.text() == "dude"
+        ByteArrayOutputStream byteArrayOutputStream = service.createTicketPdf(Sale.findByUuid(uuid))
 
+        then:
+        OutputStream outputStream  = new FileOutputStream("filename.pdf")
+        byteArrayOutputStream.writeTo(outputStream)
+        false
     }
 }

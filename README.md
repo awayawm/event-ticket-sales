@@ -35,9 +35,9 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 	3. tickets are emailed to customer
 
 5. web application generates reports
-	1. generates total sales
-	2. primary sales report
-	3. split sales report (periodic or on-demand)
+	1. generates total sales (primary, split, total)
+	2. generates event sales (primary, split, total)
+	3. periodically sends out reports.  event sales report goes out when even closes
 	4. produces a event ticket list report that contains names, numbers, email, and tickets purchased
 	
 6. admin dashboard
@@ -45,19 +45,9 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 	2. link to google analytics
 
 #### Challenges
-* ~~surcharge goes to primary person~~
 * generated ticket looks similar to fandango
 * change ticket background to advertisement
 * recaptcha on login
 * interceptor requires session.loggedIn to be true for admin pages
-* ~~braintree and ticket, Confirmatiom view~~
 * comp tickets (you select a ticket and enter an name, email address, phone)
-* ~~ticket policy modal confirmation before charging credit card~~
-* ~~validation on confirmation~~
-* ~~flash error messages on briantree failures~~
-* ~~receipt landing page on success~~
-* ~~write sale data to domain~~
-* ~~sales admin index~~
-* ~~autotimestamp all domains~~
-* ~~itemmap to rawrecord.  raw record to itemmap in ticketservice~~
 * write transaction status to SaleStatus and periodically check status, set associated sale settle to true when verified
