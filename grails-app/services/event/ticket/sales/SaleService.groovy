@@ -3,6 +3,13 @@ package event.ticket.sales
 import grails.gorm.transactions.Transactional
 import groovy.xml.MarkupBuilder
 
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
+
 @Transactional
 class SaleService {
 
@@ -16,6 +23,7 @@ class SaleService {
         def logo
         def advert
         Random random = new Random()
+        ConfigService configService = new ConfigService()
 
         ticketService.rawRecordToRawRecordItemMap(sale.rawRecord).each{
             if(Ticket.findByName(it.name)) {
@@ -29,7 +37,10 @@ class SaleService {
         logo = logoList.get(random.nextInt(logoList.size()))
         advert = advertList.get(random.nextInt(advertList.size()))
 
+        def now =  DateTimeFormatter.ofPattern("L/d/Y K:mm:ss a z").format(ZonedDateTime.ofInstant(Instant.now(), ZoneId.systemDefault()))
         xml.Sale(){
+            RenderDateTime(now)
+            Coordinator(Phone:configService.getConfig().admin.coordinator_phone_number, Email:configService.getConfig().admin.coordinator_email)
             Images{
                 Poster(Bytes:new String(Base64.getEncoder().encode(sale.event.posterBytes)), ContentType:sale.event.posterContentType)
                 Logo(Bytes:new String(Base64.getEncoder().encode(logo.Bytes)), ContentType:logo.ContentType)

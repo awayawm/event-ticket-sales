@@ -5,6 +5,7 @@ import com.braintreegateway.Result
 import com.braintreegateway.Transaction
 import com.braintreegateway.TransactionRequest
 import com.braintreegateway.exceptions.AuthenticationException
+import org.apache.commons.io.IOUtils
 import org.apache.commons.lang3.RandomStringUtils
 
 import java.math.RoundingMode
@@ -95,6 +96,7 @@ class PurchaseController {
                                                 status: "Approved")
                 Event event = Event.findByName(session.event_name)
                 TicketService ticketService = new TicketService()
+                PdfService pdfService = new PdfService()
                 def allocConfig = configService.getConfig().allocation
 
                 Double primaryAllocation = allocConfig.allocationEnabled ?
@@ -110,7 +112,10 @@ class PurchaseController {
                         primaryAllocation: primaryAllocation, secondaryAllocation: secondaryAllocation,
                         primaryPercentage: allocConfig.primaryPercentage, allocationEnabled: allocConfig.allocationEnabled,
                         customerName: "${params.first_name} ${params.last_name}", phoneNumber: "${params.phone_number}", emailAddress: "${params.email_address}",
-                        ticketPDF: new byte[0]).save(failOnError:true)
+                        ticketPDF: new byte[0])
+
+                sale.ticketPDF = pdfService.createTicketPdf(sale).toByteArray()
+                sale.save(failOnError:true)
 
                 ticketService.subtractItemMap(session.itemMapList)
 
@@ -121,8 +126,8 @@ class PurchaseController {
                         message("Could not save sale to database :(")
                     }
                 } else {
-                    session.sale = sale
                     return render(contentType:"application/json") {
+                        session.sale = sale
                         success(true)
                         id(session.sale.uuid)
                     }

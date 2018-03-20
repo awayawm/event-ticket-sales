@@ -12,18 +12,16 @@ class BootStrap {
     def init = { servletContext ->
 
         DateService dateService = new DateService()
-
-        def resourcePath = "${System.properties['user.dir']}/src/test/resources"
-        byte[] titleBackground = IOUtils.toByteArray(new FileInputStream("${resourcePath}/ticketBackground.png"))
-        byte[] titleBackground2 = IOUtils.toByteArray(new FileInputStream("${resourcePath}/ticketBackground2.jpg"))
-        byte[] ticketLogo = IOUtils.toByteArray(new FileInputStream("${resourcePath}/ticketLogo.gif"))
-        byte[] ticketLogo2 = IOUtils.toByteArray(new FileInputStream("${resourcePath}/ticketLogo2.jpg"))
-        byte[] poster = IOUtils.toByteArray(new FileInputStream("${resourcePath}/poster.jpg"))
-        byte[] poster2 = IOUtils.toByteArray(new FileInputStream("${resourcePath}/poster2.jpg"))
-        byte[] poster3 = IOUtils.toByteArray(new FileInputStream("${resourcePath}/poster3.jpg"))
-
         switch(Environment.current){
             case(Environment.DEVELOPMENT):
+                def resourcePath = "${System.properties['user.dir']}/src/test/resources"
+                byte[] titleBackground = IOUtils.toByteArray(new FileInputStream("${resourcePath}/ticketBackground.png"))
+                byte[] titleBackground2 = IOUtils.toByteArray(new FileInputStream("${resourcePath}/ticketBackground2.jpg"))
+                byte[] ticketLogo = IOUtils.toByteArray(new FileInputStream("${resourcePath}/ticketLogo.gif"))
+                byte[] ticketLogo2 = IOUtils.toByteArray(new FileInputStream("${resourcePath}/ticketLogo2.jpg"))
+                byte[] poster = IOUtils.toByteArray(new FileInputStream("${resourcePath}/poster.jpg"))
+                byte[] poster2 = IOUtils.toByteArray(new FileInputStream("${resourcePath}/poster2.jpg"))
+                byte[] poster3 = IOUtils.toByteArray(new FileInputStream("${resourcePath}/poster3.jpg"))
                 new Ticket(quantity: 75, name: "General Admission", description: "Stadium Seating", price: "30.00",
                         ticketImageName: "titleBackground.png", ticketImageBytes: titleBackground, ticketImageContentType: "image/png",
                         ticketLogoName: "ticketLogo.gif", ticketLogoContentType: "image/gif", ticketLogoBytes: ticketLogo).save()

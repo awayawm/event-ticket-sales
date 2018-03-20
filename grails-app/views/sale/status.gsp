@@ -41,7 +41,7 @@
         <div class="col text-center">
 
         <h1 class="m-5">Thank you for your purchase.</h1>
-        <p class="lead mb-5">Your ticket is now being emailed to you.  You can download it here using this link</p>
+        <p class="lead mb-5">Your ticket is now being emailed to you.  <a id="download_ticket" href="data:application/pdf;base64,${Base64.getEncoder().encodeToString(session.sale.ticketPDF)}" download="ticket.pdf">You can download it here using this link</a></p>
 
 <table class="table">
   <thead>
@@ -87,6 +87,10 @@
         </div>
         </div>
     </div>
+
+    <script>
+    document.getElementById("download_ticket").click()
+    </script>
 
     </body>
 </html>
