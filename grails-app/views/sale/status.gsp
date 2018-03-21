@@ -41,7 +41,7 @@
         <div class="col text-center">
 
         <h1 class="m-5">Thank you for your purchase.</h1>
-        <p class="lead mb-5">Your ticket is now being emailed to you.  <a id="download_ticket" href="data:application/pdf;base64,${Base64.getEncoder().encodeToString(session.sale.ticketPDF)}" download="ticket.pdf">You can download it here using this link</a></p>
+        <p class="lead mb-5">Your ticket is now being emailed to you.  <a id="download_ticket" href="data:application/pdf;base64,${Base64.getEncoder().encodeToString(session.sale.ticketPDF)}" download="${sale.event.shortURL}_${sale.uuid}.pdf">You can download it here using this link</a></p>
 
 <table class="table">
   <thead>
@@ -89,7 +89,13 @@
     </div>
 
     <script>
-    document.getElementById("download_ticket").click()
+    var referrer =  document.referrer
+    console.log(referrer.toString().split("/")[3] ==  "purchase" && referrer.toString().split("/")[4] == "confirmation")
+    if(referrer.toString().split("/")[3] ==  "purchase" && referrer.toString().split("/")[4] == "confirmation") {
+        document.getElementById("download_ticket").click()
+    }else{
+        // no pdf
+    }
     </script>
 
     </body>

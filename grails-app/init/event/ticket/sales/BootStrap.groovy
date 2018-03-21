@@ -49,8 +49,6 @@ class BootStrap {
                         address: "433 Skylake Ave., Chicago, Illinios 45678", posterContentType: "image/jpg", posterBytes: poster3, posterName: "poster3.jpg",
                         doorsOpen: dateService.getDate(2018, 5, 30, 20, 00), eventStarts: dateService.getDate(2018, 5, 30, 21, 00),
                         stopTicketSalesAt: dateService.getDate(2018, 5, 30, 21, 0), enabled: false, tickets: [Ticket.findAll()[1], Ticket.findAll()[2], Ticket.findAll()[3]]).save()
-
-
                 break
             case(Environment.PRODUCTION):
                 break

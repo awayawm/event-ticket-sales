@@ -30,9 +30,9 @@ Application also emails two reports: weekly cumulative profit (total accumulated
     6. ~~customer views receipt information and link to download ticket~~
     
 4. tickets are emailed to user
-	1. apache fop creates dynamic tickets
-	2. ticket contains ticket logo, ticket background, QR code, customer name, and sales description
-	3. tickets are emailed to customer
+	1. ~~apache fop creates dynamic tickets~~
+	2. ~~ticket contains ticket logo, ticket background, QR code, customer name, and sales description~~
+	3. ~~tickets are emailed to customer~~
 
 5. web application generates reports
 	1. generates total sales (primary, split, total)
@@ -45,9 +45,10 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 	2. link to google analytics
 
 #### Challenges
-* generated ticket looks similar to fandango
-* change ticket background to advertisement
+* ~~generated ticket looks similar to fandango~~
+* ~~change ticket background to advertisement~~
 * recaptcha on login
 * interceptor requires session.loggedIn to be true for admin pages
 * comp tickets (you select a ticket and enter an name, email address, phone)
-* write transaction status to SaleStatus and periodically check status, set associated sale settle to true when verified
+* periodically check cc status and update sales
+* fix qr code or figure out how to reliably scan it

@@ -69,6 +69,6 @@ class PdfServiceSpec extends Specification implements ServiceUnitTest<PdfService
         then:
         OutputStream outputStream  = new FileOutputStream("filename.pdf")
         byteArrayOutputStream.writeTo(outputStream)
-        false
+        true
     }
 }

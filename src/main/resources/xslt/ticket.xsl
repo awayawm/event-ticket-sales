@@ -20,15 +20,6 @@
             <xsl:variable name="logo" select="Images/Logo/@Bytes"/>
             <xsl:variable name="logoContentType" select="Images/Logo/@ContentType"/>
 
-            <xsl:message><xsl:value-of select="$poster"/></xsl:message>
-            <xsl:message><xsl:value-of select="$posterContentType"/></xsl:message>
-
-            <xsl:message><xsl:value-of select="$advert"/></xsl:message>
-            <xsl:message><xsl:value-of select="$advertContentType"/></xsl:message>
-
-            <xsl:message><xsl:value-of select="$logo"/></xsl:message>
-            <xsl:message><xsl:value-of select="$logoContentType"/></xsl:message>
-
                 <fo:block-container>
                     <fo:block text-align="right">
                         <xsl:value-of  select="RenderDateTime"/>
@@ -141,7 +132,7 @@
 
                 <fo:block-container>
                     <fo:block text-align="center" space-before="10mm" font-size="16pt" font-weight="bold">Ticket Policies &amp; Information</fo:block>
-                    <fo:block space-before="4mm" font-size="14pt">
+                    <fo:block space-before="4mm" font-size="12pt">
                         All reservations must be secured with an credit card and tickets may be picked up at the Box Office the day of the fight. You will need a state issued ID at the box office to pick up Online Tickets.
                         All sales are final and will be charged at the time the reservation is made. Show times may vary from production to production. For specifics dates and times, please contact us at <xsl:value-of select="Coordinator/@Phone"/> or <xsl:value-of select="Coordinator/@Email"/>.
                         For reservations made online, a service fee is added to each ticket.

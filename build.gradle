@@ -105,6 +105,11 @@ dependencies {
     // https://mvnrepository.com/artifact/net.sf.barcode4j/barcode4j
     compile group: 'net.sf.barcode4j', name: 'barcode4j', version: '2.1'
 
+    // https://mvnrepository.com/artifact/javax.mail/javax.mail-api
+    compile group: 'javax.mail', name: 'javax.mail-api', version: '1.6.1'
+    // https://mvnrepository.com/artifact/com.sun.mail/javax.mail
+    compile group: 'com.sun.mail', name: 'javax.mail', version: '1.6.1'
+
 }
 
 bootRun {

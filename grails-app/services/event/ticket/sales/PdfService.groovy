@@ -37,7 +37,7 @@ class PdfService {
             Result res = new SAXResult(fop.getDefaultHandler())
             transformer.transform(src, res)
         } catch(Exception ex) {
-            println ex.printStackTrace()
+            log.error ex.printStackTrace()
         }
         byteArrayOutputStream
     }

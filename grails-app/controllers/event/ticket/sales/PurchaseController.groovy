@@ -14,6 +14,9 @@ class PurchaseController {
     EventService eventService = new EventService()
     ConfigService configService = new ConfigService()
     BraintreeService braintreeService = new BraintreeService()
+    TicketService ticketService = new TicketService()
+    PdfService pdfService = new PdfService()
+    MailService mailService = new MailService()
 
     def index(){
         render view:"selectEvent", model:[events:eventService.getEvents().events]
@@ -95,8 +98,7 @@ class PurchaseController {
                 def saleStatus = new SaleStatus(transactionId: result.getTarget().getId(),
                                                 status: "Approved")
                 Event event = Event.findByName(session.event_name)
-                TicketService ticketService = new TicketService()
-                PdfService pdfService = new PdfService()
+
                 def allocConfig = configService.getConfig().allocation
 
                 Double primaryAllocation = allocConfig.allocationEnabled ?
@@ -117,8 +119,6 @@ class PurchaseController {
                 sale.ticketPDF = pdfService.createTicketPdf(sale).toByteArray()
                 sale.save(failOnError:true)
 
-                ticketService.subtractItemMap(session.itemMapList)
-
                 if(!sale){
                     // TODO send email on database save failures
                     return render(contentType:"application/json") {
@@ -127,6 +127,8 @@ class PurchaseController {
                     }
                 } else {
                     return render(contentType:"application/json") {
+                        mailService.sendTicketPdf(sale)
+                        ticketService.subtractItemMap(session.itemMapList)
                         session.sale = sale
                         success(true)
                         id(session.sale.uuid)

@@ -18,6 +18,7 @@ class Sale {
     String emailAddress
     byte[] ticketPDF
     boolean consumed
+    boolean notified
     Date dateCreated
     Date lastUpdated
 
