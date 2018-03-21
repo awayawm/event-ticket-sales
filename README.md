@@ -14,6 +14,7 @@ Application also emails two reports: weekly cumulative profit (total accumulated
     1. ~~admin inputs, edits, deletes event and ticket information~~
     2. admin logs on with credentials
     3. ~~configuration is read from file~~
+    4. recaptcha on login page
 	
 2. customer can use landing page to purchase a ticket
 	1. ~~customer selects event~~
@@ -45,10 +46,9 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 	2. link to google analytics
 
 #### Challenges
-* ~~generated ticket looks similar to fandango~~
-* ~~change ticket background to advertisement~~
 * recaptcha on login
-* interceptor requires session.loggedIn to be true for admin pages
 * comp tickets (you select a ticket and enter an name, email address, phone)
 * periodically check cc status and update sales
 * fix qr code or figure out how to reliably scan it
+* interceptor requires session.loggedIn to be true for admin pages
+* login page

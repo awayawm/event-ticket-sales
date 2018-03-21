@@ -45,10 +45,10 @@ class MailService {
 
         StringBuilder sb = new StringBuilder()
         ticketService.rawRecordToRawRecordItemMap(sale.rawRecord).each{
-            sb.append("<tr><td>${it.name}</td><td>${it.quantity} @ ${it.price}</td></tr>")
+            sb.append("<tr><td>${it.name}</td><td style='text-align:right'>${it.quantity} @ ${it.price}</td></tr>")
         }
-        sb.append("<tr><td>Taxes and Fees</td><td>${sale.taxes + sale.totalSurcharge}</td></tr>")
-        sb.append("<tr><td><b>Total</b></td><td>${sale.totalAfterFeesAndTaxes}</td></tr>")
+        sb.append("<tr><td>Taxes and Fees</td><td style='text-align:right'>${sale.taxes + sale.totalSurcharge}</td></tr>")
+        sb.append("<tr><td><b>Total</b></td><td style='text-align:right'><b>${sale.totalAfterFeesAndTaxes}</b></td></tr>")
 
         String emailContents = """<html>
 <body>

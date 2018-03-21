@@ -129,6 +129,7 @@ class PurchaseController {
                     return render(contentType:"application/json") {
                         mailService.sendTicketPdf(sale)
                         ticketService.subtractItemMap(session.itemMapList)
+
                         session.sale = sale
                         success(true)
                         id(session.sale.uuid)
