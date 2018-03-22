@@ -11,6 +11,8 @@ class SaleControllerSpec extends Specification implements ControllerUnitTest<Sal
     }
 
     def cleanup() {
+        Sale.metaClass = null
+        TicketService.metaClass = null
     }
 
     def "does sale/status forward to /event/index with error flash when uuid not found"(){
@@ -19,7 +21,22 @@ class SaleControllerSpec extends Specification implements ControllerUnitTest<Sal
         then:
         controller.flash.message == "That sale UUID was not found :("
         controller.flash.class == "alert alert-danger"
-        response.redirectUrl == "/event/index"
+        response.redirectUrl == "/"
+    }
+
+    def "does sale/status model have things when uuid returns not null"(){
+        setup:
+        Sale.metaClass.static.findByUuid = { def uuid ->
+            new Sale()
+        }
+        TicketService.metaClass.rawRecordToRawRecordItemMap = { def rawRecord ->
+            []
+        }
+        params.id = 1
+        when:
+        controller.status()
+        then:
+        model.size() == 2
     }
 
 }

@@ -15,6 +15,7 @@ import javax.mail.internet.MimeBodyPart
 import javax.mail.internet.MimeMessage
 import javax.mail.internet.MimeMultipart
 import javax.mail.util.ByteArrayDataSource
+import java.text.DecimalFormat
 
 @Transactional
 class MailService {
@@ -23,6 +24,7 @@ class MailService {
 
         ConfigService configService = new ConfigService()
         TicketService ticketService = new TicketService()
+        DecimalFormat decimalFormat = new DecimalFormat(".##")
 
         def host = configService.getConfig().smtp.host.toString()
         def username = configService.getConfig().smtp.username.toString()
@@ -42,11 +44,12 @@ class MailService {
         log.info from
 
         StringBuilder sb = new StringBuilder()
+
         ticketService.rawRecordToRawRecordItemMap(sale.rawRecord).each{
-            sb.append("<tr><td>${it.name}</td><td style='text-align:right'>${it.quantity} @ ${it.price}</td></tr>")
+            sb.append("<tr><td>${it.name}</td><td style='text-align:right'>${it.quantity} @ ${decimalFormat.format(it.price.toDouble())}</td></tr>")
         }
-        sb.append("<tr><td>Taxes and Fees</td><td style='text-align:right'>${sale.taxes + sale.totalSurcharge}</td></tr>")
-        sb.append("<tr><td><b>Total</b></td><td style='text-align:right'><b>${sale.totalAfterFeesAndTaxes}</b></td></tr>")
+        sb.append("<tr><td>Taxes and Fees</td><td style='text-align:right'>${decimalFormat.format(sale.taxes + sale.totalSurcharge)}</td></tr>")
+        sb.append("<tr><td><b>Total</b></td><td style='text-align:right'><b>${decimalFormat.format(sale.totalAfterFeesAndTaxes)}</b></td></tr>")
 
         String emailContents = """<html>
 <body>

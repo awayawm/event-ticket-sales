@@ -4,9 +4,9 @@
 
 ~~Anonymous online users can purchase tickets using braintree api.~~
 
-After purchasing online tickets, tickets are dynamically generated as PDFs and emailed to the purchaser.  
+~~After purchasing online tickets, tickets are dynamically generated as PDFs and emailed to the purchaser.~~
 
-Application also emails two reports: weekly cumulative profit (total accumulated revenue since launch) and total event sales (cumulative sales of each event)
+Application generates various reports
 
 ### Roadmap
 
@@ -15,6 +15,8 @@ Application also emails two reports: weekly cumulative profit (total accumulated
     2. admin logs on with credentials
     3. ~~configuration is read from file~~
     4. recaptcha on login page
+    5. dashboard contains simple graphs of profit (line charts)
+    6. link to google analytics
 	
 2. customer can use landing page to purchase a ticket
 	1. ~~customer selects event~~
@@ -36,16 +38,12 @@ Application also emails two reports: weekly cumulative profit (total accumulated
 	3. ~~tickets are emailed to customer~~
 
 5. web application generates reports
-	1. generates total sales (primary, split, total)
-	2. generates event sales (primary, split, total)
-	3. periodically sends out reports.  event sales report goes out when even closes
-	4. produces a event ticket list report that contains names, numbers, email, and tickets purchased
-	
-6. admin dashboard
-	1. dashboard contains simple graphs of profit (line charts)
-	2. link to google analytics
+	1. generates total sales (primary, split, total), sent periodically
+	2. generates event sales (primary, split, total), sent periodically
+	3. generate event ticket list that contains name, email, phone, raw records in a list
+	4. generate credit card transactions report, sent periodically
 
-#### Challenges
+#### Sprint
 * recaptcha on login
 * comp tickets (you select a ticket and enter an name, email address, phone)
 * periodically check cc status and update sales

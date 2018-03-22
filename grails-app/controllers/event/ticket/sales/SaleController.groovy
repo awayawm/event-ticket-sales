@@ -10,11 +10,11 @@ class SaleController {
     def status(){
         def sale = Sale.findByUuid(params.id)
         if(sale) {
-            [sale:sale, tickets:ticketService.rawRecordToRawRecordItemMap(sale.rawRecord)]
+            render view:"status", model:[sale:sale, tickets:ticketService.rawRecordToRawRecordItemMap(sale.rawRecord)]
         } else {
             flash.message = "That sale UUID was not found :("
             flash.class = "alert alert-danger"
-            redirect uri:"/event/index"
+            redirect uri:"/"
         }
     }
 }
