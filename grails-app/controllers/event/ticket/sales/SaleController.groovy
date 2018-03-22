@@ -8,9 +8,13 @@ class SaleController {
     }
 
     def status(){
-        if(params.id) {
-            def sale = Sale.findByUuid(params.id)
+        def sale = Sale.findByUuid(params.id)
+        if(sale) {
             [sale:sale, tickets:ticketService.rawRecordToRawRecordItemMap(sale.rawRecord)]
+        } else {
+            flash.message = "That sale UUID was not found :("
+            flash.class = "alert alert-danger"
+            redirect uri:"/event/index"
         }
     }
 }

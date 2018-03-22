@@ -3,8 +3,6 @@ package event.ticket.sales
 import grails.gorm.transactions.Transactional
 
 import javax.activation.DataHandler
-import javax.activation.DataSource
-import javax.activation.FileDataSource
 import javax.mail.Authenticator
 import javax.mail.BodyPart
 import javax.mail.Message
@@ -100,6 +98,11 @@ ${sb.toString()}
 
         message.setContent(multiPart)
 
+        sendMessage(message, transport)
+
+    }
+
+    def sendMessage(Message message, Transport transport){
         transport.connect()
         transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO))
         transport.close()

@@ -7,6 +7,9 @@ import org.apache.commons.io.IOUtils
 import org.apache.commons.lang3.RandomStringUtils
 import spock.lang.Specification
 
+import javax.mail.Message
+import javax.mail.Transport
+
 class MailServiceSpec extends Specification implements ServiceUnitTest<MailService>, DataTest{
 
     byte[] ticketImage = IOUtils.toByteArray(this.class.classLoader.getResourceAsStream("ticketBackground.png"))
@@ -43,11 +46,12 @@ class MailServiceSpec extends Specification implements ServiceUnitTest<MailServi
     }
 
     def cleanup() {
+        MailService.metaClass = null
     }
 
     void "does sendTicketPdf send ticket email"() {
         setup:
-        String emailAddress = "your@email.com"
+        String emailAddress = "lakeoftea@gmail.com"
         createEvent()
         ticket.save()
         ticket2.save()
@@ -65,6 +69,8 @@ class MailServiceSpec extends Specification implements ServiceUnitTest<MailServi
         ByteArrayOutputStream byteArrayOutputStream = new PdfService().createTicketPdf(sale)
         sale.ticketPDF = byteArrayOutputStream.toByteArray()
         sale.save(flush:true)
+
+        MailService.metaClass.sendMessage = { Message message, Transport transport -> }
 
         FileUtils.writeByteArrayToFile(new File("filename.pdf"), sale.ticketPDF)
         when:
