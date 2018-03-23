@@ -50,3 +50,5 @@ Application generates various reports
 * fix qr code or figure out how to reliably scan it
 * interceptor requires session.loggedIn to be true for admin pages
 * login page
+* remove seconds from all visible datetimes
+* dynamic titles from config

@@ -73,6 +73,7 @@ ${sb.toString()}
         props.put("mail.smtp.port", port)
         props.put("mail.smtp.auth", "true")
         props.put("mail.smtp.starttls.enable", "true")
+
         Session session = Session.getDefaultInstance(props, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -106,8 +107,8 @@ ${sb.toString()}
     }
 
     def sendMessage(Message message, Transport transport){
-        transport.connect()
-        transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO))
-        transport.close()
+            transport.connect()
+            transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO))
+            transport.close()
     }
 }

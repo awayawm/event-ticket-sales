@@ -3,6 +3,7 @@ package event.ticket.sales
 class Event {
 
     static hasMany = [tickets: Ticket]
+    String uuid
     String name
     String shortURL
     String description
@@ -18,6 +19,7 @@ class Event {
     Date lastUpdated
 
     static constraints = {
+        uuid nullable:true
         name blank: false
         shortURL blank: false
         address blank: false

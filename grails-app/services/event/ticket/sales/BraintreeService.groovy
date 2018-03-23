@@ -22,4 +22,8 @@ class BraintreeService {
         }
         gateway.clientToken().generate()
     }
+
+    def getTransactionStatus(String transactionId){
+
+    }
 }
