@@ -12,8 +12,11 @@ class BootStrap {
     def init = { servletContext ->
 
         DateService dateService = new DateService()
-        switch(Environment.current){
-            case(Environment.DEVELOPMENT):
+
+        int numTickets = Ticket.findAll().size()
+
+        if(numTickets == 0) {
+                log.info "${numTickets} tickets found, spawning sample data."
                 def resourcePath = "${System.properties['user.dir']}/src/test/resources"
                 byte[] titleBackground = IOUtils.toByteArray(new FileInputStream("${resourcePath}/ticketBackground.png"))
                 byte[] titleBackground2 = IOUtils.toByteArray(new FileInputStream("${resourcePath}/ticketBackground2.jpg"))
@@ -49,9 +52,8 @@ class BootStrap {
                         address: "433 Skylake Ave., Chicago, Illinios 45678", posterContentType: "image/jpg", posterBytes: poster3, posterName: "poster3.jpg",
                         doorsOpen: dateService.getDate(2018, 5, 30, 20, 00), eventStarts: dateService.getDate(2018, 5, 30, 21, 00),
                         stopTicketSalesAt: dateService.getDate(2018, 5, 30, 21, 0), enabled: false, tickets: [Ticket.findAll()[1], Ticket.findAll()[2], Ticket.findAll()[3]]).save()
-                break
-            case(Environment.PRODUCTION):
-                break
+        } else {
+            log.info "${numTickets} tickets found, no sample data spawned."
         }
     }
     def destroy = {

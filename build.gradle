@@ -35,6 +35,8 @@ buildscript {
         maven { url "https://repo.grails.org/grails/core" }
     }
     dependencies {
+        // https://plugins.gradle.org/plugin/fi.evident.beanstalk
+        classpath "gradle.plugin.fi.evident.gradle.beanstalk:gradle-beanstalk-plugin:0.1.3"
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
         classpath "gradle.plugin.com.energizedwork.webdriver-binaries:webdriver-binaries-gradle-plugin:1.1"
         classpath "gradle.plugin.com.energizedwork:idea-gradle-plugins:1.4"
@@ -43,7 +45,7 @@ buildscript {
     }
 }
 
-version "0.1"
+version "0.0.6"
 group "event.ticket.sales"
 
 apply plugin:"idea"
@@ -53,6 +55,7 @@ apply plugin:"com.energizedwork.webdriver-binaries"
 apply plugin:"com.energizedwork.idea-project-components"
 apply plugin:"asset-pipeline"
 apply plugin:"org.grails.grails-gsp"
+apply plugin: "fi.evident.beanstalk"
 
 repositories {
     mavenLocal()
@@ -133,4 +136,19 @@ tasks.withType(Test) {
 assets {
     minifyJs = true
     minifyCss = true
+}
+
+// https://plugins.gradle.org/plugin/fi.evident.beanstalk
+beanstalk {
+    profile = 'event-ticket-sales'
+    s3Endpoint = "s3-us-west-2.amazonaws.com"
+    beanstalkEndpoint = "elasticbeanstalk.us-west-2.amazonaws.com"
+
+    deployments {
+        alpha {
+            file = 'build/libs/event-ticket-sales-0.1.war'
+            application = 'event-ticket-sales'
+            environment = 'event-ticket-sales-alpha'
+        }
+    }
 }

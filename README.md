@@ -52,3 +52,7 @@ Application generates various reports
 * login page
 * remove seconds from all visible datetimes
 * dynamic titles from config
+* additional sales sample data
+* deploy to elastic bean stalk
+* migrate production datasource to rdb
+* add logging
