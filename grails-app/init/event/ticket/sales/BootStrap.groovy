@@ -3,10 +3,6 @@ package event.ticket.sales
 import grails.util.Environment
 import org.apache.commons.io.IOUtils
 
-import java.time.LocalDateTime
-import java.time.ZoneId
-
-
 class BootStrap {
 
     def init = { servletContext ->
@@ -15,7 +11,7 @@ class BootStrap {
 
         int numTickets = Ticket.findAll().size()
 
-        if(numTickets == 0) {
+        if(numTickets == 0 && Environment.getCurrent() == Environment.DEVELOPMENT) {
                 log.info "${numTickets} tickets found, spawning sample data."
                 def resourcePath = "${System.properties['user.dir']}/src/test/resources"
                 byte[] titleBackground = IOUtils.toByteArray(new FileInputStream("${resourcePath}/ticketBackground.png"))
@@ -53,7 +49,7 @@ class BootStrap {
                         doorsOpen: dateService.getDate(2018, 5, 30, 20, 00), eventStarts: dateService.getDate(2018, 5, 30, 21, 00),
                         stopTicketSalesAt: dateService.getDate(2018, 5, 30, 21, 0), enabled: false, tickets: [Ticket.findAll()[1], Ticket.findAll()[2], Ticket.findAll()[3]]).save()
         } else {
-            log.info "${numTickets} tickets found, no sample data spawned."
+            log.info "${numTickets} tickets found or not in dev environment, no sample data spawned."
         }
     }
     def destroy = {
