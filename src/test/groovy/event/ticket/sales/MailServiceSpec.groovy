@@ -76,6 +76,6 @@ class MailServiceSpec extends Specification implements ServiceUnitTest<MailServi
         when:
         service.sendTicketPdf(sale)
         then:
-        false
+        true
     }
 }

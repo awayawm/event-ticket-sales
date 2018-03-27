@@ -5,7 +5,6 @@ import com.braintreegateway.Result
 import com.braintreegateway.Transaction
 import com.braintreegateway.TransactionRequest
 import com.braintreegateway.exceptions.AuthenticationException
-import org.apache.commons.io.IOUtils
 import org.apache.commons.lang3.RandomStringUtils
 
 import java.math.RoundingMode
