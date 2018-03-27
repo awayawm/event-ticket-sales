@@ -37,11 +37,7 @@ class MailService {
         def coordinator_email = configService.getConfig().admin.coordinator_email.toString()
         def coordinator_phone_number = configService.getConfig().admin.coordinator_phone_number.toString()
 
-        log.info host
-        log.info username
-        log.info password
-        log.info port
-        log.info from
+        log.info "Host: ${host}, Username: ${username}, Port: ${port}, From: ${from}"
 
         StringBuilder sb = new StringBuilder()
 
@@ -72,8 +68,7 @@ ${sb.toString()}
         props.put("mail.smtp.host", host)
         props.put("mail.smtp.port", port)
         props.put("mail.smtp.auth", "true")
-        props.put("mail.smtp.starttls.enable", "true")
-
+        props.put("mail.smtp.ssl.enable", "true")
         Session session = Session.getDefaultInstance(props, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -82,7 +77,6 @@ ${sb.toString()}
         })
 
         Transport transport = session.getTransport()
-
         Message message = new MimeMessage(session)
         message.setSubject("${sale.event.name} Online Ticket Purchase")
         message.setFrom(new InternetAddress(from, "MFL Tickets"))

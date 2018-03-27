@@ -13,9 +13,9 @@ class ConfigServiceSpec extends Specification implements ServiceUnitTest<ConfigS
         service.metaClass = null
     }
 
-    def "does isEnvironmentalVariableSet() return false when System.getEnv() returns null"(){
+    def "does isEnvironmentalVariableSet() return false when System.getProperty() returns null"(){
         setup:
-        System.metaClass.static.getenv = { String name ->
+        System.metaClass.static.getProperty = { String name ->
             null
         }
         when:
@@ -26,7 +26,7 @@ class ConfigServiceSpec extends Specification implements ServiceUnitTest<ConfigS
 
     def "does isEnvironmentalVariableSet() return false if EVENT_TICKET_SALES not set"(){
         when:
-        System.metaClass.static.getenv = { String name ->
+        System.metaClass.static.getProperty = { String name ->
             false
         }
         then:
@@ -36,13 +36,13 @@ class ConfigServiceSpec extends Specification implements ServiceUnitTest<ConfigS
         !result
     }
 
-    def "does isEnvironmentalVariable() returns false if System.getenv() is false"(){
+    def "does isEnvironmentalVariable() returns false if System.getProperty() is false"(){
         System
     }
 
     def "does isEnvironmentalVariableSet() return true if EVENT_TICKET_SALES set"(){
         when:
-        System.metaClass.static.getenv = { String name ->
+        System.metaClass.static.getProperty = { String name ->
             this.class.classLoader.getResource("event-ticket-sales.config")
         }
         then:
@@ -63,7 +63,7 @@ class ConfigServiceSpec extends Specification implements ServiceUnitTest<ConfigS
 
     def  "does getConfig() return file system config when EVENT_TICKET_SALES set"(){
         when:
-        System.metaClass.static.getenv = { String name ->
+        System.metaClass.static.getProperty = { String name ->
             def resourcePath = "${System.properties['user.dir']}/src/test/resources/valid.config"
             new File(resourcePath).absolutePath
         }

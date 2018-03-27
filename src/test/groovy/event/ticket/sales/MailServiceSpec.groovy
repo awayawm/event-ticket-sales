@@ -51,7 +51,7 @@ class MailServiceSpec extends Specification implements ServiceUnitTest<MailServi
 
     void "does sendTicketPdf send ticket email"() {
         setup:
-        String emailAddress = "lakeoftea@gmail.com"
+        String emailAddress = "test@test.com"
         createEvent()
         ticket.save()
         ticket2.save()
@@ -76,6 +76,6 @@ class MailServiceSpec extends Specification implements ServiceUnitTest<MailServi
         when:
         service.sendTicketPdf(sale)
         then:
-        true
+        false
     }
 }
