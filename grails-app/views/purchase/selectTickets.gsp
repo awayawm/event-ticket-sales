@@ -48,7 +48,7 @@
 <hr>
            </form>
 
-           <button onclick="didCustomerSelectTickets()" class="btn btn-primary btn-lg btn-block" />Purchase Tickets</button>
+           <button onclick="didCustomerSelectTickets()" class="btn btn-primary btn-lg btn-block my-4" />Purchase Tickets</button>
 
             </div>
             <div class="col text-center">

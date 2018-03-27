@@ -24,8 +24,8 @@ class PdfService {
     FOUserAgent foUserAgent = fopFactory.newFOUserAgent()
     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()
 
-    def resourcePath = "${System.properties['user.dir']}/src/main/resources"
-    File ticketPdfXSLT = new File("${resourcePath}/xslt/ticket.xsl")
+    def resourcePath = "${System.properties['user.dir']}"
+    File ticketPdfXSLT = new File("${resourcePath}/src/main/webapp/xslt/ticket.xsl")
 
     ByteArrayOutputStream createTicketPdf(Sale sale) {
         SaleService saleService = new SaleService()

@@ -1,7 +1,7 @@
 apply plugin: 'groovy'
 apply plugin: 'idea'
 
-version "0.0.23"
+version "0.0.24"
 group "event.ticket.sales"
 
 repositories {
