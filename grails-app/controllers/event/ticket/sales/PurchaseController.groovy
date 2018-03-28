@@ -73,7 +73,7 @@ class PurchaseController {
         render view:"confirmation", model:model
     }
 
-    def processPayment(){
+        def processPayment(){
         if(params.nonce) {
             TransactionRequest request = new TransactionRequest()
                     .amount(session.totalAfterFeesAndTaxes)
@@ -95,7 +95,7 @@ class PurchaseController {
 
                 def uuid = RandomStringUtils.random(32, true, true)
                 def saleStatus = new SaleStatus(transactionId: result.getTarget().getId(),
-                                                status: "Approved")
+                                                status: "Submitted")
                 Event event = Event.findByName(session.event_name)
 
                 def allocConfig = configService.getConfig().allocation
@@ -114,8 +114,9 @@ class PurchaseController {
                         primaryPercentage: allocConfig.primaryPercentage, allocationEnabled: allocConfig.allocationEnabled,
                         customerName: "${params.first_name} ${params.last_name}", phoneNumber: "${params.phone_number}", emailAddress: "${params.email_address}",
                         ticketPDF: new byte[0])
-
+                log.info "rendering ticket and adding to sale"
                 sale.ticketPDF = pdfService.createTicketPdf(sale).toByteArray()
+                log.info "saving sale to database"
                 sale.save(failOnError:true)
 
                 if(!sale){
@@ -126,6 +127,7 @@ class PurchaseController {
                     }
                 } else {
                     return render(contentType:"application/json") {
+                        log.info "attempting to mail ticket ..."
                         mailService.sendTicketPdf(sale)
                         ticketService.subtractItemMap(session.itemMapList)
 
