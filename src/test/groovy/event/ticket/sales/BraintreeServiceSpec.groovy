@@ -38,8 +38,4 @@ class BraintreeServiceSpec extends Specification implements ServiceUnitTest<Brai
         service.gateway instanceof BraintreeGateway
         authenticationExceptionThrown
     }
-
-    def canTokenBeUpdated(){
-
-    }
 }

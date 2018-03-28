@@ -12,8 +12,14 @@ class BootStrap {
         int numTickets = Ticket.findAll().size()
 
         if(numTickets == 0 && Environment.getCurrent() == Environment.DEVELOPMENT) {
-                log.info "${numTickets} tickets found, spawning sample data."
+                def systemProperty = "${System.properties['user.dir']}/src/main/webapp/EVENT_TICKET_SALES"
+
+                log.info "Setting EVENT_TICKET_SALES System property to ${systemProperty}"
+                System.setProperty("EVENT_TICKET_SALES", systemProperty)
+
                 def resourcePath = "${System.properties['user.dir']}/src/test/resources"
+
+                log.info "${numTickets} tickets found, spawning sample data."
                 byte[] titleBackground = IOUtils.toByteArray(new FileInputStream("${resourcePath}/ticketBackground.png"))
                 byte[] titleBackground2 = IOUtils.toByteArray(new FileInputStream("${resourcePath}/ticketBackground2.jpg"))
                 byte[] ticketLogo = IOUtils.toByteArray(new FileInputStream("${resourcePath}/ticketLogo.gif"))

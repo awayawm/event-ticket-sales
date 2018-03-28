@@ -2,6 +2,7 @@ package event.ticket.sales
 
 import com.braintreegateway.BraintreeGateway
 import com.braintreegateway.Environment
+import com.braintreegateway.Transaction
 
 class BraintreeService {
 
@@ -9,11 +10,14 @@ class BraintreeService {
     BraintreeGateway gateway
 
     def getGateway(){
-        new BraintreeGateway(
-                Environment.SANDBOX,
-                configService.getConfig().keys.braintree.merchantId,
-                configService.getConfig().keys.braintree.publicKey,
-                configService.getConfig().keys.braintree.privateKey)
+        if(gateway == null) {
+            gateway = new BraintreeGateway(
+                    Environment.SANDBOX,
+                    configService.getConfig().keys.braintree.merchantId,
+                    configService.getConfig().keys.braintree.publicKey,
+                    configService.getConfig().keys.braintree.privateKey)
+        }
+        gateway
     }
 
     def getClientToken() {
@@ -23,7 +27,7 @@ class BraintreeService {
         gateway.clientToken().generate()
     }
 
-    def getTransactionStatus(String transactionId){
-
+    Transaction getTransactionStatus(String transactionId){
+        getGateway().transaction().find(transactionId)
     }
 }
