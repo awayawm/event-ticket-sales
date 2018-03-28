@@ -4,11 +4,9 @@ import grails.gorm.transactions.Transactional
 import groovy.xml.MarkupBuilder
 
 import java.time.Instant
-import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 
 @Transactional
 class SaleService {
@@ -22,20 +20,25 @@ class SaleService {
         def advertList = []
         def logo
         def advert
+        Ticket ticket
         Random random = new Random()
         ConfigService configService = new ConfigService()
-
+        log.info "making xml for ${sale.uuid}"
         ticketService.rawRecordToRawRecordItemMap(sale.rawRecord).each{
-            if(Ticket.findByName(it.name)) {
-                advertList << [Bytes: Ticket.findByName(it.name).ticketImageBytes, ContentType: Ticket.findByName(it.name).ticketImageContentType]
-            }
-            if(Ticket.findByName(it.name)) {
-                logoList << [Bytes: Ticket.findByName(it.name).ticketLogoBytes, ContentType: Ticket.findByName(it.name).ticketLogoContentType]
+            log.info "raw record is ${it}"
+            ticket = Ticket.findByName(it.name)
+            if(ticket != null) {
+                log.info "found ticket for raw record, ${ticket}"
+                advertList << [Bytes: ticket.ticketImageBytes, ContentType: ticket.ticketImageContentType]
+                logoList << [Bytes: ticket.ticketLogoBytes, ContentType: ticket.ticketLogoContentType]
             }
         }
 
         logo = logoList.get(random.nextInt(logoList.size()))
         advert = advertList.get(random.nextInt(advertList.size()))
+
+        log.info "logo is ${logo}"
+        log.info "advert is ${advert}"
 
         def now =  DateTimeFormatter.ofPattern("L/d/Y K:mm:ss a z").format(ZonedDateTime.ofInstant(Instant.now(), ZoneId.systemDefault()))
         xml.Sale(){

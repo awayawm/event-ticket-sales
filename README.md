@@ -45,11 +45,11 @@ Application generates various reports
 
 #### Sprint
 * recaptcha on login
+* interceptor requires session.loggedIn to be true for admin pages
+* login page
 * comp tickets (you select a ticket and enter an name, email address, phone)
 * ~~periodically check cc status and update sales~~
 * fix qr code or figure out how to reliably scan it
-* interceptor requires session.loggedIn to be true for admin pages
-* login page
 * remove seconds from all visible datetimes
 * dynamic titles from config
 * sales sample data, bootstrap sample data from webapp
@@ -57,3 +57,4 @@ Application generates various reports
 * ~~migrate production datasource to rdb~~
 * ~~add logging~~
 * quart task to disable events after eventstop date
+* text message on settled payment
