@@ -12,7 +12,7 @@ Application generates various reports
 
 1. administration section
     1. ~~admin inputs, edits, deletes event and ticket information~~
-    2. admin logs on with credentials
+    2. ~~admin logs on with credentials~~
     3. ~~configuration is read from file~~
     4. recaptcha on login page
     5. dashboard contains simple graphs of profit (line charts)
@@ -38,15 +38,12 @@ Application generates various reports
 	3. ~~tickets are emailed to customer~~
 
 5. web application generates reports
-	1. generates total sales (primary, split, total), sent periodically
-	2. generates event sales (primary, split, total), sent periodically
+	1. generates total sales (select date range -> start date, end date) (primary, secondary, combined)
+	2. generates event sales (select event)(primary, secondary, combined), sent at close of event or on demand
 	3. generate event ticket list that contains name, email, phone, raw records in a list
-	4. generate credit card transactions report, sent periodically
+	4. generate credit card transactions report, sent periodically.  30 day cc status and 
 
 #### Sprint
-* recaptcha on login
-* interceptor requires session.loggedIn to be true for admin pages
-* login page
 * comp tickets (you select a ticket and enter an name, email address, phone)
 * ~~periodically check cc status and update sales~~
 * fix qr code or figure out how to reliably scan it
@@ -58,3 +55,12 @@ Application generates various reports
 * ~~add logging~~
 * quart task to disable events after eventstop date
 * text message on settled payment
+* void transaction, refund transaction, etc.
+* detail sales information on click
+* validate file type on upload (disallow gifs, allow jpgs, png, supported fop types)
+* additional cc validation from braintree - https://articles.braintreepayments.com/guides/fraud-tools/basic/overview
+* show filenames beneath images in admin
+* show last modified date for cc status
+* only update ccstatuses that aren't SETTLED
+* add logout in admin
+* instead of hiding sold out tickets, disable option/select and make card background gray

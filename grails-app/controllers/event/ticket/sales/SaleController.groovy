@@ -1,12 +1,16 @@
 package event.ticket.sales
 
+import grails.plugin.springsecurity.annotation.Secured
+
 class SaleController {
     TicketService ticketService = new TicketService()
 
+    @Secured('ROLE_ADMIN')
     def index() {
         [sales:Sale.findAll([sort: "dateCreated", order: "desc"])]
     }
 
+    @Secured('permitAll')
     def status(){
         def sale = Sale.findByUuid(params.id)
         if(sale) {

@@ -8,6 +8,21 @@ class BootStrap {
     def init = { servletContext ->
 
         DateService dateService = new DateService()
+        ConfigService configService = new ConfigService()
+
+        if(User.findByUsername(configService.getConfig().admin.username) == null) {
+            def adminRole = new Role(authority: 'ROLE_ADMIN').save(failOnError:true)
+
+            def testUser = new User(username: configService.getConfig().admin.username,
+                    password: configService.getConfig().admin.password).save(failOnError:true)
+
+            UserRole.create testUser, adminRole
+
+            UserRole.withSession {
+                it.flush()
+                it.clear()
+            }
+        }
 
         int numTickets = Ticket.findAll().size()
 

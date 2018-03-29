@@ -2,6 +2,9 @@
 
 package event.ticket.sales
 
+import grails.plugin.springsecurity.annotation.Secured
+
+@Secured('ROLE_ADMIN')
 class TicketController {
     def edit(){
         switch(request.method) {

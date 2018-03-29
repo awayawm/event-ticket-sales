@@ -1,5 +1,8 @@
 package event.ticket.sales
 
+import grails.plugin.springsecurity.annotation.Secured
+
+@Secured('ROLE_ADMIN')
 class EventController {
 
     DateService dateService = new DateService()

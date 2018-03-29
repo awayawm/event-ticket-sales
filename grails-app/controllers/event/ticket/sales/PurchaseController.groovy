@@ -6,9 +6,11 @@ import com.braintreegateway.Transaction
 import com.braintreegateway.TransactionRequest
 import com.braintreegateway.exceptions.AuthenticationException
 import org.apache.commons.lang3.RandomStringUtils
+import org.springframework.security.access.annotation.Secured
 
 import java.math.RoundingMode
 
+@Secured('permitAll')
 class PurchaseController {
     EventService eventService = new EventService()
     ConfigService configService = new ConfigService()

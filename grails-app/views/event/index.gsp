@@ -66,7 +66,7 @@
               <td>${it.shortURL}</td>
               <td>${it.description}</td>
               <td>${it.address}</td>
-              <td><img src="data:${it.posterContentType};base64,${it.posterBytes.encodeBase64()}" style="max-width: 200px; max-height: 200px;"></td>
+              <td><img src="data:${it.posterContentType};base64,${it.posterBytes.encodeBase64()}" style="max-width: 200px; max-height: 200px;"><p class="my-2 text-center">${it.posterName}</p></td>
               <td>${it.doorsOpen}</td>
               <td>${it.eventStarts}</td>
               <td>${it.stopTicketSalesAt}</td>

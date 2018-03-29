@@ -3,11 +3,10 @@ package event.ticket.sales
 class UrlMappings {
 
     static mappings = {
-//        "/$controller/$action?/$id?(.$format)?"{
-//            constraints {
-//                // apply constraints here
-//            }
-//        }
+
+        "/login/auth"(controller:"login", action:"auth")
+        "/logout"(controller:"logout", action:"index")
+
 
         group "/sale", {
             "/status/$id"(controller:"sale", action: "status")

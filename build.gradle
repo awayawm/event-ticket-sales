@@ -1,7 +1,7 @@
 apply plugin: 'groovy'
 apply plugin: 'idea'
 
-version "0.0.34"
+version "0.0.36"
 group "event.ticket.sales"
 
 repositories {
@@ -114,7 +114,8 @@ dependencies {
     compile group: 'com.sun.mail', name: 'javax.mail', version: '1.6.1'
 
     compile 'org.grails.plugins:quartz:2.0.13'
-
+    compile 'org.grails.plugins:spring-security-core:3.2.1'
+    compile "org.hibernate:hibernate-ehcache"
 }
 
 bootRun {
