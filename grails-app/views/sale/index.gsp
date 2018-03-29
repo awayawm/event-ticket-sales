@@ -64,12 +64,12 @@
               <td><a href="/sale/status/${it.uuid}">${it.uuid}</a></td>
               <td>${it.event.name}</td>
               <td>${it.totalAfterFeesAndTaxes}</td>
-              <td>${it.salesStatus.status}</td>
+              <td>${it.salesStatus.status}<p class="my-2 text-center small"><g:formatDate date="${it.salesStatus.lastUpdated}" type="datetime" style="MEDIUM"/></p></td>
               <td>${it.phoneNumber}</td>
               <td>${it.emailAddress}</td>
               <td><g:formatDate date="${it.dateCreated}" type="datetime" style="MEDIUM"/></td>
               <td>${it.allocationEnabled}</td>
-              <td><i class="fas fa-edit"></i> <i class="fas fa-trash"></i></td>
+              <td><!--<i class="fas fa-edit"></i> <i class="fas fa-trash"></i>--></td>
             </tr>
         </g:each>
         </g:if>

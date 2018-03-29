@@ -15,7 +15,7 @@ Application generates various reports
     2. ~~admin logs on with credentials~~
     3. ~~configuration is read from file~~
     4. recaptcha on login page
-    5. dashboard contains simple graphs of profit (line charts)
+    5. dashboard contains simple graphs of profit (total sales, revenue)
     6. link to google analytics
 	
 2. customer can use landing page to purchase a ticket
@@ -45,22 +45,14 @@ Application generates various reports
 
 #### Sprint
 * comp tickets (you select a ticket and enter an name, email address, phone)
-* ~~periodically check cc status and update sales~~
 * fix qr code or figure out how to reliably scan it
 * remove seconds from all visible datetimes
 * dynamic titles from config
 * sales sample data, bootstrap sample data from webapp
-* ~~deploy to elastic bean stalk~~
-* ~~migrate production datasource to rdb~~
-* ~~add logging~~
 * quart task to disable events after eventstop date
 * text message on settled payment
 * void transaction, refund transaction, etc.
 * detail sales information on click
 * validate file type on upload (disallow gifs, allow jpgs, png, supported fop types)
 * additional cc validation from braintree - https://articles.braintreepayments.com/guides/fraud-tools/basic/overview
-* show filenames beneath images in admin
-* show last modified date for cc status
-* only update ccstatuses that aren't SETTLED
-* add logout in admin
 * instead of hiding sold out tickets, disable option/select and make card background gray
