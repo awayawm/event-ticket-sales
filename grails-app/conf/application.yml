@@ -128,3 +128,11 @@ environments:
           password: ${PASSWORD}
           driverClassName: com.mysql.jdbc.Driver
           dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+            properties:
+              validationQuery: "SELECT 1"
+              testOnBorrow: true
+              testOnReturn: true
+              testWhileIdle: true
+              timeBetweenEvictionRunsMillis: 1000 * 60 * 30
+              numTestsPerEvictionRun: 3
+              minEvictableIdleTimeMillis: 1000 * 60 * 30

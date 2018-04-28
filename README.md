@@ -56,3 +56,4 @@ Application generates various reports
 * validate file type on upload (disallow gifs, allow jpgs, png, supported fop types) - https://stackoverflow.com/questions/4328947/limit-file-format-when-using-input-type-file?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 * additional cc validation from braintree - https://articles.braintreepayments.com/guides/fraud-tools/basic/overview
 * instead of hiding sold out tickets, disable option/select and make card background gray
+* forward to https or generate error when http
