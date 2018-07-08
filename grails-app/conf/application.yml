@@ -121,13 +121,13 @@ environments:
             password:
     production:
         dataSource:
+          dbCreate: create
           pooled: true
-          dbCreate: update
-          driverClassName: com.mysql.jdbc.Driver
-          url: ${JDBC_CONNECTION_STRING}
-          username: ${USERNAME}
-          password: ${PASSWORD}
-
+#          driverClassName: com.mysql.jdbc.Driver
+#          url: ${JDBC_CONNECTION_STRING}
+#          username: ${USERNAME}
+#          password: ${PASSWORD}
+          jndiName: "java:comp/env/jdbc/event_ticket_sales"
           hibernate:
               hbm2ddl:
                   auto: update
