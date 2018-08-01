@@ -121,23 +121,28 @@ environments:
             password:
     production:
         dataSource:
-          dbCreate: create
           pooled: true
-#          driverClassName: com.mysql.jdbc.Driver
-#          url: ${JDBC_CONNECTION_STRING}
-#          username: ${USERNAME}
-#          password: ${PASSWORD}
-          jndiName: "java:comp/env/jdbc/event_ticket_sales"
-          hibernate:
-              hbm2ddl:
-                  auto: update
-              dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-
+          dbCreate: create
+          url:   ${EVENT_JDBC_CONNECTION_STRING}
+          driverClassName: "com.mysql.jdbc.Driver"
+          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+          username: ${EVENT_USERNAME}
+          password: ${EVENT_PASSWORD}
           properties:
+            jmxEnabled: true
+            initialSize: 5
+            maxActive: 50
+            minIdle: 5
+            maxIdle: 25
+            maxWait: 10000
+            maxAge: 10 * 60000
+            timeBetweenEvictionRunsMillis: 5000
+            minEvictableIdleTimeMillis: 60000
             validationQuery: "SELECT 1"
+            validationQueryTimeout: 3
+            validationInterval: 15000
             testOnBorrow: true
-            testOnReturn: true
             testWhileIdle: true
-            timeBetweenEvictionRunsMillis: 1000 * 60 * 30
-            numTestsPerEvictionRun: 3
-            minEvictableIdleTimeMillis: 1000 * 60 * 30
+            testOnReturn: false
+            jdbcInterceptors: "ConnectionState;StatementCache(max=200)"
+            defaultTransactionIsolation: java.sql.Connection.TRANSACTION_READ_COMMITTED

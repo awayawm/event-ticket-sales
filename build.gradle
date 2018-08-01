@@ -84,23 +84,13 @@ dependencies {
     testRuntime "org.seleniumhq.selenium:selenium-firefox-driver:3.6.0"
     testRuntime "org.seleniumhq.selenium:selenium-remote-driver:3.6.0"
     testRuntime "org.seleniumhq.selenium:selenium-api:3.6.0"
-    // https://mvnrepository.com/artifact/com.braintreepayments.gateway/braintree-java
+
     compile group: 'com.braintreepayments.gateway', name: 'braintree-java', version: '2.77.0'
-
-    // https://mvnrepository.com/artifact/org.apache.xmlgraphics/fop
     compile group: 'org.apache.xmlgraphics', name: 'fop', version: '2.2'
-
-// https://mvnrepository.com/artifact/net.sf.barcode4j/barcode4j-fop-ext
     compile group: 'net.sf.barcode4j', name: 'barcode4j-fop-ext', version: '2.1'
-
-    // https://mvnrepository.com/artifact/net.sf.barcode4j/barcode4j
     compile group: 'net.sf.barcode4j', name: 'barcode4j', version: '2.1'
-
-    // https://mvnrepository.com/artifact/javax.mail/javax.mail-api
     compile group: 'javax.mail', name: 'javax.mail-api', version: '1.6.1'
-    // https://mvnrepository.com/artifact/com.sun.mail/javax.mail
     compile group: 'com.sun.mail', name: 'javax.mail', version: '1.6.1'
-
     compile 'org.grails.plugins:quartz:2.0.13'
     compile 'org.grails.plugins:spring-security-core:3.2.1'
     compile "org.hibernate:hibernate-ehcache"

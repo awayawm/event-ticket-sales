@@ -43,7 +43,7 @@ Application generates various reports
 	3. generate event ticket list that contains name, email, phone, raw records in a list
 	4. generate credit card transactions report, sent periodically.  30 day cc status and 
 
-#### Sprint
+#### TODO
 * comp tickets (you select a ticket and enter an name, email address, phone)
 * fix qr code or figure out how to reliably scan it
 * remove seconds from all visible datetimes
