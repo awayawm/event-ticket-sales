@@ -19,6 +19,8 @@
             <xsl:variable name="advertContentType" select="Images/Advert/@ContentType"/>
             <xsl:variable name="logo" select="Images/Logo/@Bytes"/>
             <xsl:variable name="logoContentType" select="Images/Logo/@ContentType"/>
+            <xsl:variable name="qrCode" select="Images/QrCode/@Bytes"/>
+            <xsl:variable name="qrCodeContentType" select="Images/QrCode/@ContentType"/>
 
                 <fo:block-container>
                     <fo:block text-align="right">
@@ -110,34 +112,39 @@
                                         </fo:table>
 
                                 </fo:block-container>
-
-                                <fo:block-container space-after="6mm" padding="3mm">
-                                    <fo:block space-after="2mm">
-                                        <fo:instream-foreign-object>
-                                            <barcode:barcode
-                                                    xmlns:barcode="http://barcode4j.krysalis.org/ns"
-                                                    message="{UUID}">
-                                                <barcode:code128>
-                                                    <barcode:height>12mm</barcode:height>
-                                                </barcode:code128>
-                                            </barcode:barcode>
-                                        </fo:instream-foreign-object>
-                                    </fo:block>
-                                </fo:block-container>
-
                             </fo:table-cell>
                         </fo:table-row>
                     </fo:table-body>
                 </fo:table>
 
-                <fo:block-container>
-                    <fo:block text-align="center" space-before="10mm" font-size="16pt" font-weight="bold">Ticket Policies &amp; Information</fo:block>
-                    <fo:block space-before="4mm" font-size="12pt">
-                        All reservations must be secured with an credit card and tickets may be picked up at the Box Office the day of the fight. You will need a state issued ID at the box office to pick up Online Tickets.
-                        All sales are final and will be charged at the time the reservation is made. Show times may vary from production to production. For specifics dates and times, please contact us at <xsl:value-of select="Coordinator/@Phone"/> or <xsl:value-of select="Coordinator/@Email"/>.
-                        For reservations made online, a service fee is added to each ticket.
-                    </fo:block>
-                </fo:block-container>
+                <fo:table space-after="6mm">
+                    <fo:table-column column-width="50mm"/>
+                    <fo:table-column column-width="120mm"/>
+                <fo:table-body>
+                <fo:table-row>
+                <fo:table-cell text-align="center">
+                    <!--<fo:block-container space-after="6mm" padding="3mm">-->
+                    <fo:block-container>
+                        <fo:block space-after="2mm">
+                            <fo:external-graphic content-width="40mm" src="url('data:{$qrCodeContentType};base64,{$qrCode}')"/>
+                        </fo:block>
+                    </fo:block-container>
+                </fo:table-cell>
+                    <fo:table-cell>
+                        <fo:block-container>
+                            <fo:block text-align="center" space-before="10mm" font-size="16pt" font-weight="bold">Ticket Policies &amp; Information</fo:block>
+                            <fo:block space-before="4mm" font-size="12pt">
+                                All reservations must be secured with an credit card and tickets may be picked up at the Box Office the day of the fight. You will need a state issued ID at the box office to pick up Online Tickets.
+                                All sales are final and will be charged at the time the reservation is made. Show times may vary from production to production. For specifics dates and times, please contact us at <xsl:value-of select="Coordinator/@Phone"/> or <xsl:value-of select="Coordinator/@Email"/>.
+                                For reservations made online, a service fee is added to each ticket.
+                            </fo:block>
+                        </fo:block-container>
+                    </fo:table-cell>
+                </fo:table-row>
+                </fo:table-body>
+                </fo:table>
+
+
 
             </fo:flow>
         </fo:page-sequence>
