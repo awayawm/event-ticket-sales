@@ -36,7 +36,7 @@ class SaleControllerSpec extends Specification implements ControllerUnitTest<Sal
         when:
         controller.status()
         then:
-        model.size() == 2
+        model.size() == 4
     }
 
 }

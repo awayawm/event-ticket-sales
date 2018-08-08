@@ -12,7 +12,7 @@
 
     <g:layoutHead/>
     </head>
-    <body class="bg-light">
+    <body class="bg-gradient-dark">
     <div class="container-fluid">
         <g:layoutBody/>
     </div>

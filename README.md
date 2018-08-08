@@ -46,9 +46,8 @@ Application generates various reports
 #### TODO
 * comp tickets (you select a ticket and enter an name, email address, phone)
 * ~~fix qr code or figure out how to reliably scan it~~
-* remove seconds from all visible datetimes
-* dynamic titles from config
-* sales sample data, bootstrap sample data from webapp
+* ~~remove seconds from all visible datetimes~~
+* ~~dynamic titles from config~~
 * quart task to disable events after eventstop date - send event list, event sales
 * void transaction, refund transaction, etc.
 * detail sales information on click
@@ -56,4 +55,5 @@ Application generates various reports
 * additional cc validation from braintree - https://articles.braintreepayments.com/guides/fraud-tools/basic/overview
 * instead of hiding sold out tickets, disable option/select and make card background gray
 * ~~forward to https or generate error when http~~
-* upgrade bootstrap, styles
+* ~~upgrade bootstrap, styles~~
+* reports

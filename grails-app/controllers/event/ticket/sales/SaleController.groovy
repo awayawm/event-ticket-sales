@@ -4,6 +4,7 @@ import grails.plugin.springsecurity.annotation.Secured
 
 class SaleController {
     TicketService ticketService = new TicketService()
+    Utils utils = new Utils()
 
     @Secured('ROLE_ADMIN')
     def index() {
@@ -14,7 +15,7 @@ class SaleController {
     def status(){
         def sale = Sale.findByUuid(params.id)
         if(sale) {
-            render view:"status", model:[sale:sale, tickets:ticketService.rawRecordToRawRecordItemMap(sale.rawRecord)]
+            render view:"status", model:utils.addConfigToModel([sale:sale, tickets:ticketService.rawRecordToRawRecordItemMap(sale.rawRecord)])
         } else {
             flash.message = "That sale UUID was not found :("
             flash.class = "alert alert-danger"

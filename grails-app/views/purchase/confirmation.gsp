@@ -2,17 +2,17 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <title>event-ticket-sales</title>
+        <title>${title}</title>
     </head>
     <body>
 
     <div class="container-fluid" style="max-width:960px">
         <div class="py-5 text-center">
-        <h2>Get your tickets for ${session.event_name}</h2>
+        <h1 class="display-4 text-white">Get your tickets for ${session.event_name}</h1>
         </div>
 
         <div class="row">
-        <div id="shake-form" class="col-md-8 order-md-1">
+        <div id="shake-form" class="shadow-lg col-md-8 order-md-1 border rounded p-2 bg-gradient-light pt-2 mb-4">
 
             <div id="alert_box"></div>
 
@@ -20,41 +20,41 @@
 
         <div class="row">
         <div class="col-md-6 mb-3">
-            <label for="first_name"><h6>First Name</h6></label>
+            <label for="first_name"><h6 class="ml-1">First Name</h6></label>
             <input class="form-control" type="text" name="first_name" id="first_name" placeholder="First Name"/>
         </div>
 
         <div class="col-md-6 mb-3">
-            <label for="last_name"><h6>Last name</h6></label>
+            <label for="last_name"><h6 class="ml-1">Last name</h6></label>
             <input class="form-control" type="text" name="last_name" id="last_name" placeholder="Last Name"/>
         </div>
         </div>
 
         <div class="py-2">
-        <label for="email_address"><h6>Email Address</h6></label>
+        <label for="email_address"><h6 class="ml-1">Email Address</h6></label>
         <input class="form-control" type="text" name="email_address" id="email_address" placeholder="Your Email Address"/>
         </div>
 
         <div class="py-2">
-            <label for="phone_number"><h6>Phone Number</h6></label>
+            <label for="phone_number"><h6 class="ml-1">Phone Number</h6></label>
             <input class="form-control" type="text" name="phone_number" id="phone_number" placeholder="###-###-#####"/>
         </div>
 
         <div class="py-2">
-          <label for="card-number"><h6>Card Number</h6></label>
+          <label for="card-number"><h6 class="ml-1">Card Number</h6></label>
           <div class="form-control" style="height: 40px" id="card-number"></div>
         </div>
 
         <div class="row">
         <div class="col-md-6 mb-3">
             <div class="py-2">
-                <label for="cvv"><h6>CVV</h6></label>
+                <label for="cvv"><h6 class="ml-1">CVV</h6></label>
                 <div class="form-control" style="height: 40px" id="cvv"></div>
             </div>
         </div>
         <div class="col-md-6 mb-3">
             <div class="py-2">
-              <label for="expiration-date"><h6>Expiration Date</h6></label>
+              <label for="expiration-date"><h6 class="ml-1">Expiration Date</h6></label>
               <div class="form-control" style="height: 40px" id="expiration-date"></div>
             </div>
         </div>
@@ -96,11 +96,10 @@
         </ul>
         </div>
 
-        <hr>
-          <button class="btn btn-lg btn-primary btn-block" id="submitPayment" disabled>Purchase Tickets</button>
+          <button class="btn btn-lg btn-secondary btn-block py-3 my-4" id="submitPayment" disabled>Purchase Tickets</button>
 
         <div class="text-center my-3 collapse" id="ticket_spinner">
-        <i class="fas fa-spinner fa-spin fa-5x "></i>
+        <i class="fas fa-spinner fa-spin fa-5x" style="color:white"></i>
         </div>
         </div>
         </div>

@@ -18,16 +18,18 @@ class PurchaseController {
     TicketService ticketService = new TicketService()
     PdfService pdfService = new PdfService()
     MailService mailService = new MailService()
+    Utils utils = new Utils()
+
 
     def index(){
-        render view:"selectEvent", model:[events:eventService.getEvents().events]
+        render view:"selectEvent", model:utils.addConfigToModel([events:eventService.getEvents().events])
     }
     def shortURL(){
         if (params.id) {
             def event = Event.findByShortURL(params.id)
             session.event_name = event.name
             session.doorsOpen = event.doorsOpen
-            render model:[event:event], view:"selectTickets"
+            render model:utils.addConfigToModel([event:event]), view:"selectTickets"
         }
     }
 
@@ -57,6 +59,7 @@ class PurchaseController {
         try{
             token = braintreeService.getClientToken()
         } catch(AuthenticationException ex){
+            ex.printStackTrace()
             flash.message = "Could not get a Braintree clientKey, please check your configuration and/or environmental variable :("
             flash.class = "alert-danger"
             redirect action:'index'
@@ -72,7 +75,7 @@ class PurchaseController {
                     "coordinator_phone_number": configService.getConfig().admin.coordinator_phone_number]
 
         def model = [config:config, itemMapList: itemMapList, clientToken:token]
-        render view:"confirmation", model:model
+        render view:"confirmation", model:utils.addConfigToModel(model)
     }
 
         def processPayment(){
