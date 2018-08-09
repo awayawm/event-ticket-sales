@@ -39,7 +39,10 @@ class SaleService {
         getQrCode((String)sale.uuid, 250, 250, outputStream)
         byte[] qrCode = outputStream.toByteArray()
 
+
+        log.info "qrCode is ${qrCode.length} bytes"
         log.info "making xml for ${sale.uuid}"
+
         ticketService.rawRecordToRawRecordItemMap(sale.rawRecord).each{
             log.info "raw record is ${it}"
             ticket = Ticket.findByName(it.name)

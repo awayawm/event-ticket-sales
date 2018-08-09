@@ -121,7 +121,7 @@ class PurchaseController {
                         ticketPDF: new byte[0])
                 log.info "rendering ticket and adding to sale"
                 sale.ticketPDF = pdfService.createTicketPdf(sale).toByteArray()
-                log.info "saving sale to database"
+                log.info "saving sale to database, size: ${sale.ticketPDF.length} bytes"
                 sale.save(failOnError:true)
 
                 if(!sale){
